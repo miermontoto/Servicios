@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Sesión 1.2. Introducción a python</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style type="text/css">figure {
+padding: 1em;
+margin: 2em auto;
+box-shadow: 10px 10px 7px -5px rgba(0,0,0,0.51);
+}
+figcaption {
+font-size: small;
+font-weight: bold;
+text-align: center;
+margin: 1em;
+color: #888;
+}
+.markdown-body .highlight pre, .markdown-body pre {
+padding: 0pt !important;
+border-radius: 3px;
+}
+div.sourceCode {
+margin: 0pt;
+padding: 0pt;
+border-radius: 3px;
+margin-bottom: 1em;
+}
+pre.sourceCode::before {
+font-size: 1rem;
+color: #fff;
+display: block;
+position: relative;
+top: 0pt;
+left: 0pt;
+width: 100%;
+background: #999;
+padding: 0;
+text-indent: 1em;
+background: #ccc;
+padding: 0;
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+margin-bottom: 1ex;
+}
+pre.console, pre.shell {
+padding: .5em 1em !important;
+}
+.markdown-body pre code {
+text-indent: 1em;
+}
+pre.sourceCode.html::before{
+content: "HTML";
+}
+pre.sourceCode.css::before{
+content: "CSS";
+}
+pre.sourceCode.xml::before{
+content: "XML";
+}
+pre.sourceCode.json::before{
+content: "JSON";
+}
+pre.sourceCode.nginx::before{
+content: "Nginx config";
+}
+pre.sourceCode.javascript::before{
+content: "Javascript";
+background-color: steelblue;
+}
+pre.sourceCode.text::before{
+content: "";
+}
+pre.sourceCode.yaml::before{
+content: "Yaml";
+}
+pre.sourceCode.sql::before{
+content: "SQL";
+}
+pre.sourceCode.rust::before{
+content: "Pseudocódigo";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.c\+\+::before{
+content: "XDR";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.python::before{
+content: "Python";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.java::before{
+content: "Java";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.C::before{
+content: "C";
+}
+pre.sourceCode.dockerfile::before{
+content: "Dockerfile";
+}
+pre.sourceCode.Makefile::before{
+content: "Makefile";
+background-color: #d0d0e0;
+color: #888;
+}
+pre.sourceCode.bash::before{
+content: "Shell";
+background-color: #888;
+}
+code.sourceCode > span {
+display: inline-block;
+line-height: 1.4;
+min-height: 1.4em;
+}
+.markdown-body {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+color: #24292e;
+font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.5;
+word-wrap: break-word;
+box-sizing: border-box;
+min-width: 200px;
+max-width: 110ex;
+margin: 0 auto;
+padding: 45px;
+text-align: justify;
+}
+.markdown-body a {
+color: #0366d6;
+background-color: transparent;
+text-decoration: none;
+-webkit-text-decoration-skip: objects
+}
+.markdown-body a:active,
+.markdown-body a:hover {
+outline-width: 0
+}
+.markdown-body a:hover {
+text-decoration: underline
+}
+.markdown-body a:not([href]) {
+color: inherit;
+text-decoration: none
+}
+.markdown-body strong {
+font-weight: 600
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+margin-top: 24px;
+margin-bottom: 16px;
+font-weight: 600;
+line-height: 1.25
+}
+.markdown-body h1 {
+font-size: 2em;
+margin: .67em 0;
+padding-bottom: .3em;
+border-bottom: 1px solid #eaecef
+}
+.markdown-body h2 {
+padding-bottom: .3em;
+font-size: 1.5em;
+border-bottom: 1px solid #eaecef
+}
+.markdown-body h3 {
+font-size: 1.25em
+}
+.markdown-body h4 {
+font-size: 1em
+}
+.markdown-body h5 {
+font-size: .875em
+}
+.markdown-body h6 {
+font-size: .85em;
+color: #6a737d
+}
+.markdown-body img {
+border-style: none
+}
+.markdown-body svg:not(:root) {
+overflow: hidden
+}
+.markdown-body hr {
+box-sizing: content-box;
+height: .25em;
+margin: 24px 0;
+padding: 0;
+overflow: hidden;
+background-color: #e1e4e8;
+border: 0
+}
+.markdown-body hr::before {
+display: table;
+content: ""
+}
+.markdown-body hr::after {
+display: table;
+clear: both;
+content: ""
+}
+.markdown-body input {
+margin: 0;
+overflow: visible;
+font: inherit;
+font-family: inherit;
+font-size: inherit;
+line-height: inherit
+}
+.markdown-body [type=checkbox] {
+box-sizing: border-box;
+padding: 0
+}
+.markdown-body * {
+box-sizing: border-box
+}
+.markdown-body blockquote {
+margin: 0
+}
+.markdown-body ol,
+.markdown-body ul {
+padding-left: 2em
+}
+.markdown-body ol ol {
+list-style-type: lower-roman
+}
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+margin-top: 0;
+margin-bottom: 0
+}
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+list-style-type: lower-alpha
+}
+.markdown-body li>p {
+margin-top: 16px
+}
+.markdown-body li+li {
+margin-top: .25em
+}
+.markdown-body dd {
+margin-left: 0
+}
+.markdown-body dl {
+padding: 0
+}
+.markdown-body dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: 600
+}
+.markdown-body dl dd {
+padding: 0 16px;
+margin-bottom: 16px
+}
+.markdown-body code {
+font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace
+}
+.markdown-body pre {
+font: 12px SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+word-wrap: normal
+}
+.markdown-body blockquote,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+margin-top: 0;
+margin-bottom: 16px
+}
+.markdown-body blockquote {
+padding: 0 1em;
+color: #6a737d;
+background-color: #eaecef;
+border-left: .25em solid #bac6d3
+}
+.markdown-body blockquote>:first-child {
+margin-top: 0
+}
+.markdown-body blockquote>:last-child {
+margin-bottom: 0
+}
+.markdown-body table {
+display: block;
+width: 100%;
+overflow: auto;
+border-spacing: 0;
+border-collapse: collapse
+}
+.markdown-body table th {
+font-weight: 600;
+background-color: #fff1af;
+color: #c66e41;
+}
+.markdown-body table td,
+.markdown-body table th {
+padding: 6px 13px;
+border: 1px solid #dfe2e5
+}
+.markdown-body table tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1
+}
+.markdown-body table tr:nth-child(2n) {
+background-color: #f6f8fa
+}
+.markdown-body img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff
+}
+.markdown-body code {
+padding: .2em 0;
+margin: 0;
+font-size: 85%;
+background-color: rgba(27, 31, 35, .10);
+word-break: normal;
+word-wrap: normal;
+border-radius: 3px
+}
+.markdown-body code::after,
+.markdown-body code::before {
+letter-spacing: -.2em;
+content: "\00a0"
+}
+.markdown-body pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: 0 0;
+border: 0
+}
+.markdown-body .highlight {
+margin-bottom: 16px
+}
+.markdown-body .highlight pre {
+margin-bottom: 0;
+word-break: normal
+}
+.markdown-body .highlight pre,
+.markdown-body pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f6f8fa;
+border-radius: 3px
+}
+.markdown-body pre code {
+display: inline;
+max-width: auto;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0
+}
+.markdown-body pre code::after,
+.markdown-body pre code::before {
+content: normal
+}
+.markdown-body .full-commit .btn-outline:not(:disabled):hover {
+color: #005cc5;
+border-color: #005cc5
+}
+.markdown-body kbd {
+box-shadow: inset 0 -1px 0 #959da5;
+display: inline-block;
+padding: 3px 5px;
+font: 11px/10px SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+color: #444d56;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: 1px solid #c6cbd1;
+border-bottom-color: #959da5;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #959da5
+}
+.markdown-body :checked+.radio-label {
+position: relative;
+z-index: 1;
+border-color: #0366d6
+}
+.markdown-body .task-list-item {
+list-style-type: none
+}
+.markdown-body .task-list-item+.task-list-item {
+margin-top: 3px
+}
+.markdown-body .task-list-item input {
+margin: 0 .2em .25em -1.6em;
+vertical-align: middle
+}
+.markdown-body::before {
+display: table;
+content: ""
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: ""
+}
+.markdown-body>:first-child {
+margin-top: 0 !important
+}
+.markdown-body>:last-child {
+margin-bottom: 0 !important
+}
+.Alert,
+.Error,
+.Note,
+.Success,
+.Warning {
+padding: 11px;
+margin-bottom: 24px;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px
+}
+.Alert p,
+.Error p,
+.Note p,
+.Success p,
+.Warning p {
+margin-top: 0
+}
+.Alert p:last-child,
+.Error p:last-child,
+.Note p:last-child,
+.Success p:last-child,
+.Warning p:last-child {
+margin-bottom: 0
+}
+.Alert {
+color: #246;
+background-color: #e2eef9;
+border-color: #bac6d3
+}
+.Warning {
+color: #4c4a42;
+background-color: #fff9ea;
+border-color: #dfd8c2
+}
+.Error {
+color: #911;
+background-color: #fcdede;
+border-color: #d2b2b2
+}
+.Success {
+color: #22662c;
+background-color: #e2f9e5;
+border-color: #bad3be
+}
+.Note {
+color: #2f363d;
+background-color: #f6f8fa;
+border-color: #d5d8da
+}
+.Alert h1,
+.Alert h2,
+.Alert h3,
+.Alert h4,
+.Alert h5,
+.Alert h6 {
+color: #246;
+margin-bottom: 0
+}
+.Warning h1,
+.Warning h2,
+.Warning h3,
+.Warning h4,
+.Warning h5,
+.Warning h6 {
+color: #4c4a42;
+margin-bottom: 0
+}
+.Error h1,
+.Error h2,
+.Error h3,
+.Error h4,
+.Error h5,
+.Error h6 {
+color: #911;
+margin-bottom: 0
+}
+.Success h1,
+.Success h2,
+.Success h3,
+.Success h4,
+.Success h5,
+.Success h6 {
+color: #22662c;
+margin-bottom: 0
+}
+.Note h1,
+.Note h2,
+.Note h3,
+.Note h4,
+.Note h5,
+.Note h6 {
+color: #2f363d;
+margin-bottom: 0
+}
+.Alert h1:first-child,
+.Alert h2:first-child,
+.Alert h3:first-child,
+.Alert h4:first-child,
+.Alert h5:first-child,
+.Alert h6:first-child,
+.Error h1:first-child,
+.Error h2:first-child,
+.Error h3:first-child,
+.Error h4:first-child,
+.Error h5:first-child,
+.Error h6:first-child,
+.Note h1:first-child,
+.Note h2:first-child,
+.Note h3:first-child,
+.Note h4:first-child,
+.Note h5:first-child,
+.Note h6:first-child,
+.Success h1:first-child,
+.Success h2:first-child,
+.Success h3:first-child,
+.Success h4:first-child,
+.Success h5:first-child,
+.Success h6:first-child,
+.Warning h1:first-child,
+.Warning h2:first-child,
+.Warning h3:first-child,
+.Warning h4:first-child,
+.Warning h5:first-child,
+.Warning h6:first-child {
+margin-top: 0
+}
+h1.title,
+p.subtitle,
+p.date {
+text-align: center
+}
+h1.title.followed-by-subtitle {
+margin-bottom: 0
+}
+p.subtitle {
+font-size: 1.5em;
+font-weight: 600;
+line-height: 1.25;
+margin-top: 0;
+margin-bottom: 16px;
+padding-bottom: .3em
+}
+div.line-block {
+white-space: pre-line
+}
+.markdown-body img {
+margin: auto;
+display: block;
+}
+.Profe,
+.Alumno,
+.Cuestion {
+padding: 1ex 1em 1ex 4.5em;
+margin: 1em 2em 1em 0em;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px;
+position: relative;
+}
+.Profe p,
+.Alumno p,
+.Cuestion p {
+margin-top: 0
+}
+.Profe p:last-child,
+.Alumno p:last-child,
+.Cuestion p:last-child {
+margin-bottom: 0
+}
+.Profe {
+color: #246;
+background-color: #e2eef9;
+border-color: #bac6d3
+}
+.Alumno {
+color: #4d2600;
+background-color: #ffcc99;
+border-color: #ff8000
+}
+.Cuestion {
+color: #4d2600;
+background-color: #ffeedc;
+border-color: #ffd9b3
+}
+.Profe::before {
+content: "👁";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+.Alumno::before {
+content: "⚙️";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+.Cuestion::before {
+content: "💭";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+#TOC {
+width: 20%;
+position: fixed;
+z-index: 1;
+top: 0px;
+left: 0px;
+padding: 0px 10px;
+height: 100%;
+background-color: #f6f8fa;
+font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 12px;
+line-height: 0.8;
+overflow-y: auto;
+overflow-x: hidden;
+}
+#TOC a {
+text-decoration: none;
+color: #3676ab;
+}
+.toc-title {
+color: #999;
+}
+#main {
+margin-left: 20%;
+}
+#TOC>ul {
+margin-left: -2.5em;
+}
+#TOC>ul>li {
+font-size: 18px;
+line-height: 27px;
+list-style-type: none;
+}
+#TOC>ul>li>ul>li {
+font-size: 16px;
+line-height: 24px;
+}
+#TOC>ul>li>ul>li>ul>li {
+font-size: 14px;
+line-height: 21px;
+}
+.markdown-body header {
+text-align: center;
+margin-bottom: 52pt;
+}
+@media print {
+#TOC {
+page-break-after: always;
+}
+.markdown-body {
+text-align: justify;
+}
+}
+@media print, screen and (max-width: 767px) {
+.markdown-body {
+padding: 2px;
+text-align: left;
+}
+#TOC {
+position: inherit;
+width: 100%;
+height: auto;
+page-break: inherit;
+}
+#main {
+margin-left: 0pt;
+}
+.markdown-body ol,
+.markdown-body ul {
+padding-left: 1.5em
+}
+.Profe,
+.Alumno,
+.Cuestion {
+padding: 1ex 1ex 1ex 1em;
+margin: 2em 0ex 2ex 2ex;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px;
+position: relative;
+}
+.Profe::before {
+content: "👁";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+.Alumno::before {
+content: "⚙️";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+.Cuestion::before {
+content: "💭";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+<div id="wrapper">
+<nav id="TOC">
+<h1 class="toc-title">Índice</h1>
+<ul>
+<li><a href="#introducción"><span class="toc-section-number">1</span> Introducción</a></li>
+<li><a href="#instalación"><span class="toc-section-number">2</span> Instalación</a>
+<ul>
+<li><a href="#instalación-de-python-portable-en-windows"><span class="toc-section-number">2.1</span> Instalación de python portable en Windows</a></li>
+<li><a href="#probando-python"><span class="toc-section-number">2.2</span> Probando Python</a></li>
+<li><a href="#instalación-de-un-ide"><span class="toc-section-number">2.3</span> Instalación de un IDE</a></li>
+</ul></li>
+<li><a href="#introducción-al-lenguaje-python"><span class="toc-section-number">3</span> Introducción al lenguaje Python</a>
+<ul>
+<li><a href="#datos-variables-y-expresiones"><span class="toc-section-number">3.1</span> Datos, variables y expresiones</a></li>
+<li><a href="#control-de-flujo"><span class="toc-section-number">3.2</span> Control de flujo</a></li>
+<li><a href="#condicionales"><span class="toc-section-number">3.3</span> Condicionales</a></li>
+<li><a href="#clases-y-objetos"><span class="toc-section-number">3.4</span> Clases y objetos</a></li>
+<li><a href="#módulos"><span class="toc-section-number">3.5</span> Módulos</a></li>
+<li><a href="#documentación"><span class="toc-section-number">3.6</span> Documentación</a></li>
+<li><a href="#decoradores"><span class="toc-section-number">3.7</span> Decoradores</a></li>
+</ul></li>
+<li><a href="#ejercicios"><span class="toc-section-number">4</span> Ejercicios</a></li>
+</ul>
+</nav>
+<div id="main">
+<article class="markdown-body">
+<header>
+<h1 class="title followed-by-subtitle">Sesión 1.2. Introducción a python</h1>
+<p class="subtitle">Ingeniería de Servicios</p>
+<p class="date">2023-2024</p>
+</header>
+<div id="main-text">
+<h1 data-number="1" id="introducción" data-number="1"><span class="header-section-number">1</span> Introducción</h1>
+<p>En esta asignatura se utilizará el lenguaje de programación Python para la mayoría de las prácticas debido a la simplicidad de su sintaxis y a la gran variedad de bibliotecas que vienen incorporadas al lenguaje y que hacen posible el abordar los problemas planteados en estas prácticas desde diferentes niveles de abstracción.</p>
+<p>En esta primera sesión se indica cómo instalar un entorno de desarrollo basado en Python, para que el alumno que lo desee pueda hacerlo también en su ordenador particular, y se introduce someramente su sintaxis y filosofía.</p>
+<p>Ten en cuenta que esta asignatura usa Python3 en lugar de Python2, que se comporta de forma diferente en lo que respecta a la entrada/salida de cadenas, entre otras cosas<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<h1 data-number="2" id="instalación" data-number="2"><span class="header-section-number">2</span> Instalación</h1>
+<blockquote>
+<p>No necesitas instalarlo en la máquina de prácticas, pues ya viene. Esta sección explica cómo instalarlo en otras plataformas.</p>
+</blockquote>
+<p>Dependiendo del sistema operativo en que se quiera trabajar, podemos encontrar:</p>
+<ul>
+<li>En OSX Python ya viene preinstalado, pero la versión que trae es la 2.7. No obstante, ya que en esta asignatura usaremos Python3, que no es sencillo de instalar en OSX, junto con otras herramientas y servidores propios del mundo linux, que tampoco serían sencillos de instalar en OSX, la mejor opción para un alumno que use este operativo es que utilice VirtualBox (versión para OSX) para crear e instalar una máquina virtual con Ubuntu Server, como se describe en otro guión de prácticas.</li>
+<li>En la mayoría de las distribuciones de Linux también viene preinstalado, o bien se instala con un simple <code>sudo apt-get install python</code>. En Ubuntu 16.04 LTS (tanto en la versión escritorio como la de servidor) se instala también python 3.5 de forma automática. Cuando tecleas <code>python</code> a secas la versión que se intenta cargar es la 2.7, que no viene preinstalada por lo que dará un error. Para usar la versión 3, que es la que necesitamos, hay que teclear <code>python3</code>.</li>
+<li>En Windows la alternativa típica suele ser descargar un instalador específico para Windows desde la <a href="http://www.python.org/downloads/">página de descarga de python</a>. Sin embargo este enfoque requiere tener permisos de administrador para posteriormente poder ejecutar dicho instalador. Por ello, otra alternativa popular es la instalación de una versión “portable”. Este tipo de versiones no requieren una instalación propiamente dicha, sino simplemente que sean copiadas a una carpeta cualquiera desde la cual se ejecutarán (funcionan también desde un lápiz usb), y ya que no modifican archivos de sistema no requieren permisos de administración.</li>
+</ul>
+<p>El siguiente apartado explica cómo instalar una versión portable para windows, por si quieres hacerlo en tu casa para llevar siempre contigo (en un lápiz USB) un entorno python que pueda ser usado en cualquier ordenador Windows. No obstante, no necesitas hacer esto en los ordenadores de prácticas en los que ya está instalado. Además en esta asignatura haremos casi todas las prácticas en Linux, donde también viene preinstalado como ya se ha dicho.</p>
+<h2 data-number="2.1" id="instalación-de-python-portable-en-windows" data-number="2.1"><span class="header-section-number">2.1</span> Instalación de python portable en Windows</h2>
+<p>Lo que se describe en esta sección no es necesario para esta asignatura, pues Python ya está instalado en los ordenadores de prácticas. Es sólo por si quieres hacerlo en tu ordenador personal.</p>
+<ol type="1">
+<li>Ve a la <a href="http://winpython.github.io/">página de descarga</a> y descarga la versión más reciente de WinPython <strong>3.4</strong>.x.x.</li>
+<li>Obtendrás un fichero ejecutable (<code>.exe</code>) que es en realidad un archivo comprimido auto-extraíble. Al ejecutarlo te preguntará dónde quieres extraerlo en tu disco duro. Aunque podrías darle como destino un lápiz USB no se recomienda hacerlo en este punto pues la escritura en las memorias <em>flash</em> es muy lenta. Dale como destino una carpeta de tu disco duro, preferiblemente en el raíz de la primera unidad de disco (<code>C:\</code>).</li>
+<li>Una vez se ha extraído al destino que has especificado, puedes copiar la carpeta resultante a cualquier otro disco, incluyendo un lápiz USB externo.</li>
+</ol>
+<p>Con esta copia la instalación está completada. De ahora en adelante, a la carpeta en la que se ha copiado WinPython la llamaremos <code>_WinPython_</code> en este documento. En tu caso el nombre real de la carpeta puede ser por ejemplo <code>C:\WinPython 3.4.4.3\</code>, de modo que cuando más adelante en el documento nos refiramos a la carpeta <code>_WinPython_\App</code>, se trataría en tu caso de la carpeta <code>C:\WinPython 3.4.4.3\App</code>.</p>
+<h2 data-number="2.2" id="probando-python" data-number="2.2"><span class="header-section-number">2.2</span> Probando Python</h2>
+<p>Python es un lenguaje interpretado. Esto quiere decir que va leyendo una a una las órdenes que tú le des (bien sea directamente en una ventana del intérprete o bien en un fichero de texto en el que has escrito previamente el programa), y las va ejecutando. Si alguna de las líneas no puede ejecutarse debido a un error, la ejecución se abortará en ese punto.</p>
+<p>Por tanto hay dos formas de probar python:</p>
+<ol type="1">
+<li>Abriendo el intérprete sin especificarle ningún archivo a ejecutar, y tecleando directamente en el intérprete las órdenes que queremos que ejecute. Este método es rápido para hacer pequeños experimentos, pero tiene el inconveniente de que lo que hayamos escrito se pierde al abandonar el intérprete.</li>
+<li>Escribiendo previamente en un archivo las órdenes que componen nuestro programa y después ejecutando el intérprete pasándole como argumento el nombre del fichero que hemos escrito. Es costumbre poner a estos ficheros extensión <code>.py</code>.</li>
+</ol>
+<p>Aún hay una tercera que consiste en escribir el programa en un fichero <code>.py</code> y pasárselo como argumento al intérprete, pero con una opción que hace que cuando termine de ejecutar ese programa, en lugar de finalizar, el intérprete se quede a la espera de nuevas órdenes, que recibiría en este caso directamente desde el teclado. Esta tercera opción es como una mezcla de las dos anteriores, ya que nos permite escribir en un fichero definiciones de funciones y variables con las que después podremos experimentar interactivamente en la ventana del intérprete.</p>
+<p>Vamos a probar ambas formas como sigue:</p>
+<h3 data-number="2.2.1" id="probar-el-intérprete-interactivo" data-number="2.2.1"><span class="header-section-number">2.2.1</span> Probar el intérprete interactivo</h3>
+<p>El intérprete se llama <code>python3</code>. En sistemas Unix basta abrir una terminal y teclear <code>python3</code> para entrar en ese intérprete y poder comenzar a darle comandos. En sistemas Windows, si python ha sido instalado desde su instalador oficial, éste habrá modificado el <code>PATH</code> del sistema de modo que al abrir una interfaz de comandos de Windows (<code>cmd</code>) también será posible teclear <code>python3</code> directamente desde esa ventana.</p>
+<p>En cambio, ya que hemos instalado la versión portable de python y ésta no modifica nada en el sistema, el <code>PATH</code> no estará actualizado con la ruta hacia la carpeta donde haya sido instalado, y tendremos que especificar dicha ruta “a mano” al lanzar el intérprete desde una terminal. Haz lo siguiente:</p>
+<div class="Profe">
+<ol type="1">
+<li><p>Abre una interfaz de comandos (Ejecutar → <code>cmd</code>)</p></li>
+<li><p>En ella escribe: <code>_WinPython_\App\python.exe</code>. Obtendrás un resultado como el siguiente:</p>
+<p><img src="data:image/png;base64,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" alt="Intérprete en la interfaz de comandos" /> </p></li>
+<li><p>Prueba a escribir cualquier expresión matemática entre números (el operador de exponenciación es <code>**</code>) y verás el resultado. En modo intérprete interactivo, cada vez que python evalúa una expresión muestra en pantalla el resultado, sin que sea necesario hacer ningún <code>print()</code></p></li>
+</ol>
+</div>
+<h3 data-number="2.2.2" id="escribiendo-el-programa" data-number="2.2.2"><span class="header-section-number">2.2.2</span> Escribiendo el programa</h3>
+<div class="Alumno">
+<p>Abre un editor de texto cualquiera y escribe un fichero llamado <code>prueba.py</code> con el siguiente contenido:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>nombre <span class="op">=</span> <span class="bu">input</span>(<span class="st">&quot;Como te llamas: &quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">print</span>(<span class="st">&quot;Hola&quot;</span>, nombre)</span></code></pre></div>
+</div>
+<p>La función <code>input()</code> lee del teclado la respuesta del usuario, hasta que este pulse retorno de carro, y devuelve la cadena tecleada (incluyendo el retorno de carro final)<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Si se le pasa un argumento a esta función, lo imprimirá a modo de <em>prompt</em> antes de leer la respuesta. En el código anterior asignamos la cadena respuesta a la variable <code>nombre</code> para seguidamente mostrarla por pantalla con un <code>print()</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Cuando ejecutas un programa python desde un fichero, a diferencia del intérprete interactivo, no se muestran automáticamente los resultados tras cada línea, sino que es necesario hacer un <code>print()</code> explícito cuando queramos ver algún resultado.</p>
+<p>En la ventana de la interfaz de comandos usa <code>cd</code> (cambiar de directorio) hasta situarte en la carpeta en la que hayas guardado <code>prueba.py</code>, y ejecuta el siguiente comando:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">&gt;</span> <span class="ex">_WinPython_</span>\App\python.exe prueba.py</span></code></pre></div>
+<p>Deberías ver cómo python te pide el nombre para saludarte a continuación. Estas pruebas sirven para comprobar que el intérprete está instalado correctamente.</p>
+<h2 data-number="2.3" id="instalación-de-un-ide" data-number="2.3"><span class="header-section-number">2.3</span> Instalación de un IDE</h2>
+<p>Aunque, como ves, todo lo que necesitas para escribir y probar programas en python es un editor de textos y una interfaz de comandos, resulta por lo general más cómodo el poder utilizar un editor específico para el lenguaje que te ofrezca coloreado sintáctico, autocompletado de identificadores, etc, y si además tiene integrado un mecanismo que permita ejecutar el intérprete python y mostrar los resultados en un panel del editor, ya no sería necesario ni abrir una interfaz de comandos para probar el código.</p>
+<p>Existen multitud de IDEs específicos para python, y otros IDEs de propósito general famosos como Eclipse también pueden ser usados con python. Incluso Visual Studio tiene un <em>plugin</em> que permite <a href="https://www.visualstudio.com/es-es/features/python-vs.aspx">trabajar con Python</a>, creando un entorno muy amigable con auto-completado, documentación on-line, etc.</p>
+<p>Cuando trabajes con python en la máquina virtual Ubuntu, no podrás usar ninguno de estos IDEs, puesto que la versión Server que usamos no tiene display gráfico. En este caso el “ide” será un editor de texto cualquiera (por ejemplo <code>vim</code>) en el que escribirás el código, y la línea de comandos desde la que lo ejecutarás.</p>
+<h1 data-number="3" id="introducción-al-lenguaje-python" data-number="3"><span class="header-section-number">3</span> Introducción al lenguaje Python</h1>
+<p>Python es un lenguaje que puede usarse a muchos niveles diferentes. Internamente es un lenguaje orientado a objetos, pero es posible usarlo sin esa característica, sino como un mero lenguaje de <em>scripting</em> como hemos hecho en el ejemplo anterior, o en un nivel ligeramente superior, como un lenguaje procedural tipo C, pero débilmente tipado. En python las variables no tienen tipo, son los datos los que pueden ser de diferentes tipos, pero las variables no son más que referencias a los datos y una misma variable puede usarse para referenciar tanto un entero como una cadena como cualquier otro tipo.</p>
+<p>Por otro lado tiene incorporado de forma nativa el tipo de datos <code>list</code> que hace muy sencillo trabajar con listas (o arrays) que crecen dinámicamente a medida que se necesita, y los operadores de manejo de listas hacen que se pueda usar en ocasiones como un lenguaje funcional. Las funciones son un tipo de dato más, y por tanto pueden pasarse como parámetro o declararse dentro de otras funciones, para implementar <em>closures</em> (si bien de forma no enteramente satisfactoria).</p>
+<p>Pero la gran ventaja de python es la gran cantidad de bibliotecas (módulos usando su terminología) que vienen ya instalados con el lenguaje y a las que se accede con una sintaxis uniforme. Python es un lenguaje muy adecuado para escribir prototipos rápidos que ayudan a comprender un problema y su posible solución, y probar estas ideas antes de pasar a implementarlas en un lenguaje más convencional como C, C++, C# o Java. Es especialmente adecuado para escribir clientes o servidores de red, ya que proporciona no sólo acceso a la API de sockets “pura”, sino también varios envoltorios de más alto nivel para acceder a protocolos de aplicación frecuentemente utilizados, tales como HTTP, SMTP y otros que veremos en esta asignatura.</p>
+<p>En esta sección no se puede cubrir todos los aspectos de python, que son inabarcables en una asignatura, sino sólo la sintaxis básica para trabajar con variables, bucles, condiciones, funciones y clases, con especial hincapié en el manejo de las listas y diccionarios que son casi el tipo de datos “básico” usado por el resto de sus bibliotecas.</p>
+<p>A lo largo de futuras sesiones de prácticas se irán cubriendo más aspectos del lenguaje a medida que sean necesarios.</p>
+<h2 data-number="3.1" id="datos-variables-y-expresiones" data-number="3.1"><span class="header-section-number">3.1</span> Datos, variables y expresiones</h2>
+<h3 data-number="3.1.1" id="tipos" data-number="3.1.1"><span class="header-section-number">3.1.1</span> Tipos</h3>
+<p>Cada dato en python tiene un tipo concreto. Los tipos más importantes que usaremos son los siguientes. Usa la función <code>type()</code> sobre cada uno de ellos en el intérprete, para ver cómo se llaman en python cada uno de ellos.</p>
+<ul>
+<li>Entero: <code>5</code></li>
+<li>Entero grande: <code>7123917237128</code></li>
+<li>Flotante: <code>5.0</code></li>
+<li>Cadena: <code>&quot;Hola&quot;</code>, o bien <code>&#39;Hola&#39;</code> (da igual). Puede contener cualquier carácter Unicode (hay que especificar la codificación usada por nuestro editor en un comentario inicial que diga <code># coding: utf8</code>, por ejemplo)</li>
+<li>Secuencia de bytes: <code>b&quot;Hola&quot;</code> similar a cadena, pero no intenta “entender” utf8 ni otros encodings, simplemente es la secuencia de bytes que el editor haya guardado.</li>
+<li>Lista: <code>[1,2,3]</code></li>
+<li>Tupla: <code>(1,2,3)</code></li>
+<li>Diccionario (también llamado <em>array asociativo</em>): <code>{ &quot;nombre&quot;:</code> <code>&quot;Manolo&quot;,</code> <code>&quot;apellido&quot;:</code> <code>&quot;Salas&quot; }</code></li>
+</ul>
+<p>Una observación sobre el tipo entero. Por defecto python usa 32 bits para almacenar un <code>int</code>, lo que en otros lenguajes de programación como el C se denomina un <em>entero largo</em> (<code>long int</code>). Pero a diferencia de otros lenguajes, si el resultado de una operación no cabe en esos 32 bits, en lugar de producirse un error por desbordamiento, python cambia automáticamente el tipo del resultado a <code>long</code>, que es un tipo especial de entero que no tiene restricciones de tamaño y en el que caben números tan grandes como te permita la memoria del sistema. Como curiosidad intenta ver el resultado de <code>2**1000</code>, donde <code>**</code> es el operador de exponenciación. De modo que no confundas el tipo <code>long</code> de python con el <code>long</code> de otros lenguajes.</p>
+<p>Las variables en cambio no tienen tipo. No son más que una referencia a un dato, y por tanto el tipo de una variable es el tipo del dato al que apuntan. No se declaran de antemano, pero sí deben estar inicializadas antes de usarse por primera vez. El ámbito de las variables es local a la función en que aparecen por primera vez, o al módulo si se inicializan fuera de las funciones.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">&gt;&gt;&gt;</span> x</span>
+<span id="cb3-2"><a href="#cb3-2"></a>Traceback (most recent call last):</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  File <span class="st">&quot;&lt;interactive input&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="pp">NameError</span>: name <span class="st">&#39;x&#39;</span> <span class="kw">is</span> <span class="kw">not</span> defined</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="op">&gt;&gt;&gt;</span> x</span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="dv">3</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(x)</span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;int&#39;</span><span class="op">&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> <span class="st">&quot;Hola&quot;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">type</span>(x)</span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="op">&lt;</span><span class="bu">type</span> <span class="st">&#39;str&#39;</span><span class="op">&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="op">&gt;&gt;&gt;</span> x</span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">&#39;hola&#39;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(x)</span>
+<span id="cb3-16"><a href="#cb3-16"></a>hola</span></code></pre></div>
+<p>En Python3 los nombres de variable (o funciones, o clases; en realidad cualquier identificador) pueden estar formados por caracteres Unicode. Es posible por tanto tener una variable llamada <code>año</code>, sin tener que usar rodeos como <code>anyo</code>. No obstante recuerda que si tu código fuente contiene algún carácter no ascii, ya sea en los identificadores, o en las cadenas entre comillas o incluso en los comentarios, debes especificar en un comentario en la primera línea qué codificación usa tu editor, para que Python sepa cómo convertir esas secuencias de bytes a Unicode válido. Por ejemplo <code># coding: utf8</code>.</p>
+<h3 data-number="3.1.2" id="expresiones" data-number="3.1.2"><span class="header-section-number">3.1.2</span> Expresiones</h3>
+<p>Python evalúa las expresiones como cualquier otro lenguaje orientado a operadores (ejemplos: C, Java). Algunas particularidades que se pueden probar en el intérprete:</p>
+<ul>
+<li>Exponenciación: <code>2**8</code></li>
+<li>Suma de strings: <code>&quot;Hola&quot; + &quot;mundo&quot;</code></li>
+<li>Producto de string por entero (repite concatenar): <code>&quot;Hola&quot;*3</code></li>
+<li>División: <code>5/2</code> (el resultado será 2.5)<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+<li>División entera: <code>5//2</code> (el resultado será 2)</li>
+<li>Módulo: <code>5%2</code></li>
+<li>Los enteros son tan grandes como se necesite: <code>2**1000</code></li>
+<li>Interpolación de cadenas (tipo <code>printf</code>): <code>&quot;Peso: %.2f Kg, Altura: %d cm&quot;</code> <code>%</code> <code>(68.5, 170)</code>. En general: <code>cadena % tupla</code>. Si la tupla tiene un solo elemento pueden omitirse los paréntesis</li>
+</ul>
+<h3 data-number="3.1.3" id="acceso-a-los-elementos-de-una-lista-cadena-o-tupla" data-number="3.1.3"><span class="header-section-number">3.1.3</span> Acceso a los elementos de una lista, cadena o tupla</h3>
+<p>Se puede acceder a un elemento de una lista, o cadena, o tupla usando corchetes, pero también dentro de los corchetes se puede usar una expresión tipo <code>[inicio:fin]</code> para obtener una copia de una serie de elementos contiguos (el “fin” nunca se incluye). Ejemplo:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">&gt;&gt;&gt;</span> t <span class="op">=</span> <span class="st">&quot;hola&quot;</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="op">&gt;&gt;&gt;</span> t[<span class="dv">0</span>]</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">&#39;h&#39;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="op">&gt;&gt;&gt;</span> t[<span class="dv">0</span>:<span class="dv">3</span>]</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">&#39;hol&#39;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="op">&gt;&gt;&gt;</span> t[<span class="dv">1</span>:<span class="dv">3</span>]</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">&#39;ol&#39;</span></span></code></pre></div>
+<p>Si se omite <code>inicio</code> se asume cero. Si se omite <code>fin</code> se asume la longitud de la cadena, lista o tupla. Si un índice es negativo, python le suma la longitud de la cadena, lista o tupla. Así <code>[-1]</code> representa el último elemento, <code>[-2]</code> el penúltimo, etc.</p>
+<h3 data-number="3.1.4" id="mutabilidad" data-number="3.1.4"><span class="header-section-number">3.1.4</span> Mutabilidad</h3>
+<p>Cuando asignamos un nuevo valor a una variable, cambiamos a dónde apunta, no el dato que “contiene”. La analogía variables como cajas no es válida en python. Es mejor la analogía variables como etiquetas que se le pegan a un dato. <code>x=2</code> pega una etiqueta <code>x</code> en el dato <code>2</code>. Más adelante hacer <code>x = 5</code>, despega la etiqueta <code>x</code> del dato <code>2</code> y se la pega al dato <code>5</code>.</p>
+<p>Los datos en si son inmutables. No puedo cambiar un 2 por un 5. El 2 siempre será 2, y el 5 siempre será 5. Puedo pegarles diferentes etiquetas. La asignación <code>x = y</code> simplemente pega la etiqueta <code>x</code> al mismo dato que tenía ya la etiqueta <code>y</code>. Ese dato tiene ahora dos etiquetas (referencias, alias, …)</p>
+<p>Esto se hace importante en las listas y los diccionarios, ya que estos tipos SON MUTABLES. Una lista es una colección de datos (cada uno puede ser de un tipo diferente), a los que se accede por un índice (como los arrays). En realidad es una lista de referencias a datos. Cada elemento de una lista puedo hacerlo apuntar a un dato distinto del que apuntaba inicialmente. Por eso la lista es mutable. Ejemplo:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">&gt;&gt;&gt;</span> l <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="op">&gt;&gt;&gt;</span> l</span>
+<span id="cb5-3"><a href="#cb5-3"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="op">&gt;&gt;&gt;</span> l[<span class="dv">0</span>]</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="dv">1</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="op">&gt;&gt;&gt;</span> l[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="op">&gt;&gt;&gt;</span> l</span>
+<span id="cb5-8"><a href="#cb5-8"></a>[<span class="dv">9</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
+<p><code>l</code> es una referencia que apunta a una lista. <code>l[0]</code> es otra referencia que apunta al dato 1, pero después la cambio para que apunte al dato 9. Como consecuencia la lista ha cambiado. Por eso es mutable. Observa además lo siguiente:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> l</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="op">&gt;&gt;&gt;</span> x[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="op">&gt;&gt;&gt;</span> l</span>
+<span id="cb6-4"><a href="#cb6-4"></a>[<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
+<p>La asignación <code>x = l</code> hace que <code>x</code> apunte a la misma lista que <code>l</code>. Son dos etiquetas para la misma lista. Por tanto modificar <code>x[0]</code> afecta a <code>l</code>. Esto es importante cuando se pasen listas como parámetros de funciones. Si se quiere evitar esto, hay que sacar una copia de la lista, en lugar de asignarla. Esto se logra de dos formas:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="op">&gt;&gt;&gt;</span> x</span>
+<span id="cb7-3"><a href="#cb7-3"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> <span class="bu">list</span>(x)</span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="op">&gt;&gt;&gt;</span> y[<span class="dv">0</span>]<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="op">&gt;&gt;&gt;</span> y</span>
+<span id="cb7-7"><a href="#cb7-7"></a>[<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="op">&gt;&gt;&gt;</span> x</span>
+<span id="cb7-9"><a href="#cb7-9"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
+<p>O bien, mediante un “<em>slice</em>” parcial o total de la lista:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">&gt;&gt;&gt;</span> y <span class="op">=</span> x[:]</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="op">&gt;&gt;&gt;</span> y[<span class="dv">0</span>]<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="op">&gt;&gt;&gt;</span> y</span>
+<span id="cb8-4"><a href="#cb8-4"></a>[<span class="dv">5</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="op">&gt;&gt;&gt;</span> x</span>
+<span id="cb8-6"><a href="#cb8-6"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span></code></pre></div>
+<p>Un diccionario es como una lista, pero sus elementos no están ordenados y el “índice” que me permite acceder a cada uno puede ser cualquier tipo, no necesariamente un entero. Típicamente es un string. Por ejemplo:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">&gt;&gt;&gt;</span> datos <span class="op">=</span> {}</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="op">&gt;&gt;&gt;</span> datos[<span class="st">&quot;nombre&quot;</span>] <span class="op">=</span> <span class="st">&quot;Manolo&quot;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="op">&gt;&gt;&gt;</span> datos[<span class="st">&quot;telefono&quot;</span>] <span class="op">=</span> <span class="st">&quot;999999999&quot;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="op">&gt;&gt;&gt;</span> datos[<span class="st">&quot;nombre&quot;</span>]</span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">&#39;Manolo&#39;</span></span></code></pre></div>
+<p>El diccionario también es mutable (se puede asignar otro valor a cualquiera de sus elementos), y cuando se asigna una variable de tipo diccionario a otra, en realidad se copian las referencias, como en las listas, por lo que ambas variables se refieren al mismo diccionario y modificar un dato a través de una de ellas, afecta a la otra (como en las listas):</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> datos</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="op">&gt;&gt;&gt;</span> x[<span class="st">&quot;nombre&quot;</span>]<span class="op">=</span><span class="st">&quot;Juan&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="op">&gt;&gt;&gt;</span> datos[<span class="st">&quot;nombre&quot;</span>]</span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">&#39;Juan&#39;</span></span></code></pre></div>
+<p>Si queremos obtener una copia de un diccionario para operar sobre la copia sin afectar al original, haríamos <code>x = dict(datos)</code>.</p>
+<p>Las cadenas y las tuplas, aunque comparten con las listas la sintaxis para acceder a sus elementos individuales, son sin embargo INMUTABLES. Si intentamos cambiar uno de sus elementos tendremos un error.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="op">&gt;&gt;&gt;</span> x <span class="op">=</span> (<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="op">&gt;&gt;&gt;</span> x[<span class="dv">0</span>]</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="dv">1</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="op">&gt;&gt;&gt;</span> x[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>Traceback (most recent call last):</span>
+<span id="cb11-6"><a href="#cb11-6"></a>  File <span class="st">&quot;&lt;interactive input&gt;&quot;</span>, line <span class="dv">1</span>, <span class="kw">in</span> <span class="op">&lt;</span>module<span class="op">&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="pp">TypeError</span>: <span class="st">&#39;tuple&#39;</span> <span class="bu">object</span> does <span class="kw">not</span> support item assignment</span></code></pre></div>
+<h3 data-number="3.1.5" id="métodos-de-cadenas-y-listas" data-number="3.1.5"><span class="header-section-number">3.1.5</span> Métodos de cadenas y listas</h3>
+<p>La mayoría de los tipos están implementados en realidad como un objeto y tienen métodos que permiten hacer operaciones sobre él. El intérprete puede proporcionar ayuda interactiva sobre los métodos soportados por un tipo concreto, poniendo <code>help(tipo)</code>. Por ejemplo, probar a poner <code>help(str)</code> para ver métodos de las cadenas, o <code>help(list)</code> para los de las listas. Si en vez de todos ellos solo queremos ver uno, podemos poner <code>help(tipo.metodo)</code>. Una vez vistos, probar algunos de ellos:</p>
+<p>Cadenas:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">&gt;&gt;&gt;</span> t <span class="op">=</span> <span class="st">&quot;hola&quot;</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="op">&gt;&gt;&gt;</span> t.upper()</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">&#39;HOLA&#39;</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="op">&gt;&gt;&gt;</span> t.capitalize()</span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">&#39;Hola&#39;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="op">&gt;&gt;&gt;</span> t.isdigit()</span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="va">False</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="op">&gt;&gt;&gt;</span> t.startswith(<span class="st">&quot;ho&quot;</span>)</span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="va">True</span></span></code></pre></div>
+<p>Listas:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="op">&gt;&gt;&gt;</span> l <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="op">&gt;&gt;&gt;</span> l.reverse()</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="op">&gt;&gt;&gt;</span> l</span>
+<span id="cb13-4"><a href="#cb13-4"></a>[<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">1</span>]</span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="op">&gt;&gt;&gt;</span> l.sort()</span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="op">&gt;&gt;&gt;</span> l</span>
+<span id="cb13-7"><a href="#cb13-7"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="op">&gt;&gt;&gt;</span> l.count(<span class="dv">2</span>)</span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="dv">1</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="op">&gt;&gt;&gt;</span> l.append(<span class="dv">5</span>)</span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="op">&gt;&gt;&gt;</span> l</span>
+<span id="cb13-12"><a href="#cb13-12"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>]</span></code></pre></div>
+<p>Conversiones entre listas y cadenas (ver <code>help(str.join)</code> y <code>help(str.split)</code>):</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">&gt;&gt;&gt;</span> l <span class="op">=</span> <span class="bu">list</span>(t)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="op">&gt;&gt;&gt;</span> l</span>
+<span id="cb14-3"><a href="#cb14-3"></a>[<span class="st">&#39;h&#39;</span>, <span class="st">&#39;o&#39;</span>, <span class="st">&#39;l&#39;</span>, <span class="st">&#39;a&#39;</span>]</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="op">&gt;&gt;&gt;</span> <span class="st">&quot; + &quot;</span>.join(l)</span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">&#39;h + o + l + a&#39;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="op">&gt;&gt;&gt;</span> <span class="st">&quot;&quot;</span>.join(l)</span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">&#39;hola&#39;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="op">&gt;&gt;</span> frase <span class="op">=</span> <span class="st">&quot;Esta frase tiene varias palabras&quot;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="op">&gt;&gt;</span> l <span class="op">=</span> frase.split()</span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="op">&gt;&gt;</span> l</span>
+<span id="cb14-11"><a href="#cb14-11"></a>[<span class="st">&#39;Esta&#39;</span>, <span class="st">&#39;frase&#39;</span>, <span class="st">&#39;tiene&#39;</span>, <span class="st">&#39;varias&#39;</span>, <span class="st">&#39;palabras&#39;</span>]</span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="op">&gt;&gt;</span> <span class="st">&quot;;&quot;</span>.join(l)</span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">&#39;Esta;frase;tiene;varias;palabras&#39;</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="op">&gt;&gt;</span> l <span class="op">=</span> frase.split(<span class="st">&quot;;&quot;</span>)</span>
+<span id="cb14-15"><a href="#cb14-15"></a>[<span class="st">&#39;Esta&#39;</span>, <span class="st">&#39;frase&#39;</span>, <span class="st">&#39;tiene&#39;</span>, <span class="st">&#39;varias&#39;</span>, <span class="st">&#39;palabras&#39;</span>]</span></code></pre></div>
+<h2 data-number="3.2" id="control-de-flujo" data-number="3.2"><span class="header-section-number">3.2</span> Control de flujo</h2>
+<p>En python el “bloque” de sentencias no se delimita mediante ningún carácter especial (a diferencia de la mayoría de los lenguajes que sí lo hacen, por ejemplo Java o C usan llaves). En vez de eso, usa la indentación del bloque como elemento sintáctico para delimitar el bloque (a diferencia de los restantes lenguajes en los que la indentación es ignorada por el compilador).</p>
+<p>Por esta razón, estos ejemplos se prueban mejor en el editor que en el intérprete interactivo (aunque también se podría), ya que el editor automáticamente indenta el código cuando detecta que comenzamos un nuevo bloque.</p>
+<h2 data-number="3.3" id="condicionales" data-number="3.3"><span class="header-section-number">3.3</span> Condicionales</h2>
+<p>Hacer los ejemplos siguientes para comprender la sintaxis y funcionamiento:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>b <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="cf">if</span> a<span class="op">&gt;</span>b:</span>
+<span id="cb15-4"><a href="#cb15-4"></a>    <span class="bu">print</span>(<span class="st">&quot;la variable a es mayor&quot;</span>)</span>
+<span id="cb15-5"><a href="#cb15-5"></a>    <span class="bu">print</span>(<span class="st">&quot;ya que a=</span><span class="sc">%d</span><span class="st"> y b=</span><span class="sc">%d</span><span class="st">&quot;</span> <span class="op">%</span> (a,b))</span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="bu">print</span>(<span class="st">&quot;Fin de programa&quot;</span>)</span></code></pre></div>
+<p>Cambiar <code>a</code> por <code>1</code> y volver a ejecutar.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>b <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="cf">if</span> a<span class="op">&gt;</span>b:</span>
+<span id="cb16-4"><a href="#cb16-4"></a>    <span class="bu">print</span>(<span class="st">&quot;la variable a es mayor&quot;</span>)</span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="cf">else</span>:</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="bu">print</span> <span class="st">&quot;la variable b es mayor&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="bu">print</span>(<span class="st">&quot;ya que a=</span><span class="sc">%d</span><span class="st"> y b=</span><span class="sc">%d</span><span class="st">&quot;</span> <span class="op">%</span> (a,b))</span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="bu">print</span>(<span class="st">&quot;Fin de programa&quot;</span>)</span></code></pre></div>
+<p>Otro ejemplo:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>b <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="cf">if</span> a <span class="op">&gt;</span> b:</span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="bu">print</span>(<span class="st">&quot;la variable a es mayor&quot;</span>)</span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="cf">elif</span> b <span class="op">&gt;</span> a:</span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="bu">print</span>(<span class="st">&quot;la variable b es mayor&quot;</span>)</span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="cf">else</span>:</span>
+<span id="cb17-8"><a href="#cb17-8"></a>    <span class="bu">print</span>(<span class="st">&quot;a y b son iguales&quot;</span>)</span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="bu">print</span>(<span class="st">&quot;ya que a=</span><span class="sc">%d</span><span class="st"> y b=</span><span class="sc">%d</span><span class="st">&quot;</span> <span class="op">%</span> (a,b))</span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="bu">print</span>(<span class="st">&quot;Fin de programa&quot;</span>)</span></code></pre></div>
+<p>Python no tiene <code>switch()</code>, debe implementarse mediante <code>elifs</code>.</p>
+<h3 data-number="3.3.1" id="bucles" data-number="3.3.1"><span class="header-section-number">3.3.1</span> Bucles</h3>
+<p>Python solo tiene el bucle <code>while</code> (no tiene el <code>do..while</code> ni el <code>repeat..until</code>).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>i <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="cf">while</span> i<span class="op">&lt;=</span><span class="dv">3</span>:</span>
+<span id="cb18-3"><a href="#cb18-3"></a>    <span class="bu">print</span>(i)</span>
+<span id="cb18-4"><a href="#cb18-4"></a>    i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>Que puede usarse para recorrer listas, o cadenas, o tuplas:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>t <span class="op">=</span> <span class="st">&quot;Hola&quot;</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(t):</span>
+<span id="cb19-4"><a href="#cb19-4"></a>    <span class="bu">print</span>(t[i])</span>
+<span id="cb19-5"><a href="#cb19-5"></a>    i <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span></span></code></pre></div>
+<p>Pero además tiene una potente construcción llamada el iterador (<code>for</code>). El iterador permite que una variable vaya tomando valores sucesivos extraídos de una lista, o cadena o tupla y es el equivalente al <code>foreach</code> de otros lenguajes de programación:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>texto <span class="op">=</span> <span class="st">&quot;Hola&quot;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="cf">for</span> letra <span class="kw">in</span> texto:</span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="bu">print</span>(letra.upper())</span></code></pre></div>
+<p>Otro ejemplo:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>numeros <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">9</span>,<span class="dv">20</span>,<span class="dv">3</span>]</span>
+<span id="cb21-2"><a href="#cb21-2"></a>mayor <span class="op">=</span> numeros[<span class="dv">0</span>]</span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="cf">for</span> numero <span class="kw">in</span> numeros:</span>
+<span id="cb21-4"><a href="#cb21-4"></a>    <span class="cf">if</span> numero<span class="op">&gt;</span>mayor:</span>
+<span id="cb21-5"><a href="#cb21-5"></a>        mayor<span class="op">=</span>numero</span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="bu">print</span>(mayor)</span></code></pre></div>
+<p>A menudo <code>for</code> se usa en combinación con la función <code>range()</code> (que devuelve una lista de valores consecutivos, consulta <code>help(range)</code> para más opciones) para obtener una serie de números seguidos. Usado así puede servir como sustituto del bucle <code>for</code> del C o Java.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="cf">for</span> n <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">30</span>):</span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="cf">if</span> n<span class="op">%</span><span class="dv">5</span><span class="op">==</span><span class="dv">0</span>:</span>
+<span id="cb22-3"><a href="#cb22-3"></a>        <span class="bu">print</span>(n)</span></code></pre></div>
+<h3 data-number="3.3.2" id="funciones" data-number="3.3.2"><span class="header-section-number">3.3.2</span> Funciones</h3>
+<p>Las funciones se definen con <code>def</code>, y se debe especificar la lista de parámetros que van a recibir (aunque no sus tipos). El cuerpo de la función irá delimitado por indentación. La función puede contener <code>return</code> en cualquier lugar, y se puede retornar cualquier tipo de dato (retornar una tupla sirve para devolver varios resultados).</p>
+<p>El paso de parámetros no es más que una asignación del parámetro actual al parámetro formal. Por tanto el paso es por copia y una función no puede modificar el dato que recibe.</p>
+<p>Sin embargo, si el parámetro es una lista, ya vimos que sí que puede modificar alguno de sus elementos, y esa modificación afectaría al programa principal, aunque en general no es una práctica recomendable.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">def</span> maximo(numeros):</span>
+<span id="cb23-2"><a href="#cb23-2"></a>    <span class="bu">max</span> <span class="op">=</span> numeros[<span class="dv">0</span>]</span>
+<span id="cb23-3"><a href="#cb23-3"></a>    <span class="cf">for</span> n <span class="kw">in</span> numeros:</span>
+<span id="cb23-4"><a href="#cb23-4"></a>        <span class="cf">if</span> n <span class="op">&gt;</span> <span class="bu">max</span>:</span>
+<span id="cb23-5"><a href="#cb23-5"></a>            <span class="bu">max</span> <span class="op">=</span> n</span>
+<span id="cb23-6"><a href="#cb23-6"></a>    <span class="cf">return</span> <span class="bu">max</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a></span>
+<span id="cb23-8"><a href="#cb23-8"></a>datos <span class="op">=</span> [<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">15</span>,<span class="dv">23</span>,<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb23-9"><a href="#cb23-9"></a>m <span class="op">=</span> maximo(datos)</span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="bu">print</span>(m)</span></code></pre></div>
+<p>La siguiente función recibe una lista de datos y devuelve otra lista copia de la original en la que se han eliminado los ceros.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">def</span> quitarceros(datos):  <span class="co"># No modifica la lista original</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>    nueva <span class="op">=</span> []</span>
+<span id="cb24-3"><a href="#cb24-3"></a>    <span class="cf">for</span> d <span class="kw">in</span> datos:</span>
+<span id="cb24-4"><a href="#cb24-4"></a>        <span class="cf">if</span> d <span class="op">!=</span> <span class="dv">0</span>:</span>
+<span id="cb24-5"><a href="#cb24-5"></a>            nueva.append(d)</span>
+<span id="cb24-6"><a href="#cb24-6"></a>    <span class="cf">return</span> nueva</span>
+<span id="cb24-7"><a href="#cb24-7"></a></span>
+<span id="cb24-8"><a href="#cb24-8"></a>datos <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">3</span>,<span class="dv">0</span>,<span class="dv">12</span>,<span class="dv">0</span>,<span class="dv">0</span>]</span>
+<span id="cb24-9"><a href="#cb24-9"></a>datos2 <span class="op">=</span> quitarceros(datos)</span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="bu">print</span>(datos2)</span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="bu">print</span>(datos)</span></code></pre></div>
+<h2 data-number="3.4" id="clases-y-objetos" data-number="3.4"><span class="header-section-number">3.4</span> Clases y objetos</h2>
+<p>Una clase define un prototipo que tiene campos con datos (como las estructuras C), y tiene funciones (métodos). La idea es la misma que las clases C++ o Java. También tiene un constructor que puede inicializar los campos del objeto (llamado <code>__init__</code>). Dentro de los métodos de la clase para referirse al objeto concreto que la invoca, se usa el parámetro llamado <code>self</code> (el equivalente al <code>this</code> del C++ o el Java), que <em>siempre</em> hay que declarar como <strong>primer parámetro</strong> del método. ¡Acordarse de usar <code>self.campo</code>, y no simplemente <code>campo</code> como en Java! Al invocar los métodos del objeto, el parámetro <code>self</code> no se pasa, sino que el intérprete ya lo inicializa con la referencia al objeto que lo está invocando, es decir, en <code>x.metodo()</code>, <code>self</code> sería <code>x</code>.</p>
+<p>Ejemplo (observar que el constructor en este ejemplo recibe parámetros con valores por defecto, lo que significa que pueden omitirse en la llamada).</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">class</span> Complejo:</span>
+<span id="cb25-2"><a href="#cb25-2"></a>    real <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>    imag <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, re<span class="op">=</span><span class="dv">0</span>, im<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb25-5"><a href="#cb25-5"></a>        <span class="va">self</span>.real <span class="op">=</span> re</span>
+<span id="cb25-6"><a href="#cb25-6"></a>        <span class="va">self</span>.imag <span class="op">=</span> im</span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="kw">def</span> imprimir(<span class="va">self</span>):</span>
+<span id="cb25-8"><a href="#cb25-8"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="sc">%.2f</span><span class="st"> + </span><span class="sc">%.2f</span><span class="st">i&quot;</span> <span class="op">%</span> (<span class="va">self</span>.real, <span class="va">self</span>.imag))</span></code></pre></div>
+<p>Una vez declarada la clase, el nombre de la clase se convierte en una función que al llamarla invoca al constructor y retorna una referencia al objeto recién creado (mientras se ejecuta el constructor, <code>self</code> apunta a ese objeto recién creado también). Así <code>Complejo(1,1)</code> crea un objeto del tipo <code>Complejo</code> e inicializa sus campos con los valores <code>1</code> y <code>1</code>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>y <span class="op">=</span> Complejo(<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb26-2"><a href="#cb26-2"></a>y.imprimir()    <span class="co"># Mostrará 1.0 + 1.0i</span></span></code></pre></div>
+<h3 data-number="3.4.1" id="herencia" data-number="3.4.1"><span class="header-section-number">3.4.1</span> Herencia</h3>
+<p>Una clase puede heredar de otra, y así recibir sus atributos y métodos, que después podrá extender o redefinir (sobrecargar). Como muestra el simple ejemplo siguiente, la sintaxis de la herencia consiste en escribir la clase base entre paréntesis:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="kw">class</span> Imaginario(Complejo):   <span class="co"># La clase de la que hereda va entre paréntesis</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, im<span class="op">=</span><span class="dv">0</span>):</span>
+<span id="cb27-3"><a href="#cb27-3"></a>        <span class="va">self</span>.real <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a>        <span class="va">self</span>.imag <span class="op">=</span> im</span>
+<span id="cb27-5"><a href="#cb27-5"></a></span>
+<span id="cb27-6"><a href="#cb27-6"></a>z <span class="op">=</span> Imaginario(<span class="dv">3</span>)</span>
+<span id="cb27-7"><a href="#cb27-7"></a>z.imprimir()  <span class="co"># Mostrará 0.00 + 3.00i</span></span></code></pre></div>
+<p>Python admite herencia múltiple, con las complejidades que ésto puede acarrear, especialmente al tratar de invocar el constructor de la clase base. Estos problemas se salen del ámbito de esta breve introducción y sólo se verán en su momento si son necesarios en alguna práctica.</p>
+<h2 data-number="3.5" id="módulos" data-number="3.5"><span class="header-section-number">3.5</span> Módulos</h2>
+<p>Un módulo no es más que un fichero que contiene código python, normalmente para implementar clases y funciones. La idea es que ese código pueda “incluirse” en otro programa para poder así acceder a las clases y funciones allí definidas, cumpliendo por tanto el papel de las bibliotecas en otros lenguajes.</p>
+<p>La sintaxis más sencilla para usar un módulo es mediante <code>import</code>. Por ejemplo, el módulo <code>math</code> contiene funciones matemáticas, y mediante <code>import math</code> tendremos acceso a esas funciones. Puedes averiguar qué funciones y clases implementa un módulo haciendo <code>help(math)</code>, por ejemplo, desde el intérprete, pero sólo funcionará si has hecho antes <code>import math</code> (ya que sin eso el símbolo <code>math</code> no está definido).</p>
+<p>Una vez que el módulo ha sido importado, esto crea un espacio de nombres con el nombre del módulo, dentro del cual están todas las clases, funciones y variables implementadas en el módulo. Esto implica que para acceder a esas clases, funciones y variables hay que escribir delante el nombre de módulo y un punto. Ejemplo:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="im">import</span> math</span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="bu">print</span>(math.sqrt(<span class="dv">5</span>))</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="bu">print</span>(math.pi)</span></code></pre></div>
+<p>Hay sintaxis alternativas para simplificar el uso de estos espacios de nombres. Por ejemplo, si el módulo importado tiene un nombre demasiado largo de escribir, podemos “renombrarlo” cuando lo importamos así:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="im">import</span> math <span class="im">as</span> m</span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="bu">print</span>(m.sqrt(<span class="dv">5</span>))</span>
+<span id="cb29-3"><a href="#cb29-3"></a>printr(m.pi)</span></code></pre></div>
+<p>Si sólo vamos a necesitar una función del módulo, podemos importar esa función solo. En este caso, para usarla no requeriremos precederla del espacio de nombres:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a><span class="im">from</span> math <span class="im">import</span> sqrt</span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="bu">print</span>(sqrt(<span class="dv">5</span>))</span></code></pre></div>
+<p>Finalmente, se puede usar el asterisco para importar TODAS las funciones, clases y variables definidas en un módulo, y así no tener que usar el espacio de nombres para usarlas. Este “truco” se ve a menudo en ejemplos de código de Internet, pero se desaconseja porque los espacios de nombres ayudan a evitar colisiones en nombres de funciones y variables.</p>
+<h3 data-number="3.5.1" id="escribir-un-módulo-que-pueda-ejecutarse-como-programa" data-number="3.5.1"><span class="header-section-number">3.5.1</span> Escribir un módulo que pueda ejecutarse como programa</h3>
+<p>Cuando python carga un módulo, ejecuta todo su contenido. Normalmente el módulo contiene sólo definiciones de funciones y clases, pero podría contener asignaciones de variables o cualquier otro código ejecutable, el cual se ejecutaría cuando el módulo es cargado. Por ejemplo:</p>
+<div class="Alumno">
+<p>Escribe el siguiente código en un fichero y guárdalo con el nombre <code>mimodulo.py</code>.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># Guarda este fichero con el nombre mimodulo.py</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="kw">def</span> saludo(nombre):</span>
+<span id="cb31-3"><a href="#cb31-3"></a>    <span class="bu">print</span>(<span class="st">&quot;Hola&quot;</span>, nombre)</span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="bu">print</span>(<span class="st">&quot;Modulo cargado&quot;</span>)</span>
+<span id="cb31-6"><a href="#cb31-6"></a>x <span class="op">=</span> <span class="dv">3</span></span></code></pre></div>
+</div>
+<p>Si en la misma carpeta tienes otro programa que haga <code>import mimodulo</code>, al ejecutar este último<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> veremos aparecer en la consola el texto “Modulo cargado” y además quedarán definidas la función <code>mimodulo.saludo</code> y la variable <code>mimodulo.x</code> con el valor 3.</p>
+<p>Además, python también inicializa una variable automáticamente llamada <code>mimodulo.__name__</code> con el valor <code>mimodulo</code>. Sin embargo, si desde línea de comandos hacemos <code>python mimodulo</code>, también se ejecutará el módulo y veremos aparecer el mensaje, pero en este caso el valor que python asigna a <code>mimodulo.__name__</code> no es <code>&quot;mimodulo&quot;</code>, sino la cadena especial <code>&quot;__main__&quot;</code>.</p>
+<p>Esto nos sirve para distinguir desde dentro del módulo si estamos siendo ejecutados como consecuencia de un <code>import</code>, o directamente como programa principal. Así podemos cambiar nuestro comportamiento según sea el caso:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">def</span> saludo(nombre):</span>
+<span id="cb32-2"><a href="#cb32-2"></a>    <span class="bu">print</span>(<span class="st">&quot;Hola&quot;</span>, nombre)</span>
+<span id="cb32-3"><a href="#cb32-3"></a></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb32-5"><a href="#cb32-5"></a>    <span class="bu">print</span>(<span class="st">&quot;Ejecutado directamente como programa principal&quot;</span>)</span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="cf">else</span>:</span>
+<span id="cb32-7"><a href="#cb32-7"></a>    <span class="bu">print</span>(<span class="st">&quot;Modulo cargado&quot;</span>)</span>
+<span id="cb32-8"><a href="#cb32-8"></a>    x <span class="op">=</span> <span class="dv">3</span></span></code></pre></div>
+<p>Prueba a ejecutarlo como programa principal (si estás en IEP pulsa <code>Ctrl+E</code>, si no ve a la interfaz de comandos y teclea <code>python mimodulo.py</code>). Deberás ver cómo sale el mensaje que indica que ha sido ejecutado como programa principal.</p>
+<p>Prueba en cambio a ejecutar el intérprete solo (o cambia al panel de intérprete si estás en IEP) y en él escribe <code>import mimodulo</code>. O bien escribe otro pequeño programa principal que contenga <code>import mimodulo</code>. En este caso deberá aparecer el otro mensaje.</p>
+<p>Esto permite escribir módulos que definan funciones útiles para ser usadas en otros programas, y que a la vez contengan una especie de “demo” de su utilidad que pueda ser ejecutada directamente como programa principal. Por ejemplo:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">def</span> saludo(nombre):</span>
+<span id="cb33-2"><a href="#cb33-2"></a>    <span class="bu">print</span>(<span class="st">&quot;Hola&quot;</span>, nombre)</span>
+<span id="cb33-3"><a href="#cb33-3"></a></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb33-5"><a href="#cb33-5"></a>    nombre <span class="op">=</span> <span class="bu">raw_input</span>(<span class="st">&quot;Como te llamas? &quot;</span>)</span>
+<span id="cb33-6"><a href="#cb33-6"></a>    saludo(nombre)</span></code></pre></div>
+<h2 data-number="3.6" id="documentación" data-number="3.6"><span class="header-section-number">3.6</span> Documentación</h2>
+<p>Hemos dejado para el final uno de los aspectos más importantes de la programación en cualquier lenguaje, y es la generación de documentación del programa que se esté escribiendo. Python admite dos formas de documentación:</p>
+<h3 data-number="3.6.1" id="comentarios" data-number="3.6.1"><span class="header-section-number">3.6.1</span> Comentarios</h3>
+<p>Como cualquier otro lenguaje, python permite escribir comentarios que serán ignorados por el intérprete. En el caso de python, todo lo que siga al carácter <code>#</code> será ignorado.</p>
+<h3 data-number="3.6.2" id="docstrings" data-number="3.6.2"><span class="header-section-number">3.6.2</span> <em>Docstrings</em></h3>
+<p>Además de los comentarios que son ignorados, cada módulo y cada función dentro del módulo puede llevar asociada una cadena de documentación, (<em>docstring</em>) que no son ignoradas por el intérprete, sino que son utilizadas para generar la ayuda que podemos ver con <code>help()</code> y eventualmente puede ser transformada en HTML para generar una documentación imprimible, al estilo de Javadoc.</p>
+<p>Si queremos usar estas cadenas de documentación, basta añadirlas como la primera sentencia de una función, o de un módulo. Ya que habitualmente estas cadenas ocuparán varias líneas, se suele usar el delimitador <code>&quot;&quot;&quot;</code> (triple) para contenerlas. Este delimitador no es exclusivo de los <em>docstring</em> aunque es donde más suele verse, sino que es parte de la sintaxis de python y puede usarse en cualquier lugar en que se necesite delimitar una cadena que ocupe varias líneas. Observa el ejemplo siguiente:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Este es el modulo saludo.py</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="co">&quot;&quot;&quot;Este modulo implementa funciones relacionadas con saludos.&quot;&quot;&quot;</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="kw">def</span> saludo(nombre):</span>
+<span id="cb34-4"><a href="#cb34-4"></a>    <span class="co">&quot;&quot;&quot;Emite por la salida estandar un saludo al nombre que</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="co">    recibe como parametro&quot;&quot;&quot;</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a>    <span class="bu">print</span>(<span class="st">&quot;Hola&quot;</span>, nombre)</span></code></pre></div>
+<p>La documentación incorporada de este modo está accesible a través de <code>help()</code> cuando se carga el módulo.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="op">&gt;&gt;&gt;</span> <span class="im">import</span> saludo</span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">help</span>(saludo)</span>
+<span id="cb35-3"><a href="#cb35-3"></a>Help on module saludo:</span>
+<span id="cb35-4"><a href="#cb35-4"></a></span>
+<span id="cb35-5"><a href="#cb35-5"></a>NAME</span>
+<span id="cb35-6"><a href="#cb35-6"></a>    saludo <span class="op">-</span> Este modulo implementa funciones relacionadas con saludos.</span>
+<span id="cb35-7"><a href="#cb35-7"></a></span>
+<span id="cb35-8"><a href="#cb35-8"></a>FILE</span>
+<span id="cb35-9"><a href="#cb35-9"></a>    <span class="op">/</span>carpeta<span class="op">/</span>donde<span class="op">/</span>esta<span class="op">/</span>guardado<span class="op">/</span>saludo.py</span>
+<span id="cb35-10"><a href="#cb35-10"></a></span>
+<span id="cb35-11"><a href="#cb35-11"></a>FUNCTIONS</span>
+<span id="cb35-12"><a href="#cb35-12"></a>    saludo(nombre)</span>
+<span id="cb35-13"><a href="#cb35-13"></a>        Emite por la salida estandar un saludo al nombre que</span>
+<span id="cb35-14"><a href="#cb35-14"></a>        recibe como parametro</span>
+<span id="cb35-15"><a href="#cb35-15"></a></span>
+<span id="cb35-16"><a href="#cb35-16"></a><span class="op">&gt;&gt;&gt;</span> </span></code></pre></div>
+<h2 data-number="3.7" id="decoradores" data-number="3.7"><span class="header-section-number">3.7</span> Decoradores</h2>
+<p>Un decorador es una función que toma como parámetro otra función, y devuelve como resultado una tercera función. Aplicar un decorador a una función permite alterar cómo se comporta esta, sin necesidad de tocar su código.</p>
+<p>Como el concepto es complejo, comencemos haciendo un ejemplo que muestra cómo lograr alterar una función sin necesitar decoradoes. Esto es posible porque en Python las funciones también son objetos por lo que se pueden recibir como parámetro y devolver como resultado.</p>
+<p>Supongamos que tengo la función siguiente:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">def</span> cuadrado(n):</span>
+<span id="cb36-2"><a href="#cb36-2"></a>    <span class="cf">return</span> n<span class="op">*</span>n</span></code></pre></div>
+<p>La forma de invocarla sería por ejemplo <code>r = cuadrado(5)</code>. Ahora imagina que queremos que la función, antes de ejecutarse, imprima “Voy a ejecutar cuadrado” y cuando haya terminado, que imprima “He ejecutado cuadrado”. No queremos cambiar la función original, de modo que escribimos otra que la llame:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">def</span> cuadrado_modificada(n):</span>
+<span id="cb37-2"><a href="#cb37-2"></a>    <span class="bu">print</span>(<span class="st">&quot;Voy a ejecutar cuadrado&quot;</span>)</span>
+<span id="cb37-3"><a href="#cb37-3"></a>    result  <span class="op">=</span> cuadrado(n)</span>
+<span id="cb37-4"><a href="#cb37-4"></a>    <span class="bu">print</span>(<span class="st">&quot;He ejecutado cuadrado&quot;</span>)</span>
+<span id="cb37-5"><a href="#cb37-5"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<p>Esto está mejor, pero no es muy general. Si tuviéramos diferentes funciones (<code>cuadrado</code>, <code>raiz</code>, etc.) y quisiéramos “instrumentar” (añadir código como acabamos de hacer) cualquiera de ellas, tendríamos que programar muchas funciones como <code>cuadrado_modificada()</code>, <code>raiz_modificada()</code>, etc. todas ellas prácticamente iguales. En cuanto nos encontremos copiando y pegando trozos del código en otra parte para modificarlos, debería sonar una alarma de que puede hacerse mejor.</p>
+<p>Queremos hacer una función más genérica, que reciba como parámetro la función a instrumentar y la llame, en un <em>sandwich</em> entre los <code>print()</code>. Podemos averiguar además el nombre de la función que estamos invocando para mostrarlo en el <code>print()</code> usando <code>funcion.__name__</code> (¿dijimos que las funciones son objetos?). Sería así:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">def</span> funcion_modificada(funcion, dato):</span>
+<span id="cb38-2"><a href="#cb38-2"></a>    <span class="bu">print</span>(<span class="st">&quot;Voy a invocar&quot;</span>, funcion.<span class="va">__name__</span>)</span>
+<span id="cb38-3"><a href="#cb38-3"></a>    result <span class="op">=</span> funcion(dato)</span>
+<span id="cb38-4"><a href="#cb38-4"></a>    <span class="bu">print</span>(<span class="st">&quot;He invocado&quot;</span>, funcion.<span class="va">__name__</span>)</span>
+<span id="cb38-5"><a href="#cb38-5"></a>    <span class="cf">return</span> result</span></code></pre></div>
+<p>Esto lo invocaríamos con <code>r = funcion_modificada(cuadrado, 5)</code>, por ejemplo.</p>
+<p>Esto está mejor, pero aún no es lo bastante general, porque ¿y si la función a instrumentar tiene más de un parámetro? La función anterior no nos valdría y habría que hacer otra, muy similar, pero con más parámetros.</p>
+<p>Python soporta una sintaxis especial a la hora de listar los parámetros de una función. Si el parámetro comienza por <code>*</code>, esto indica que se trata en realidad de una lista de parámetros, con cualquier número de ellos. Es decir, una función así:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">def</span> muchos_parametros(<span class="op">*</span>args):</span>
+<span id="cb39-2"><a href="#cb39-2"></a>    ...</span></code></pre></div>
+<p>Cuando es invocada así:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1"></a>muchos_parametros(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)</span></code></pre></div>
+<p>Recibe en realidad en su único parámetro <code>args</code> una lista <code>[1,2,3,4]</code>. De forma simétrica, si tenemos una lista como <code>l = [1,2,3,4]</code> y queremos pasar los datos individuales a una función, en lugar de la lista, podemos hacer <code>funcion(*l)</code>. Entonces la función recibirá cuatro parámetros (obviamente debe estar declarada para aceptar cuatro paránetros, o tener un truco tipo <code>*args</code>). Comprueba la diferencia entre <code>print(l)</code>, que imprime la lista, o <code>print(*l)</code>, que imprime los valores.</p>
+<p>Con este truco podemos mejorar nuestra función instrumentadora<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">def</span> funcion_modificada(funcion, <span class="op">*</span>args):</span>
+<span id="cb41-2"><a href="#cb41-2"></a>    <span class="bu">print</span>(<span class="st">&quot;Voy a invocar&quot;</span>, funcion.<span class="va">__name__</span>)</span>
+<span id="cb41-3"><a href="#cb41-3"></a>    result <span class="op">=</span> funcion(<span class="op">*</span>args)</span>
+<span id="cb41-4"><a href="#cb41-4"></a>    <span class="bu">print</span>(<span class="st">&quot;He invocado&quot;</span>, funcion.<span class="va">__name__</span>)</span>
+<span id="cb41-5"><a href="#cb41-5"></a>    <span class="cf">return</span> resultado</span></code></pre></div>
+<p>Ya casi lo tenemos. Pero ahora quiero que mi antigua función <code>cuadrado()</code> sea en realidad la versión modificada. Es decir, no quiero tener que llamar así: <code>r = funcion_modificada(cuadrado, 5)</code>, sino que quiero llamar así: <code>r = cuadrado(5)</code>, tal y como la llamaba antes, pero que se ejecute en su lugar la versión instrumentada.</p>
+<p>¿Cómo lograr esto? Se puede gracias a que en Python las funciones no son más que variables que apuntan al objeto función que van a ejecutar. Es decir, yo puedo hacer:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1"></a>otro <span class="op">=</span> cuadrado</span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="bu">print</span>(otro(<span class="dv">7</span>))  <span class="co"># Y sale 49</span></span></code></pre></div>
+<p>Por tanto la idea parece que va por la línea de:</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a>viejo_cuadrado <span class="op">=</span> cuadrado</span>
+<span id="cb43-2"><a href="#cb43-2"></a>cuadrado <span class="op">=</span> funcion_modificada</span></code></pre></div>
+<p>pero aún no está bien. Para empezar, hemos perdido la función <code>cuadrado</code> original (por eso he guardado una referencia a la original en la variable <code>viejo_cuadrado</code>) pero además no hemos ganado nada, pues la nueva <code>cuadrado</code> necesita invocarse como <code>funcion_modificada</code>, es decir, así: <code>r = cuadrado(viejo_cuadrado, 5)</code>.</p>
+<p>No obstante vamos por el buen camino. Lo que quiero es que <code>funcion_modificada</code>, en lugar de ejecutar la función que se le pasa, cree a partir de ella una nueva función y retorne esa nueva función como resultado. Así (la cosa se complica un poco):</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">def</span> decorar_con_prints(funcion):</span>
+<span id="cb44-2"><a href="#cb44-2"></a>    <span class="kw">def</span> version_decorada(<span class="op">*</span>args):</span>
+<span id="cb44-3"><a href="#cb44-3"></a>        <span class="bu">print</span>(<span class="st">&quot;Voy a invocar&quot;</span>, funcion.<span class="va">__name__</span>)</span>
+<span id="cb44-4"><a href="#cb44-4"></a>        result <span class="op">=</span> funcion(<span class="op">*</span>args)</span>
+<span id="cb44-5"><a href="#cb44-5"></a>        <span class="bu">print</span>(<span class="st">&quot;He invocado&quot;</span>, funcion.<span class="va">__name__</span>)</span>
+<span id="cb44-6"><a href="#cb44-6"></a>    <span class="cf">return</span> version_decorada</span></code></pre></div>
+<p>Ahora puedo hacer desde el programa principal:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a>cuadrado <span class="op">=</span> decorar_con_prints(cuadrado)</span>
+<span id="cb45-2"><a href="#cb45-2"></a><span class="bu">print</span>(cuadrado(<span class="dv">5</span>))</span></code></pre></div>
+<p>Y se mostrará:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1"></a><span class="ex">Voy</span> a invocar cuadrado</span>
+<span id="cb46-2"><a href="#cb46-2"></a><span class="ex">He</span> invocado cuadrado</span>
+<span id="cb46-3"><a href="#cb46-3"></a><span class="ex">25</span></span></code></pre></div>
+<p>Lo que acabamos de implementar es lo que se llama un <em>decorador</em> (tomado del Patrón Decorador). Python introduce el <em>azúcar sintáctico</em> para que, una vez que he escrito un decorador (la función <code>decorar_con_prints</code>), sea muy fácil aplicárselo a otras funciones que escriba luego. Basta poner <code>@nombre_del_decorador</code> delante de la función que vaya a implementar.</p>
+<p>Por ejemplo, si quiero implementar una función <code>suma()</code> que también sea ejecutada por el decorador, escribiría:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="at">@decorar_con_prints</span></span>
+<span id="cb47-2"><a href="#cb47-2"></a><span class="kw">def</span> suma(a, b):</span>
+<span id="cb47-3"><a href="#cb47-3"></a>    <span class="cf">return</span> a<span class="op">+</span>b</span></code></pre></div>
+<p>Y puedo invocarla así: <code>r = suma(2,3)</code>. Prueba incluso <code>r = cuadrado(suma(2,3))</code>.</p>
+<p>Es decir, la sintaxis:</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1"></a><span class="at">@decorador</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a><span class="kw">def</span> funcion(...):</span>
+<span id="cb48-3"><a href="#cb48-3"></a>    ...</span></code></pre></div>
+<p>es interpretada por python como equivalente a:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a>funcion <span class="op">=</span> decorador(funcion)</span></code></pre></div>
+<p>Observa que este patrón es muy poderoso, pues la función que es retornada por el <code>decorador</code> no tiene por qué invocar internamente a la función que recibe como parámetro, sino que puede retornar cualquier otra función. El decorador a su vez puede recibir parámetros que no tiene por qué pasar a la función decorada.</p>
+<p>Cuando un decorador lleva parámetros, como aquí:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1"></a><span class="at">@meta_decorador</span>(parametro)</span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="kw">def</span> funcion(...):</span>
+<span id="cb50-3"><a href="#cb50-3"></a>    ...</span></code></pre></div>
+<p>Python lo ejecuta como si hubiéramos puesto:</p>
+<pre><code>decorador = meta_decorador(parametro)
+funcion = decorador(funcion)</code></pre>
+<p>Esto ya es material avanzado que se sale de los objetivos de la asignatura, pero en este caso se entiende que la función <code>decorador</code> retornaría otra función que a su vez sería un decorador (quizás uno diferente según el parámetro que se le haya pasado).</p>
+<p>Los decoradores son utilizados intensivamente por los <em>frameworks</em> de desarrollo web, como una forma de asociar funciones con rutas HTTP. Veremos ejemplos de su uso en futuras sesiones de prácticas. Es posible usar los decoradores sin entender exactamente cómo funcionan, pero los ejemplos anteriores habrán servido para hacerse una idea.</p>
+<p>El siguiente ejemplo de código puede ayudarte a entender de qué forma los decoradores son usados en este tipo de <em>frameworks</em>. Quizás no lo entiendas ahora, pero se aconseja revisitarlo tras la práctica sobre Web.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1"></a><span class="co"># Variable global donde iremos guardando las funciones registradas</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>funciones <span class="op">=</span> {}</span>
+<span id="cb52-3"><a href="#cb52-3"></a></span>
+<span id="cb52-4"><a href="#cb52-4"></a><span class="kw">def</span> registrar(categoria):</span>
+<span id="cb52-5"><a href="#cb52-5"></a>    <span class="co"># La categoría sería una cadena para catalogar las funciones</span></span>
+<span id="cb52-6"><a href="#cb52-6"></a>    <span class="kw">def</span> decorador(funcion):</span>
+<span id="cb52-7"><a href="#cb52-7"></a>        <span class="co"># El decorador almacena en un diccionario el nombre de la función</span></span>
+<span id="cb52-8"><a href="#cb52-8"></a>        <span class="cf">if</span> categoria <span class="kw">not</span> <span class="kw">in</span> funciones:</span>
+<span id="cb52-9"><a href="#cb52-9"></a>            funciones[categoria] <span class="op">=</span> []</span>
+<span id="cb52-10"><a href="#cb52-10"></a>        funciones[categoria].append(funcion.<span class="va">__name__</span>)</span>
+<span id="cb52-11"><a href="#cb52-11"></a>        <span class="co"># Pero simplmemente retorna la misma función sin cambios</span></span>
+<span id="cb52-12"><a href="#cb52-12"></a>        <span class="cf">return</span> funcion</span>
+<span id="cb52-13"><a href="#cb52-13"></a>    <span class="co"># Retornar el decorador</span></span>
+<span id="cb52-14"><a href="#cb52-14"></a>    <span class="cf">return</span> decorador</span>
+<span id="cb52-15"><a href="#cb52-15"></a></span>
+<span id="cb52-16"><a href="#cb52-16"></a></span>
+<span id="cb52-17"><a href="#cb52-17"></a><span class="at">@registrar</span>(<span class="st">&quot;aritmetica&quot;</span>)</span>
+<span id="cb52-18"><a href="#cb52-18"></a><span class="kw">def</span> suma(a,b):</span>
+<span id="cb52-19"><a href="#cb52-19"></a>    <span class="cf">return</span> a<span class="op">+</span>b</span>
+<span id="cb52-20"><a href="#cb52-20"></a></span>
+<span id="cb52-21"><a href="#cb52-21"></a><span class="at">@registrar</span>(<span class="st">&quot;aritmetica&quot;</span>)</span>
+<span id="cb52-22"><a href="#cb52-22"></a><span class="kw">def</span> resta(a,b):</span>
+<span id="cb52-23"><a href="#cb52-23"></a>    <span class="cf">return</span> a<span class="op">-</span>b</span>
+<span id="cb52-24"><a href="#cb52-24"></a></span>
+<span id="cb52-25"><a href="#cb52-25"></a><span class="at">@registrar</span>(<span class="st">&quot;aritmetica&quot;</span>)</span>
+<span id="cb52-26"><a href="#cb52-26"></a><span class="kw">def</span> producto(a,b):</span>
+<span id="cb52-27"><a href="#cb52-27"></a>    <span class="cf">return</span> a<span class="op">*</span>b</span>
+<span id="cb52-28"><a href="#cb52-28"></a></span>
+<span id="cb52-29"><a href="#cb52-29"></a><span class="at">@registrar</span>(<span class="st">&quot;logica&quot;</span>)</span>
+<span id="cb52-30"><a href="#cb52-30"></a><span class="kw">def</span> son_iguales(a,b):</span>
+<span id="cb52-31"><a href="#cb52-31"></a>    <span class="cf">return</span> a<span class="op">==</span>b</span>
+<span id="cb52-32"><a href="#cb52-32"></a></span>
+<span id="cb52-33"><a href="#cb52-33"></a><span class="at">@registrar</span>(<span class="st">&quot;logica&quot;</span>)</span>
+<span id="cb52-34"><a href="#cb52-34"></a><span class="kw">def</span> son_distintas(a,b):</span>
+<span id="cb52-35"><a href="#cb52-35"></a>    <span class="cf">return</span> a<span class="op">!=</span>b</span>
+<span id="cb52-36"><a href="#cb52-36"></a></span>
+<span id="cb52-37"><a href="#cb52-37"></a><span class="co"># Los decoradores, al ejecutarse, van guardando información sobre las</span></span>
+<span id="cb52-38"><a href="#cb52-38"></a><span class="co"># funciones registradas, aún si éstas no han sido ejecutadas aún (porque</span></span>
+<span id="cb52-39"><a href="#cb52-39"></a><span class="co"># el decorador sí ha sido ejecutado)</span></span>
+<span id="cb52-40"><a href="#cb52-40"></a></span>
+<span id="cb52-41"><a href="#cb52-41"></a><span class="bu">print</span>(funciones)</span>
+<span id="cb52-42"><a href="#cb52-42"></a><span class="co"># Resultado:</span></span>
+<span id="cb52-43"><a href="#cb52-43"></a><span class="co"># {&#39;aritmetica&#39;: [&#39;suma&#39;, &#39;resta&#39;, &#39;producto&#39;], </span></span>
+<span id="cb52-44"><a href="#cb52-44"></a><span class="co">#  &#39;logica&#39;: [&#39;son_iguales&#39;, &#39;son_distintas&#39;]}</span></span></code></pre></div>
+<h1 data-number="4" id="ejercicios" data-number="4"><span class="header-section-number">4</span> Ejercicios</h1>
+<p>Los siguientes ejercicios, para que te familiarices con la sintaxis de python y el entorno de desarrollo, son opcionales pero muy recomendables. Recuerda que <code>help()</code> puede ayudarte a descubrir las funciones incluidas en un módulo.</p>
+<ol type="1">
+<li><p>Escribe un programa que imprima en pantalla la función <code>sin(x)</code> para <code>x</code> evaluada entre 0 y <code>pi</code>, a intervalos regulares de 0.1</p></li>
+<li><p>Modifica el programa anterior para que en lugar de imprimirlo en pantalla almacene los datos en una lista. Después imprime la lista.</p></li>
+<li><p>Escribe fichero llamado <code>seno.py</code> que contenga una función que construya la lista descrita en el punto anterior y la devuelva como resultado. Llama a esta función <code>seno()</code> (no recibe parámetros). Documenta la función con <em>docstrings</em>. Escribe el fichero de modo que pueda ser ejecutado como programa principal o como módulo. Cuando es ejecutado como programa principal contendrá una “demo” que llama a la función anterior e imprime por pantalla la lista resultante.</p></li>
+<li><p>Como curiosidad, WinPython viene con una potente biblioteca científica estilo matlab, llamada <code>pylab</code>. Ésta no forma parte de la distribución estándar python y por tanto no viene por defecto con OSX ni Linux, aunque puede instalarse a posteriori. Aunque en esta asignatura no es necesario el uso de esta biblioteca, puede interesarte saber que contiene entre otras muchas cosas funciones para generar gráficos a partir de unos datos. Puedes probarla con el siguiente código (siendo <code>seno</code> el módulo que has escrito en el apartado anterior). Ejecuta en este caso con <code>Mayus+Ctrl+E</code>.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a><span class="im">from</span> pylab <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a><span class="im">import</span> seno</span>
+<span id="cb53-3"><a href="#cb53-3"></a></span>
+<span id="cb53-4"><a href="#cb53-4"></a>s <span class="op">=</span> seno.seno()</span>
+<span id="cb53-5"><a href="#cb53-5"></a></span>
+<span id="cb53-6"><a href="#cb53-6"></a>plot(s)</span>
+<span id="cb53-7"><a href="#cb53-7"></a>show()</span></code></pre></div>
+<p>La ventana gráfica que se muestra tiene un botón que te permite guardar la gráfica en diferentes formatos.</p></li>
+<li><p>Escribe una función que recibe una cadena como parámetro y devuelve un diccionario con las claves <code>&quot;a&quot;</code>, <code>&quot;e&quot;</code>, <code>&quot;i&quot;</code>, <code>&quot;o&quot;</code> y <code>&quot;u&quot;</code> y en cada clave el número de repeticiones de esa vocal en la cadena. Ejemplo de uso (suponiendo que la función ya la has escrito):</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1"></a><span class="op">&gt;&gt;&gt;</span> txt <span class="op">=</span> <span class="st">&quot;Esto es una prueba. Esta cadena contiene vocales variadas&quot;</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="op">&gt;&gt;&gt;</span> result <span class="op">=</span> contar_vocales(txt)</span>
+<span id="cb54-3"><a href="#cb54-3"></a><span class="op">&gt;&gt;&gt;</span> <span class="bu">print</span>(result)</span>
+<span id="cb54-4"><a href="#cb54-4"></a>{<span class="st">&#39;a&#39;</span>: <span class="dv">9</span>, <span class="st">&#39;i&#39;</span>: <span class="dv">2</span>, <span class="st">&#39;e&#39;</span>: <span class="dv">8</span>, <span class="st">&#39;u&#39;</span>: <span class="dv">2</span>, <span class="st">&#39;o&#39;</span>: <span class="dv">3</span>}</span></code></pre></div>
+<p>Observa que al imprimir un diccionario las claves no siguen ningún orden en particular, por lo que las vocales no saldrán por orden alfabético. Hay muchas formas de enfocar este problema, pero para ir acostumbrándote a pensar en forma “pythónica” puedes usar las siguientes pistas:</p>
+<ul>
+<li>Se puede recorrer una cadena letra a letra con un <code>for letra in cadena:</code></li>
+<li>El tipo <code>str</code> tiene métodos <code>lower()</code> y <code>upper()</code> que devuelven la misma cadena pasada a minúsculas o mayúsculas respectivamente.</li>
+<li>Puedes mirar si una variable toma un valor de un conjunto dado sin necesidad de comparar con cada elemento uno a uno. Puedes usar la construcción <code>if variable in conjunto:</code>. Por ejemplo, si el conjunto es la lista <code>impares=[1,3,5,7,9]</code> puedes hacer algo como <code>if x in impares:</code>. Aplica esto para ver si una letra es una vocal.</li>
+</ul></li>
+</ol>
+<!-- 
+# Notas al pie y referencias -->
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Existen dos “grandes” versiones de Python. Las que comienzan por 2, de las cuales la última versión es la 2.7.12 y ya no saldrán más salvo para corregir <em>bugs</em> y las que comienzan por 3, de las cuales la última versión es la 3.10.7 (de Septiembre de 2022) y que es la que continúa en desarrollo y de la que previsiblemente saldrán nuevas versiones con nuevas características.</p>
+<p>El problema es que estas dos “grandes” versiones no son compatibles entre sí. Aunque dentro de cada rama, las nuevas versiones son compatibles hacia atrás (es decir, la 2.7 es compatible con la 2.6, la 3.4 es compatible con la 3.3, etc.) no existe compatibilidad entre las ramas. Al ser la rama 2 mucho más antigua, es la que dispone de un mayor número de bibliotecas adicionales para necesidades específicas no cubiertas por la biblioteca estándar. La versión 3, al ser más reciente, dispone de un menor número de estas bibliotecas, si bien la situación ya se va equilibrando. Aún así la rama 2 todavía cuenta con mucho código y soporte. Mucho del material de ejemplo sobre python que puedes encontrar en Internet es para la rama 2.</p>
+<p>Una forma fácil de reconocer si estás viendo código para la rama 2 o la 3 es fijarse en la sintaxis de <code>print</code>. En la rama 3 <code>print()</code> es una función como cualquier otra, que usa por tanto paréntesis alrededor de su argumento. Sin embargo en la rama 2 <code>print</code> es un comando del lenguaje y no lleva esos paréntesis, de modo que se escribe <code>print a</code>, en lugar de <code>print(a)</code> para imprimir el valor de la variable <code>a</code>. Como ves, esto introduce una diferencia muy fácil de arreglar, pero que rompe la compatibilidad ya incluso en el “hola mundo”.</p>
+<p>Naturalmente no es <code>print</code> lo único que cambia. Hay muchas diferencias a nivel interno, en el manejo de las clases, etc. Una de las diferencias más importantes que nos atañe de cara a la programación de aplicaciones de red es el manejo de las cadenas. Si bien en python 2 las cadenas no eran más que secuencias de bytes sin significado para el lenguaje, en python 3 las cadenas son secuencias de caracteres Unicode. Para manejar secuencias de bytes sin significado concreto python3 tiene el nuevo tipo <code>bytes</code>. Ya que la API de sockets (y la de ficheros) lo único que transporta son bytes, será necesario convertir de Unicode a bytes o viceversa para transmitir cadenas por la red. Esta conversión es más explícita y menos proclive a errores en Python3. Iremos viendo estas pequeñas diferencias a medida que las necesitemos.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>En Python2 la función necesaria se llamaba <code>raw_input()</code>, puesto que ya existía una función llamada <code>input()</code> que intentaba convertir lo que el usuario tecleara a entero o flotante, según su aspecto. En Python3 <code>input()</code> siempre retorna una cadena (Unicode) y si se quiere convertir a otra cosa deben usarse las funciones apropiadas de conversión (como <code>int()</code> o <code>float()</code>). Por tanto <code>raw_input()</code> ya no es necesaria y no existe en Python3.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>En Python2 <code>print</code> no era una función, sino un <em>keyword</em> del lenguaje, como pudiera ser <code>while</code>, <code>for</code>, etc. Por eso no llevaba paréntesis alrededor de los argumentos. En Python3 la cosa ha cambiado y <code>print()</code> es una función por lo que es obligatorio el uso de esos paréntesis. Al ser una función, admite ahora algunos parámetros con nombre. Uno que resulta muy útil es el llamado <code>end</code>, que permite especificar qué ha de usar <code>print()</code> como terminador tras la cadena impresa. Por defecto usa <code>end=&#39;\n&#39;</code> lo que causa que cada <code>print()</code> vaya a una línea diferente, pero puedes hacer <code>end=&#39;&#39;</code> para que no ocurra ese salto de línea.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>Esta es otra de las cosas que cambió de la versión 2 a la 3, ya que en la versión 3 la división siempre produce un resultado flotante aunque los operandos sean enteros. Así, <code>5/2</code> produce <code>2.5</code> y si se quiere la división entera es necesario usar el operador <code>\</code>, de modo que <code>5\2</code> produce <code>2</code>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5" role="doc-endnote"><p>Desde el entorno IEP también puedes usar el comando <code>cd</code> en el panel del intérprete para ir hasta la carpeta donde habías guardado <code>mimodulo.py</code> y después hacer <code>import mimodulo</code> directamente desde el intérprete. Si no estás usando IEP sino una terminal, usa los comandos de la terminal para ir hasta esa carpeta antes de arrancar el intérprete para que luego <code>import mimodulo</code> te funcione dentro de él.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6" role="doc-endnote"><p>Python tiene también la sintaxis <code>**kwargs</code> para referirse a parámetros adicionales que puedan venir especificados por nombre, en cuyo caso <code>kwargs</code> sería un diccionario cuyas claves son los nombres de los parámetros, asociadas a sus correspondientes valores. Se sale de los objetivos del curso explicar esta sintaxis.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+</article>
+</div>
+</div>
+</body>
+</html>

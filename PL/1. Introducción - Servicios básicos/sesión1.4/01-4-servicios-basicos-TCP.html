@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Sesión 1.4 Programación de red con python. TCP</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style type="text/css">figure {
+padding: 1em;
+margin: 2em auto;
+box-shadow: 10px 10px 7px -5px rgba(0,0,0,0.51);
+}
+figcaption {
+font-size: small;
+font-weight: bold;
+text-align: center;
+margin: 1em;
+color: #888;
+}
+.markdown-body .highlight pre, .markdown-body pre {
+padding: 0pt !important;
+border-radius: 3px;
+}
+div.sourceCode {
+margin: 0pt;
+padding: 0pt;
+border-radius: 3px;
+margin-bottom: 1em;
+}
+pre.sourceCode::before {
+font-size: 1rem;
+color: #fff;
+display: block;
+position: relative;
+top: 0pt;
+left: 0pt;
+width: 100%;
+background: #999;
+padding: 0;
+text-indent: 1em;
+background: #ccc;
+padding: 0;
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+margin-bottom: 1ex;
+}
+pre.console, pre.shell {
+padding: .5em 1em !important;
+}
+.markdown-body pre code {
+text-indent: 1em;
+}
+pre.sourceCode.html::before{
+content: "HTML";
+}
+pre.sourceCode.css::before{
+content: "CSS";
+}
+pre.sourceCode.xml::before{
+content: "XML";
+}
+pre.sourceCode.json::before{
+content: "JSON";
+}
+pre.sourceCode.nginx::before{
+content: "Nginx config";
+}
+pre.sourceCode.javascript::before{
+content: "Javascript";
+background-color: steelblue;
+}
+pre.sourceCode.text::before{
+content: "";
+}
+pre.sourceCode.yaml::before{
+content: "Yaml";
+}
+pre.sourceCode.sql::before{
+content: "SQL";
+}
+pre.sourceCode.rust::before{
+content: "Pseudocódigo";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.c\+\+::before{
+content: "XDR";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.python::before{
+content: "Python";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.java::before{
+content: "Java";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.C::before{
+content: "C";
+}
+pre.sourceCode.dockerfile::before{
+content: "Dockerfile";
+}
+pre.sourceCode.Makefile::before{
+content: "Makefile";
+background-color: #d0d0e0;
+color: #888;
+}
+pre.sourceCode.bash::before{
+content: "Shell";
+background-color: #888;
+}
+code.sourceCode > span {
+display: inline-block;
+line-height: 1.4;
+min-height: 1.4em;
+}
+.markdown-body {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+color: #24292e;
+font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.5;
+word-wrap: break-word;
+box-sizing: border-box;
+min-width: 200px;
+max-width: 110ex;
+margin: 0 auto;
+padding: 45px;
+text-align: justify;
+}
+.markdown-body a {
+color: #0366d6;
+background-color: transparent;
+text-decoration: none;
+-webkit-text-decoration-skip: objects
+}
+.markdown-body a:active,
+.markdown-body a:hover {
+outline-width: 0
+}
+.markdown-body a:hover {
+text-decoration: underline
+}
+.markdown-body a:not([href]) {
+color: inherit;
+text-decoration: none
+}
+.markdown-body strong {
+font-weight: 600
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+margin-top: 24px;
+margin-bottom: 16px;
+font-weight: 600;
+line-height: 1.25
+}
+.markdown-body h1 {
+font-size: 2em;
+margin: .67em 0;
+padding-bottom: .3em;
+border-bottom: 1px solid #eaecef
+}
+.markdown-body h2 {
+padding-bottom: .3em;
+font-size: 1.5em;
+border-bottom: 1px solid #eaecef
+}
+.markdown-body h3 {
+font-size: 1.25em
+}
+.markdown-body h4 {
+font-size: 1em
+}
+.markdown-body h5 {
+font-size: .875em
+}
+.markdown-body h6 {
+font-size: .85em;
+color: #6a737d
+}
+.markdown-body img {
+border-style: none
+}
+.markdown-body svg:not(:root) {
+overflow: hidden
+}
+.markdown-body hr {
+box-sizing: content-box;
+height: .25em;
+margin: 24px 0;
+padding: 0;
+overflow: hidden;
+background-color: #e1e4e8;
+border: 0
+}
+.markdown-body hr::before {
+display: table;
+content: ""
+}
+.markdown-body hr::after {
+display: table;
+clear: both;
+content: ""
+}
+.markdown-body input {
+margin: 0;
+overflow: visible;
+font: inherit;
+font-family: inherit;
+font-size: inherit;
+line-height: inherit
+}
+.markdown-body [type=checkbox] {
+box-sizing: border-box;
+padding: 0
+}
+.markdown-body * {
+box-sizing: border-box
+}
+.markdown-body blockquote {
+margin: 0
+}
+.markdown-body ol,
+.markdown-body ul {
+padding-left: 2em
+}
+.markdown-body ol ol {
+list-style-type: lower-roman
+}
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+margin-top: 0;
+margin-bottom: 0
+}
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+list-style-type: lower-alpha
+}
+.markdown-body li>p {
+margin-top: 16px
+}
+.markdown-body li+li {
+margin-top: .25em
+}
+.markdown-body dd {
+margin-left: 0
+}
+.markdown-body dl {
+padding: 0
+}
+.markdown-body dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: 600
+}
+.markdown-body dl dd {
+padding: 0 16px;
+margin-bottom: 16px
+}
+.markdown-body code {
+font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace
+}
+.markdown-body pre {
+font: 12px SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+word-wrap: normal
+}
+.markdown-body blockquote,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+margin-top: 0;
+margin-bottom: 16px
+}
+.markdown-body blockquote {
+padding: 0 1em;
+color: #6a737d;
+background-color: #eaecef;
+border-left: .25em solid #bac6d3
+}
+.markdown-body blockquote>:first-child {
+margin-top: 0
+}
+.markdown-body blockquote>:last-child {
+margin-bottom: 0
+}
+.markdown-body table {
+display: block;
+width: 100%;
+overflow: auto;
+border-spacing: 0;
+border-collapse: collapse
+}
+.markdown-body table th {
+font-weight: 600;
+background-color: #fff1af;
+color: #c66e41;
+}
+.markdown-body table td,
+.markdown-body table th {
+padding: 6px 13px;
+border: 1px solid #dfe2e5
+}
+.markdown-body table tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1
+}
+.markdown-body table tr:nth-child(2n) {
+background-color: #f6f8fa
+}
+.markdown-body img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff
+}
+.markdown-body code {
+padding: .2em 0;
+margin: 0;
+font-size: 85%;
+background-color: rgba(27, 31, 35, .10);
+word-break: normal;
+word-wrap: normal;
+border-radius: 3px
+}
+.markdown-body code::after,
+.markdown-body code::before {
+letter-spacing: -.2em;
+content: "\00a0"
+}
+.markdown-body pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: 0 0;
+border: 0
+}
+.markdown-body .highlight {
+margin-bottom: 16px
+}
+.markdown-body .highlight pre {
+margin-bottom: 0;
+word-break: normal
+}
+.markdown-body .highlight pre,
+.markdown-body pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f6f8fa;
+border-radius: 3px
+}
+.markdown-body pre code {
+display: inline;
+max-width: auto;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0
+}
+.markdown-body pre code::after,
+.markdown-body pre code::before {
+content: normal
+}
+.markdown-body .full-commit .btn-outline:not(:disabled):hover {
+color: #005cc5;
+border-color: #005cc5
+}
+.markdown-body kbd {
+box-shadow: inset 0 -1px 0 #959da5;
+display: inline-block;
+padding: 3px 5px;
+font: 11px/10px SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+color: #444d56;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: 1px solid #c6cbd1;
+border-bottom-color: #959da5;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #959da5
+}
+.markdown-body :checked+.radio-label {
+position: relative;
+z-index: 1;
+border-color: #0366d6
+}
+.markdown-body .task-list-item {
+list-style-type: none
+}
+.markdown-body .task-list-item+.task-list-item {
+margin-top: 3px
+}
+.markdown-body .task-list-item input {
+margin: 0 .2em .25em -1.6em;
+vertical-align: middle
+}
+.markdown-body::before {
+display: table;
+content: ""
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: ""
+}
+.markdown-body>:first-child {
+margin-top: 0 !important
+}
+.markdown-body>:last-child {
+margin-bottom: 0 !important
+}
+.Alert,
+.Error,
+.Note,
+.Success,
+.Warning {
+padding: 11px;
+margin-bottom: 24px;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px
+}
+.Alert p,
+.Error p,
+.Note p,
+.Success p,
+.Warning p {
+margin-top: 0
+}
+.Alert p:last-child,
+.Error p:last-child,
+.Note p:last-child,
+.Success p:last-child,
+.Warning p:last-child {
+margin-bottom: 0
+}
+.Alert {
+color: #246;
+background-color: #e2eef9;
+border-color: #bac6d3
+}
+.Warning {
+color: #4c4a42;
+background-color: #fff9ea;
+border-color: #dfd8c2
+}
+.Error {
+color: #911;
+background-color: #fcdede;
+border-color: #d2b2b2
+}
+.Success {
+color: #22662c;
+background-color: #e2f9e5;
+border-color: #bad3be
+}
+.Note {
+color: #2f363d;
+background-color: #f6f8fa;
+border-color: #d5d8da
+}
+.Alert h1,
+.Alert h2,
+.Alert h3,
+.Alert h4,
+.Alert h5,
+.Alert h6 {
+color: #246;
+margin-bottom: 0
+}
+.Warning h1,
+.Warning h2,
+.Warning h3,
+.Warning h4,
+.Warning h5,
+.Warning h6 {
+color: #4c4a42;
+margin-bottom: 0
+}
+.Error h1,
+.Error h2,
+.Error h3,
+.Error h4,
+.Error h5,
+.Error h6 {
+color: #911;
+margin-bottom: 0
+}
+.Success h1,
+.Success h2,
+.Success h3,
+.Success h4,
+.Success h5,
+.Success h6 {
+color: #22662c;
+margin-bottom: 0
+}
+.Note h1,
+.Note h2,
+.Note h3,
+.Note h4,
+.Note h5,
+.Note h6 {
+color: #2f363d;
+margin-bottom: 0
+}
+.Alert h1:first-child,
+.Alert h2:first-child,
+.Alert h3:first-child,
+.Alert h4:first-child,
+.Alert h5:first-child,
+.Alert h6:first-child,
+.Error h1:first-child,
+.Error h2:first-child,
+.Error h3:first-child,
+.Error h4:first-child,
+.Error h5:first-child,
+.Error h6:first-child,
+.Note h1:first-child,
+.Note h2:first-child,
+.Note h3:first-child,
+.Note h4:first-child,
+.Note h5:first-child,
+.Note h6:first-child,
+.Success h1:first-child,
+.Success h2:first-child,
+.Success h3:first-child,
+.Success h4:first-child,
+.Success h5:first-child,
+.Success h6:first-child,
+.Warning h1:first-child,
+.Warning h2:first-child,
+.Warning h3:first-child,
+.Warning h4:first-child,
+.Warning h5:first-child,
+.Warning h6:first-child {
+margin-top: 0
+}
+h1.title,
+p.subtitle,
+p.date {
+text-align: center
+}
+h1.title.followed-by-subtitle {
+margin-bottom: 0
+}
+p.subtitle {
+font-size: 1.5em;
+font-weight: 600;
+line-height: 1.25;
+margin-top: 0;
+margin-bottom: 16px;
+padding-bottom: .3em
+}
+div.line-block {
+white-space: pre-line
+}
+.markdown-body img {
+margin: auto;
+display: block;
+}
+.Profe,
+.Alumno,
+.Cuestion {
+padding: 1ex 1em 1ex 4.5em;
+margin: 1em 2em 1em 0em;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px;
+position: relative;
+}
+.Profe p,
+.Alumno p,
+.Cuestion p {
+margin-top: 0
+}
+.Profe p:last-child,
+.Alumno p:last-child,
+.Cuestion p:last-child {
+margin-bottom: 0
+}
+.Profe {
+color: #246;
+background-color: #e2eef9;
+border-color: #bac6d3
+}
+.Alumno {
+color: #4d2600;
+background-color: #ffcc99;
+border-color: #ff8000
+}
+.Cuestion {
+color: #4d2600;
+background-color: #ffeedc;
+border-color: #ffd9b3
+}
+.Profe::before {
+content: "👁";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+.Alumno::before {
+content: "⚙️";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+.Cuestion::before {
+content: "💭";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+#TOC {
+width: 20%;
+position: fixed;
+z-index: 1;
+top: 0px;
+left: 0px;
+padding: 0px 10px;
+height: 100%;
+background-color: #f6f8fa;
+font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 12px;
+line-height: 0.8;
+overflow-y: auto;
+overflow-x: hidden;
+}
+#TOC a {
+text-decoration: none;
+color: #3676ab;
+}
+.toc-title {
+color: #999;
+}
+#main {
+margin-left: 20%;
+}
+#TOC>ul {
+margin-left: -2.5em;
+}
+#TOC>ul>li {
+font-size: 18px;
+line-height: 27px;
+list-style-type: none;
+}
+#TOC>ul>li>ul>li {
+font-size: 16px;
+line-height: 24px;
+}
+#TOC>ul>li>ul>li>ul>li {
+font-size: 14px;
+line-height: 21px;
+}
+.markdown-body header {
+text-align: center;
+margin-bottom: 52pt;
+}
+@media print {
+#TOC {
+page-break-after: always;
+}
+.markdown-body {
+text-align: justify;
+}
+}
+@media print, screen and (max-width: 767px) {
+.markdown-body {
+padding: 2px;
+text-align: left;
+}
+#TOC {
+position: inherit;
+width: 100%;
+height: auto;
+page-break: inherit;
+}
+#main {
+margin-left: 0pt;
+}
+.markdown-body ol,
+.markdown-body ul {
+padding-left: 1.5em
+}
+.Profe,
+.Alumno,
+.Cuestion {
+padding: 1ex 1ex 1ex 1em;
+margin: 2em 0ex 2ex 2ex;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px;
+position: relative;
+}
+.Profe::before {
+content: "👁";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+.Alumno::before {
+content: "⚙️";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+.Cuestion::before {
+content: "💭";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+<div id="wrapper">
+<nav id="TOC">
+<h1 class="toc-title">Índice</h1>
+<ul>
+<li><a href="#introducción"><span class="toc-section-number">1</span> Introducción</a></li>
+<li><a href="#protocolo-tcp"><span class="toc-section-number">2</span> Protocolo TCP</a>
+<ul>
+<li><a href="#mensajes-de-tamaño-prefijado"><span class="toc-section-number">2.1</span> Mensajes de tamaño prefijado</a></li>
+<li><a href="#incluir-marca-de-fin-de-mensaje"><span class="toc-section-number">2.2</span> Incluir marca de “fin de mensaje”</a></li>
+<li><a href="#enviar-previamente-la-longitud-del-mensaje"><span class="toc-section-number">2.3</span> Enviar previamente la longitud del mensaje</a></li>
+</ul></li>
+<li><a href="#despliegue-con-docker"><span class="toc-section-number">3</span> Despliegue con Docker</a></li>
+</ul>
+</nav>
+<div id="main">
+<article class="markdown-body">
+<header>
+<h1 class="title followed-by-subtitle">Sesión 1.4 Programación de red con python. TCP</h1>
+<p class="subtitle">Ingeniería de Servicios</p>
+<p class="date">2023-2024</p>
+</header>
+<div id="main-text">
+<h1 data-number="1" id="introducción" data-number="1"><span class="header-section-number">1</span> Introducción</h1>
+<p>Esta sesión es continuación de la anterior, y en ella se siguen estudiando los mecanismos básicos de comunicación, sus problemas y soluciones, en este caso para el protocolo TCP, a la par que se sigue usando <em>docker</em> para probar a desplegar estos servidores sencillos.</p>
+<h1 data-number="2" id="protocolo-tcp" data-number="2"><span class="header-section-number">2</span> Protocolo TCP</h1>
+<p>Como es bien sabido, usando un socket de tipo <code>SOCK_STREAM</code> el transporte se realiza por TCP, y esta capa incluye mecanismos que evitan tener que implementar en la capa de aplicación los aspectos que hemos estado tratando bajo UDP, tales como reenviar paquetes, numerarlos, incluir respuestas de “reconocimiento”, etc. De hecho la implementación de TCP hace estas cosas y muchas otras para garantizar que los datos llegan íntegros a su destino y en el orden correcto.</p>
+<p>En una conexión TCP, una vez la conexión se ha establecido, se tiene un canal o “tubería” que permite enviar los datos en un flujo, enviando los bytes por un extremo de la tubería y recibiéndolos en el mismo orden en el otro extremo. El programador se desentiende de los detalles que permiten que esto sea así.</p>
+<p>Las aplicaciones cliente/servidor sobre TCP plantean en cambio problemas nuevos, tales como la mayor complejidad para atender a varios clientes simultáneamente o el problema del <em>framing</em>, es decir, de delimitar de algún modo dónde empieza y acaba cada mensaje. Es fundamental conocer si el mensaje leido del socket ya está completo o si aún faltan datos por leer, pues un intento de lectura adicional cuando no hay más datos puede provocar un bloqueo, y un intento de procesar el mensaje leído si está incompleto también puede causar problemas.</p>
+<p>En esta sesión abordaremos el problema del <em>framing</em> y algunas de sus posibles soluciones. El problema de la atención concurrente a varios clientes requiere usar técnicas como la creación de procesos, o de hilos, o el uso de la función <code>select()</code> para multiplexar el flujo de ejecución. Asumimos que estas técnicas ya son conocidas por el alumno, y no las usaremos en esta sesión.</p>
+<h2 data-number="2.1" id="mensajes-de-tamaño-prefijado" data-number="2.1"><span class="header-section-number">2.1</span> Mensajes de tamaño prefijado</h2>
+<p>En un enfoque simplista podemos crear un servidor que sólo pueda atender a un cliente de cada vez, para obviar el problema de los servidores concurrentes, e ignorar el problema del <em>framing</em>, intercambiando siempre paquetes de un tamaño prefijado. Usando este enfoque simplista haremos un servidor que, tras aceptar la conexión de un cliente, se limite a repetir un bucle en el que recibe bloques de 5 bytes, mostrándolos por pantalla, hasta que reciba uno que contenga el texto “FINAL”, en cuyo caso cierra el socket de datos y vuelve al bucle principal a aceptar otro cliente.</p>
+<p>Como ya sabemos, las funciones de la API C relacionadas con la programación de servidores son <code>socket()</code>, <code>bind()</code>, <code>listen()</code>, <code>accept()</code> y <code>recv()/send()</code>, mientras que para los clientes serían <code>socket()</code>, <code>connect()</code> y <code>send()/recv()</code>. Las versiones python de estas funciones tienen igual nombre y semántica, pero su sintaxis se simplifica con respecto a la usada en C, como ya hemos visto anteriormente. Recordar asimismo que <code>recv()/send()</code> operan sobre cadenas de <code>bytes</code> por lo que será necesario convertir adecuadamente las cadenas de caracteres a cadenas de bytes y viceversa, como se ha explicado en la sesión anterior.</p>
+<p>Este podría ser parte del código de este servidor:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Creación del socket de escucha</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>s <span class="op">=</span> socket.socket(socket.AF_INET, socket.SOCK_STREAM)  </span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co"># Podríamos haber omitido los parámetros, pues por defecto `socket()` en python</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># crea un socket de tipo TCP</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="co"># Asignarle puerto</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>s.bind((<span class="st">&quot;&quot;</span>, puerto))</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="co"># Ponerlo en modo pasivo</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>s.listen(<span class="dv">5</span>)  <span class="co"># Máximo de clientes en la cola de espera al accept()</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="co"># Bucle principal de espera por clientes</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb1-14"><a href="#cb1-14"></a>    <span class="bu">print</span>(<span class="st">&quot;Esperando un cliente&quot;</span>)</span>
+<span id="cb1-15"><a href="#cb1-15"></a>    sd, origen <span class="op">=</span> s.accept()</span>
+<span id="cb1-16"><a href="#cb1-16"></a>    <span class="bu">print</span>(<span class="st">&quot;Nuevo cliente conectado desde </span><span class="sc">%s</span><span class="st">, </span><span class="sc">%d</span><span class="st">&quot;</span> <span class="op">%</span> origen)</span>
+<span id="cb1-17"><a href="#cb1-17"></a>    continuar <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>    <span class="co"># Bucle de atención al cliente conectado</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>    <span class="cf">while</span> continuar:</span>
+<span id="cb1-20"><a href="#cb1-20"></a>        datos <span class="op">=</span> sd.recv(<span class="dv">5</span>)  <span class="co"># Observar que se lee del socket sd, no de s</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a>        datos <span class="op">=</span> datos.decode(<span class="st">&quot;ascii&quot;</span>)  <span class="co"># Pasar los bytes a caracteres</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>                <span class="co"># En este ejemplo se asume que el texto recibido es ascii puro</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>        <span class="cf">if</span> datos<span class="op">==</span><span class="st">&quot;&quot;</span>:  <span class="co"># Si no se reciben datos, es que el cliente cerró el socket</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>            <span class="bu">print</span>(<span class="st">&quot;Conexión cerrada de forma inesperada por el cliente&quot;</span>)</span>
+<span id="cb1-25"><a href="#cb1-25"></a>            sd.close()</span>
+<span id="cb1-26"><a href="#cb1-26"></a>            continuar <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>        <span class="cf">elif</span> datos<span class="op">==</span><span class="st">&quot;FINAL&quot;</span>:</span>
+<span id="cb1-28"><a href="#cb1-28"></a>            <span class="bu">print</span>(<span class="st">&quot;Recibido mensaje de finalización&quot;</span>)</span>
+<span id="cb1-29"><a href="#cb1-29"></a>            sd.close()</span>
+<span id="cb1-30"><a href="#cb1-30"></a>            continuar <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-32"><a href="#cb1-32"></a>            <span class="bu">print</span>(<span class="st">&quot;Recibido mensaje: </span><span class="sc">%s</span><span class="st">&quot;</span> <span class="op">%</span> datos)</span></code></pre></div>
+<div class="Alumno">
+<p><strong>Ejercicio 1</strong></p>
+<p>Completa el código anterior con lo necesario para que funcione. El puerto en que debe escuchar lo recibirá por línea de comandos o usará un valor por defecto de 9999 si no se especifica. Guárdalo con el nombre <code>tcp_servidor1_simple.py</code></p>
+<p>Escribe también un cliente para probar el servidor, llamado <code>tcp_cliente1_simple.py</code> Este cliente debe:</p>
+<ol type="1">
+<li>Crear un socket TCP y conectarlo con el servidor (recibirá la IP y puerto del servidor por línea de comandos o usará <code>localhost</code> y <code>9999</code> si no se especifican argumentos).</li>
+<li>Repetir 5 veces un bucle en el que envíe el texto “ABCDE” (observa que son exactamente 5 bytes, tal como espera el servidor en cada envío)</li>
+<li>Tras los 5 envíos anteriores hacer un último envío del texto “FINAL”, cerrar el socket y terminar.</li>
+</ol>
+<p>Prueba el cliente contra el servidor anterior y observa si llegan bien los paquetes iniciales y el que marca el final.</p>
+</div>
+<h3 data-number="2.1.1" id="problemas-del-enfoque-anterior" data-number="2.1.1"><span class="header-section-number">2.1.1</span> Problemas del enfoque anterior</h3>
+<p>Aunque lo anterior funciona aparentemente de forma correcta y da la impresión de que cada <code>send()</code> del cliente envía una especie de “datagrama” con 5 bytes de contenido, y que cada <code>recv()</code> del servidor recibe uno de estos “datagramas”, lo cierto es que en realidad lo que tenemos es un flujo en el que volcamos bytes en cualquier cantidad y leemos de él cualquier otra cantidad, a modo de un <em>pipe</em>.</p>
+<p>En particular, como es sabido, es posible que aunque el cliente intente enviar 5 bytes mediante un <code>send(&quot;ABCDE&quot;)</code>, el socket envíe realmente menos bytes (por ejemplo sólo 3), quedando los otros 2 sin enviar. El programador debería comprobar el valor retornado por <code>send()</code> ya que éste indica el número de bytes realmente enviados, y llamar de nuevo a <code>send()</code> para enviar el resto. En realidad cada envío debería constar de un bucle que se repita hasta haber enviado todo. Por ejemplo:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>mensaje <span class="op">=</span> b<span class="st">&quot;ABCDE&quot;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Enviar los 5 bytes en tantas veces como sea necesario</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="cf">while</span> mensaje <span class="op">!=</span> b<span class="st">&quot;&quot;</span>:</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    enviados <span class="op">=</span> sock.send(mensaje)</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    mensaje<span class="op">=</span>mensaje[enviados:]    <span class="co"># Reasignar los restantes  </span></span></code></pre></div>
+<p>Por suerte este escenario es tan común que python ya tiene prevista una función para ello, por lo que una alternativa más simple es simplemente llamar a <code>sock.sendall(mensaje)</code>. Esta función básicamente hace lo mismo que el código anterior pero de forma más eficiente.</p>
+<p>Sin embargo, tanto el bucle anterior como el uso de <code>sendall()</code> plantean un problema, y es que el envío puede requerir varios <code>send()</code> para completarse, por lo que el correspondiente <code>recv()</code> al otro lado plantea un problema similar. Si, por ejemplo, el envío requiere un primer <code>send()</code> que envíe 3 bytes seguido de otro que envíe los 2 restantes, es posible que el <code>recv()</code> al otro lado reciba sólo 3 bytes, siendo necesario otro <code>recv()</code> para recibir los restantes (aunque también es posible que un solo <code>recv()</code> reciba los 5 bytes, si cuando tiene lugar ya han llegado a destino los dos mensajes correspondientes a los dos <code>send()</code>). En general, haría falta un bucle similar al antes visto para el caso de enviar, pero para leer, que sepa de antemano cuántos bytes se esperan y que los vaya leyendo y acumulando en un string hasta tener los 5 previstos.</p>
+<p>Es decir, sería necesaria una función que podríamos llamar <code>recvall()</code>. Esta función no viene prevista en python, ya que su utilidad está restringida al caso en que sepamos de antemano cuántos bytes esperamos (como en este ejemplo que sabemos que esperamos 5), lo que no es muy común. Pero podemos programar nosotros una.</p>
+<div class="Alumno">
+<p><strong>Ejercicio 2</strong></p>
+<p>Modifica el servidor del ejercicio 1, renombrándolo a <code>tcp_servidor2_recvall.py</code> para que incluya una función llamada <code>recvall()</code> que reciba como parámetro un socket y un entero, que indica cuántos bytes deben recibirse. La función usará un bucle llamando a <code>socket.recv()</code> para intentar recibir los bytes solicitados, tantas veces como sea necesario en un bucle hasta haberlos leído todos. Deberá hacerse de forma eficiente, es decir, intentará leer el número de bytes solicitado y si no llegan todos leer los restantes, etc. en lugar de leerlos de uno en uno. Retornará un string con los bytes recibidos (si son necesarias varias lecturas, los irá concatenando).</p>
+<p>El servidor hará uso de esta función, en lugar de <code>recv()</code> para recibir cada paquete del cliente.</p>
+<p>Modifica también el cliente (llámalo <code>tcp_cliente2_sendall.py</code>) para que use la función de python <code>sendall()</code> en lugar de <code>send()</code>.</p>
+<p>Prueba los nuevos cliente y servidor y verifica que siguen funcionando.</p>
+</div>
+<p>Aunque los nuevos cliente/servidor son más robustos frente al posible “fraccionamiento del <em>stream</em>”, aún siguen siendo vulnerables a errores en el otro extremo o clientes malintencionados.</p>
+<p>Por ejemplo, ¿qué pasa si el cliente envía en sus <code>send()</code> sólo 4 bytes, por ejemplo el texto “HOLA”? En la primera versión del servidor que usaba <code>recv(5)</code> puede ocurrir que, al encontrarse sólo 4 bytes, la función retorne sólo esos 4 bytes en lugar de 5, y por tanto aparentemente siga funcionando correctamente la detección del “FINAL”. Pero también puede ocurrir que, ya que todos los <code>send()</code> del cliente se ejecutan en rápida sucesión en un bucle, los sucesivos mensajes se acumulen en el <em>stream</em>, de modo que el servidor recibiría algo como “HOLAHOLAHOLAHOLA…” y por tanto el <code>recv(5)</code> devolvería “HOLAH” y el siguiente “OLAHO”, etc… rompiendo la sincronización y por tanto haciendo posiblemente que el mensaje “FINAL” no sea correctamente detectado.</p>
+<p>Esto mismo ocurrirá con la segunda versión del servidor, ya que ésta insiste en recibir 5 bytes aunque el cliente haya enviado menos, por lo que los que faltan los tomará del siguiente envío, o bien, si no hay más envíos, quedará esperando por los bytes restantes un tiempo indefinido.</p>
+<div class="Alumno">
+<p><strong>Experimento</strong></p>
+<p>Realiza el experimento anterior, es decir, que el cliente envíe en cada iteración del bucle solamente “ABCD” en lugar de “ABCDE” y observa qué ocurre. Prueba primero con el servidor <code>tcp_servidor1_simple.py</code>. Seguramente observarás el comportamiento “esperado” en el que cada vez que el cliente envía con <code>send()</code> 4 bytes, el servidor recibe en su <code>recv()</code> también 4 bytes, a pesar de especificar 5. Sin embargo, dependiendo de la velocidad relativa entre cliente y servidor puede no ser así. Por ejemplo, prueba a introducir un retardo en el servidor, entre el momento en que acepta el cliente y la entrada al bucle de atención. Este retardo puedes introducirlo con <code>time.sleep(1)</code> (requiere módulo <code>time</code>).</p>
+<p>Repite el experimento usando como servidor <code>tcp_servidor2_recvall.py</code>. En este caso, debido a que la función <code>recvall()</code> no retornará hasta haber recibido los 5 bytes que espera, verás cómo se “mezclan” los diferentes paquetes que el cliente envió, y esto hace que falle la detección del mensaje “FINAL”.</p>
+</div>
+<p>Algo análogo ocurrirá si el cliente envía más de 5 bytes en cada <code>send()</code>. El servidor leerá sólo 5 y los siguientes los recibirá como parte del próximo <code>recv()</code>, rompiendo igualmente la sincronía deseada.</p>
+<p>Por tanto, en un protocolo como éste que se basa en que los datos intercambiados sean de longitud fija (en este caso 5 bytes), un error en uno sólo de los envíos puede trastornar toda la comunicación posterior. Esto con UDP no puede ocurrir porque los datagramas UDP son realmente “atómicos”, y o llegan completos o no llegan.</p>
+<h2 data-number="2.2" id="incluir-marca-de-fin-de-mensaje" data-number="2.2"><span class="header-section-number">2.2</span> Incluir marca de “fin de mensaje”</h2>
+<p>En la mayoría de los casos enviar bloques de tamaño prefijado no es posible, ya que cada mensaje puede ser una petición que requiera diferente número de parámetros, y lo mismo puede ocurrir con cada respuesta.</p>
+<p>Una solución a este caso es delimitar el final del mensaje con una secuencia de bytes particular, que no ocurra nunca dentro del mensaje. Por ejemplo, muchos protocolos de los que veremos en este curso están orientados a líneas, de modo que cada mensaje y cada respuesta es una línea delimitada por los bytes que codifican el fin de línea. Estos bytes son la secuencia de bytes de valores (hexadecimales) <code>0D</code>, <code>0A</code>, los cuales dentro de un string python (y C) pueden representarse por <code>&quot;\r\n&quot;</code> (también pueden representarse en una cadena de <code>bytes</code> con <code>b&quot;\r\n&quot;</code>). Su representación en bytes es la misma para cualquier <em>encoding</em>, en particular, UTF-8 no modifica esta secuencia de bytes.</p>
+<p>Esta técnica no está limitada a protocolos orientados a líneas, sino que cualquier secuencia de bytes (o uno solo) puede utilizarse como delimitador. Sin embargo, por ser el caso más común, usaremos en los ejercicios siguientes la secuencia que marca el “fin de línea” como hemos dicho más arriba.</p>
+<p>Plantearemos un servicio muy simple que puede ilustrar los problemas que aparecen. Llamaremos al servicio <code>oche</code>, que es <em>echo</em> al revés. Este servicio espera clientes en un socket TCP y para cada cliente que acepte, entra en un bucle en el que lee continuamente “mensajes” enviados por este cliente y los devuelve al revés. Si por ejemplo el mensaje es “HOLA”, devolverá “ALOH”.</p>
+<p>Dar la vuelta al string es muy sencillo en python haciendo uso de un truco relacionado con la sintaxis de los <em>slice</em>. Si <code>msg</code> es un string, entonces <code>msg[::-1]</code> retornará un <em>slice</em> de ese string, que comprende ambos extremos del mismo (puesto que no se especifica nada como primer ni extremo ni nada como segundo), y que va “al revés”, ya que se ha especificado -1 como incremento.</p>
+<h3 data-number="2.2.1" id="primera-aproximación-simplista" data-number="2.2.1"><span class="header-section-number">2.2.1</span> Primera aproximación simplista</h3>
+<p>La primera aproximación simplista consistirá en realizar algunas suposiciones que después eliminaremos. Las suposiciones son las siguientes:</p>
+<ol type="1">
+<li>Cada mensaje recibido del cliente será una línea de texto ASCII, finalizada por <code>&quot;\r\n&quot;</code></li>
+<li>El cliente nunca enviará líneas de más de 80 bytes (contando los dos bytes finales que codifican el fin de línea)</li>
+<li>Cada llamada a <code>recv()</code> retornará una línea completa que incluye el terminador <code>&quot;\r\n&quot;</code></li>
+<li>La respuesta del servidor será el mensaje del cliente, escrito al revés. La respuesta irá delimitada también por <code>&#39;\r\n&#39;</code>, es decir, si el cliente envía <code>&quot;HOLA\n\n&quot;</code>, el mensaje es “HOLA” y la respuesta del servidor ha de ser <code>&quot;ALOH\r\n&quot;</code>.</li>
+</ol>
+<p>Bajo estas suposiciones el bucle de atención al cliente se reduciría a lo siguiente:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Primero recibir el mensaje del cliente</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>mensaje <span class="op">=</span> sd.recv(<span class="dv">80</span>)  <span class="co"># Nunca enviará más de 80 bytes, aunque tal vez sí menos</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>mensaje <span class="op">=</span> <span class="bu">str</span>(mensaje, <span class="st">&quot;utf8&quot;</span>) <span class="co"># Convertir los bytes a caracteres</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Segundo, quitarle el &quot;fin de línea&quot; que son sus 2 últimos caracteres</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>linea <span class="op">=</span> mensaje[:<span class="op">-</span><span class="dv">2</span>]  <span class="co"># slice desde el principio hasta el final -2</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># Tercero, darle la vuelta</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>linea <span class="op">=</span> linea[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># Finalmente, enviarle la respuesta con un fin de línea añadido</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co"># Observa la transformación en bytes para enviarlo</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>sd.sendall(<span class="bu">bytes</span>(linea<span class="op">+</span><span class="st">&quot;</span><span class="ch">\r\n</span><span class="st">&quot;</span>, <span class="st">&quot;utf8&quot;</span>))</span></code></pre></div>
+<div class="Alumno">
+<p><strong>Ejercicio 3</strong></p>
+<p>Completa el servidor anterior y guárdalo como <code>tcp_servidor3_oche_simplista.py</code>, para que espere clientes en un puerto especificado por línea de comandos (o el 9999 por defecto), y para cada cliente repita un bucle en el que implemente el servicio recién explicado. De este bucle saldrá cuando <code>recv()</code> retorne la cadena vacía, que es un indicador de que el cliente ha cerrado la conexión.</p>
+<p>Para probar este servidor escribe un sencillo programa en python que se conecte al servidor, le envíe algunas líneas de prueba (recuerda finalizarlas con <code>&quot;\r\n&quot;</code>), para cada envío lea la respuesta del servidor con un <code>recv()</code> y la muestre por pantalla y finalmente cierre el socket de datos. Llama a este programa <code>tcp_cliente3_oche.py</code>.</p>
+<p>Ejecuta el cliente anterior y comprueba que recibe la respuesta correcta (“al revés”) del servidor.</p>
+</div>
+<h3 data-number="2.2.2" id="invalidando-la-tercera-simplificación" data-number="2.2.2"><span class="header-section-number">2.2.2</span> Invalidando la tercera simplificación</h3>
+<p>El ejemplo anterior ha funcionado porque la red en la que hacemos pruebas no tiene ningún retardo, y por tanto no es visible el efecto de los <em>buffers</em> intermedios que utiliza el protocolo TCP. Cada uno de los <code>sendall()</code> que se realizan, da lugar a un único <code>send()</code> en el que se envía la línea completa. Cada uno de los <code>recv()</code> recibe por tanto una línea completa y sólo una.</p>
+<p>Pero ¿qué pasaría en un caso más realista en el que la red pueda estar congestionada? Podría ser que uno de los <code>send()</code> que hace el cliente no llegue inmediatamente a destino, y el cliente haga un segundo <code>send()</code> cuyos datos se sumen a los del anterior. El servidor recibiría por tanto dos mensajes “juntos” en un solo <code>recv()</code>. El protocolo TCP garantiza que los mensajes “no se mezclan”, es decir, aparecen correctamente en secuencia uno tras el otro, en el mismo orden en que los envió el cliente, pero no garantiza que cada <code>recv()</code> vaya a recibir exactamente lo que el cliente envió en un <code>send()</code>, puede recibir la concatenación de varios <code>send()</code>.</p>
+<p>Por ejemplo, supongamos que el cliente envía tres mensajes en tres <code>sendall()</code> conteniendo <code>&quot;UNO\r\n&quot;</code>, <code>&quot;DOS\r\n&quot;</code> y <code>&quot;TRES\r\n&quot;</code> respectivamente. Puede darse el caso de que cuando el servidor haga <code>recv(80)</code> esperando recibir una sola línea, reciba la cadena <code>&quot;UNO\r\nDOS\r\nTRES\r\n&quot;</code> porque los tres mensajes se han acumulado en un buffer antes de que el servidor pudiera leerlos.</p>
+<p>En este caso la simplificación 3 que asumía que cada <code>recv()</code> va a devolver una sola línea no se cumple. Por tanto el algoritmo que habíamos implementado en el servidor no funciona. En lugar de retornar tres mensajes conteniendo <code>&quot;ONU\r\n&quot;</code>, <code>&quot;SOD\r\n&quot;</code> y <code>&quot;SERT\r\n&quot;</code> respectivamente, va a devolver un solo mensaje conteniendo <code>&quot;SERT\n\rSOD\n\rONU\r\n&quot;</code>. Observa que los <code>\r\n</code> que delimitaban las dos primeras líneas están siendo considerados parte del primer mensaje a invertir y por tanto se devuelven también invertidos, como <code>\n\r</code>.</p>
+<div class="Alumno">
+<p><strong>Experimento</strong></p>
+<p>Modifica el cliente para que, en lugar de intercalar el envío de mensajes al servidor con la recepción de sus respuestas, haga primero tres envíos de tres mensajes, para después leer tres respuestas. Haz que muestre estas respuestas por pantalla usando un <code>print(repr(respuesta))</code>. La función <code>repr()</code> hace que el string se muestre en su representación interna, lo que permite ver los <code>\r\n</code> que contenga, o si se trata de una cadena vacía, etc. Guarda el nuevo cliente con el nombre <code>tcp_cliente3_oche_envia_seguido.py</code>.</p>
+<p>Prueba si el servidor <code>tcp_servidor3_oche_simplista.py</code> sigue funcionando correctamente con este cliente. Lo más probable es que observes que los tres envíos del cliente, a pesar de hacerse en rápida sucesión, llegan “separados” al servidor, es decir, que éste recibe en cada <code>recv()</code> una sola línea y no las tres pegadas, y por tanto da correctamente la vuelta a cada línea. Sin embargo las respuestas del servidor sí que podrán llegar “pegadas” al cliente, por lo que cuando éste intente hacer los tres <code>recv()</code> para recibirlas, realmente lo recibirá todo junto en el primer <code>recv()</code> y se quedará “colgado” en el siguiente a la espera de más respuestas, que no llegarán.</p>
+<p>Modifica el servidor e inserta un <code>time.sleep(1)</code> justo después del <code>accept()</code>. Esto causará que tarde un segundo en entrar al primer <code>recv()</code> y en ese tiempo el cliente habrá enviado las tres líneas. Cuando el servidor llegue al <code>recv()</code> recibirá entonces concatenadas las tres líneas que el cliente había enviado. Nuestro algoritmo simplista asume que hay una sola línea, por lo que el mensaje retornado al cliente no estará bien. Compruébalo.</p>
+</div>
+<p>Podríamos intentar resolver el problema buscando el terminador <code>\r\n</code> dentro de la cadena recibida por el servidor, y separando esa cadena en varias subcadenas por cada <code>\r\n</code> encontrado (la función <code>split()</code> de python sería útil para esto), pero después habría que procesar cada subcadena por separado y enviar el resultado de cada una al cliente, lo que “ensucia” el sencillo bucle de procesamiento que teníamos. De momento no haremos esta modificación, pues en todo caso tendríamos otro problema que explicaremos a continuación.</p>
+<h3 data-number="2.2.3" id="invalidando-la-segunda-simplificación" data-number="2.2.3"><span class="header-section-number">2.2.3</span> Invalidando la segunda simplificación</h3>
+<p>El hecho de que varias líneas puedan aparecer concatenadas también invalida de alguna forma la segunda suposición, ya que aunque el cliente envíe cada línea con menos de 80 bytes, el hecho de que se concatenen en los buffers del socket puede causar que el servidor tenga que leer más de 80 bytes para vaciar esos buffers.</p>
+<p>Imagina además, que el cliente envía muy seguidos dos mensajes de 50 caracteres, de modo que se concatenen en el buffer del socket y cuando el servidor haga <code>recv(80)</code> recibirá efectivamente 80 caracteres que serían los 50 caracteres del primer mensaje, el <code>\r\n</code> que lo separa del segundo y los primeros 28 caracteres del siguiente.</p>
+<p>La técnica antes descrita de dividir la cadena recibida por el <code>\r\n</code> serviría para recuperar correctamente la primera línea, pero no la siguiente ya que el resto de la línea siguiente requiere otro <code>recv()</code> para ser leída.</p>
+<p>Ante esta situación la solución típica consiste en implementar una función que podríamos llamar <code>recibe_mensaje()</code>, la cual no retorna hasta tener una línea completa, es decir, hasta detectar la secuencia de bytes que actúe como terminador (en nuestro ejemplo el <code>\r\n</code>). Esta función puede implementarse de dos formas:</p>
+<ol type="1">
+<li><p>Haciendo que la función lea del socket un solo byte de cada vez y los vaya acumulando en un buffer, hasta recibir la secuencia de bytes terminadores, y en ese momento retorna el contenido acumulado del buffer.</p>
+<p>Esta técnica es muy sencilla de implementar, pero muy ineficiente si el mensaje a leer tiene muchos bytes.</p></li>
+<li><p>Implementando en la función un buffer que se llena leyendo bloques de mayor tamaño del socket y que se usa para buscar en él el terminador y retornar la subcadena apropiada, volviendo a rellenar el buffer cada vez que se pide un mensaje nuevo y no se ha encontrado el correspondiente terminador.</p>
+<p>Esta técnica es más compleja de programar. Una forma podría ser que la función contenga un buffer circular con sus punteros “cabeza” y “cola”, de modo que la cabeza se va actualizando cada vez que se añade al buffer un nuevo bloque (leído del socket) y la cola se actualiza cada vez que la función detecta un “fin de mensaje” y retorna la subcadena apropiada.</p>
+<p>Para el caso particular de que el delimitador sea <code>\r\n</code>, python tiene la función <code>readline()</code> que opera sobre ficheros realizando en esencia lo que se acaba de describir, es decir, lee un bloque del fichero y retorna la primera subcadena que encuentre en ese bloque hasta el primer <code>\n</code>, y en cada sucesiva llamada a <code>readline()</code> devuelve la siguiente subcadena hasta el siguiente <code>\n</code>, y si el buffer se termina sin haber encontrado el fin de línea, lee otro bloque del fichero y continúa buscando. Podemos hacer uso de esta función también en las comunicaciones por socket, como explicaremos más adelante. Observa que <code>readline()</code> devuelve todo lo que lee hasta el primer <code>\n</code>, inclusive, por lo que el resultado terminará con <code>\r\n</code> tal como esperamos.</p></li>
+</ol>
+<div class="Alumno">
+<p><strong>Ejercicio 4</strong></p>
+<p>Implementa una función llamada <code>recibe_mensaje()</code> que retorne líneas completas que haya leído del socket, por la técnica de leer los bytes de uno en uno y concatenarlos hasta tener una línea completa.</p>
+</div>
+<p>Un detalle sobre la implementación en python. Aunque conceptualmente queremos ir concatenando cada byte recibido en una cadena para retornar después dicha cadena, usar una técnica como <code>buffer = buffer + byte</code>, si bien es correcta, es tremendamente ineficiente por la forma en que python maneja las cadenas, tanto de caracteres como de bytes (al ser inmutables, cualquier operación sobre cadenas requiere crear una nueva, copiar la anterior, etc.) La forma eficiente de lograr el mismo resultado en python es usar, en lugar de una cadena, una lista de bytes, de modo que la lista inicialmente está vacía: <code>buffer = []</code>, y cada vez que se lee un nuevo byte se añade con: <code>buffer.append(byte)</code> lo cual es altamente eficiente en términos de velocidad y memoria. Una vez se detecta el terminador y se quiere retornar la concatenación de todos los bytes contenidos en el buffer, la sintaxis sería: <code>return b&quot;&quot;.join(buffer)</code>.</p>
+<div class="Alumno">
+<p>Usa esta función tanto en el servidor como en el cliente, tomando como base <code>tcp_servidor3_oche_simplista.py</code> y <code>tcp_cliente3_oche_envia_seguido.py</code>, para recibir los mensajes que el otro extremo le envía. Los nuevos programas se llamarán <code>tcp_servidor4_oche_mejorado.py</code> y <code>tcp_cliente4_oche_mejorado.py</code>. Comprueba que funcionan correctamente.</p>
+<p>Comprueba que siguen funcionando correctamente incluso si repetimos el experimento de poner un <code>time.sleep(1)</code> en el servidor tras el <code>accept()</code> para causar que varios mensajes del cliente se acumulen en el buffer del socket.</p>
+</div>
+<p>Para la segunda variante más eficiente en la que <code>recibe_mensaje()</code> no lee los bytes de uno en uno, en lugar de implementar nuestro propio buffer dentro de la función, haremos uso de la función <code>readline()</code> de python. Para poder hacer uso de esta función, es necesario “convertir” el socket en un fichero, pues sólo los ficheros disponen del método <code>readline()</code>. La “conversión” de socket a fichero la realiza una función llamada <code>makefile()</code>. En ella se puede especificar el <em>encoding</em> en que esperamos los bytes del fichero (del socket en realidad) y qué secuencia de caracteres actuará como fin de línea. Especificando estos parámetros en <code>makefile()</code>, las subsiguientes llamadas a <code>readline()</code> devolverán ya cadenas de caracteres (<code>str</code>) en lugar de bytes, ya que <code>readline()</code> se ocupará de la decodificación. Un ejemplo que hace esto:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Suponemos que sd es un socket previamente inicializado y conectado</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>f <span class="op">=</span> sd.makefile(encoding<span class="op">=</span><span class="st">&quot;utf8&quot;</span>, newline<span class="op">=</span><span class="st">&quot;</span><span class="ch">\r\n</span><span class="st">&quot;</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># Ahora ya se puede</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>mensaje <span class="op">=</span> f.readline()   <span class="co"># Lee bytes hasta detectar \r\n</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># El mensaje retornado es un str, y contiene \r\n al final</span></span></code></pre></div>
+<div class="Alumno">
+<p><strong>Ejercicio 5</strong></p>
+<p>Modifica cliente y servidor del ejercicio 4 para que usen la técnica <code>readline()</code> para recibir los mensajes que el otro extremo les envía. Llama a estas nuevas versiones <code>tcp_servidor5_oche_readline.py</code> y <code>tcp_cliente5_oche_readline.py</code> respectivamente. Comprueba que funcionan incluso con la modificación de <code>time.sleep(1)</code> en el servidor.</p>
+</div>
+<h2 data-number="2.3" id="enviar-previamente-la-longitud-del-mensaje" data-number="2.3"><span class="header-section-number">2.3</span> Enviar previamente la longitud del mensaje</h2>
+<p>Otra técnica de delimitación de los mensajes que no requiere ninguna secuencia de bytes especial para detectar su final y que por tanto es más fácil de implementar, consiste en que el cliente, en los primeros bytes de cada mensaje envíe cuál es la longitud de los que siguen.</p>
+<p>Tan pronto como el servidor recibe y decodifica estos primeros bytes sabrá ya cuántos debe esperar a continuación, y por tanto qué parámetro especificar en el <code>recv()</code> (o mejor, en el <code>recvall()</code> que hemos programado, para tener en cuenta posibles fragmentaciones del <em>stream</em>).</p>
+<p>El único asunto a resolver es cómo codificar inicialmente esa longitud del mensaje. Tenemos dos opciones:</p>
+<ul>
+<li>Codificar la longitud en ASCII</li>
+<li>Codificar la longitud en binario, en un número fijo de bytes</li>
+</ul>
+<p>Veamos cada caso por separado</p>
+<h3 data-number="2.3.1" id="codificación-de-la-longitud-en-ascii" data-number="2.3.1"><span class="header-section-number">2.3.1</span> Codificación de la longitud en ASCII</h3>
+<p>Si el mensaje tiene por ejemplo una longitud de 23 bytes, enviaremos primero la cadena <code>&quot;23&quot;</code> y después los 23 bytes en cuestión.</p>
+<p>El problema con este enfoque es que la representación ASCII de un número tiene una longitud variable. Si en lugar de 23 son 123, la cadena que expresa la longitud tiene 3 caracteres. Por tanto el servidor no sabe de antemano cuántos bytes debe leer inicialmente para obtener la longitud del mensaje.</p>
+<p>Es necesario usar un delimitador en esta cadena inicial. Una buena elección puede ser el ASCII nulo (<code>&quot;\0&quot;</code>), o también el retorno de carro (<code>&quot;\n&quot;</code>).</p>
+<p>La ventaja de este método es que para el cliente es muy sencillo codificar esa longitud. Por ejemplo, si el terminador es el retorno de carro, el código en que el cliente envía el mensaje podría ser así:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>longitud  <span class="op">=</span> <span class="st">&quot;</span><span class="sc">%d</span><span class="ch">\n</span><span class="st">&quot;</span> <span class="op">%</span> <span class="bu">len</span>(<span class="bu">bytes</span>(mensaje, <span class="st">&quot;utf8&quot;</span>))  <span class="co"># Pasamos a ASCII la longitud en bytes</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>                                                  <span class="co"># e incluimos el delimitador</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>s.sendall(<span class="bu">bytes</span>(longitud <span class="op">+</span> mensaje, <span class="st">&quot;utf8&quot;</span>))      <span class="co"># Enviamos la concatenación</span></span></code></pre></div>
+<p>En el servidor también es sencillo decodificar esa longitud. En primer lugar sería necesario leer hasta recibir el <code>\n</code>, lo cual puede hacerse con un bucle que reciba los bytes de uno en uno y los concatene, o bien con un <code>readline()</code> como ya vimos en el ejercicio anterior, y una vez tenemos la cadena con la longitud, se pasa a entero con la función <code>int()</code>. Este podría ser el código del servidor:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>longitud <span class="op">=</span> recibe_longitud(...)</span>
+<span id="cb6-2"><a href="#cb6-2"></a>mensaje <span class="op">=</span> recv_resto_mensaje(longitud, ...)</span></code></pre></div>
+<p>Fíjate que si optas por utilizar <code>readline()</code> el resto de lecturas del socket se deben realizar a través del fichero, ya que este crea un buffer con los datos recibidos.</p>
+<div class="Alumno">
+<p><strong>Ejercicio 6</strong></p>
+<p>Modifica el cliente y servidor del servicio “oche” (y renómbralos como <code>tcp_servidor6_oche_len.py</code> y <code>tcp_cliente.6_oche_len.py</code>) para que envíen sus mensajes y respuestas con la técnica descrita.</p>
+</div>
+<h3 data-number="2.3.2" id="codificación-de-la-longitud-en-binario-opcional" data-number="2.3.2"><span class="header-section-number">2.3.2</span> Codificación de la longitud en binario (opcional)</h3>
+<p>Otra técnica muy utilizada, especialmente en las cabeceras de bajo nivel como las de UDP, TCP o IP, consiste en enviar directamente el número binario que indica la longitud del mensaje.</p>
+<p>Es necesario elegir cuántos bytes ocupará la codificación de esta longitud, para evitar tener que enviar un terminador especial. Por ejemplo podemos fijarlo en 2 bytes (16 bits) lo que obviamente limita el tamaño del mensaje a <span class="math inline">2<sup>16</sup></span> lo que es suficiente para nuestro caso.</p>
+<p>En lenguajes de “bajo nivel” como el C, la codificación en binario es casi trivial, ya que el propio lenguaje almacena internamente sus variables en binario, por lo que bastaría enviar “tal cual” los bytes contenidos en la variable. Esto sin embargo puede causar problemas si la máquina que lo recibe tiene diferente <em>endianity</em> que la que los emite, por lo que siempre se usan las funciones <code>htons()</code> para reordenar los bytes al orden de red antes de enviarlos y <code>ntohs()</code> para volver a dejarlos en el orden nativo de quien los recibe una vez leídos.</p>
+<p>Ya que python es un lenguaje de alto nivel, no tenemos acceso directo a las direcciones de memoria en las que almacena sus variables. Por suerte python viene equipado de serie con funciones para realizar este tipo de conversiones. Se trata de <code>pack()</code> (toma datos de variables python y las convierte en secuencias de bytes) y <code>unpack()</code> (toma una secuencia de bytes, extrae de ella los datos y los deja en variables python). Ambas funciones se definen en el módulo <code>struct</code>.</p>
+<p>Puedes consultar la <a href="http://docs.python.org/2/library/struct.html">documentación del módulo struct</a> para más detalles. En este documento explicaremos únicamente su uso para este problema en particular:</p>
+<ul>
+<li><p>Para convertir la longitud del mensaje a una secuencia de 2 bytes que codifiquen su valor binario en <em>Big Endian</em> (usamos esta <em>endianity</em> porque es la que usan los protocolos de red), el código sería el siguiente (asumimos siempre en esta asignatura que vamos a transmitir cualquier cadena con codificación UTF-8):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> struct</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">bytes</span> <span class="op">=</span> struct.pack(<span class="st">&quot;&gt;H&quot;</span>, <span class="bu">len</span>(<span class="bu">bytes</span>(mensaje, <span class="st">&quot;utf8&quot;</span>)))</span></code></pre></div>
+<p>Como ves, la función <code>pack()</code> recibe como primer parámetro un string que le indica “en clave” cómo debe codificar el dato, que le pasamos como segundo parámetro. La clave en este caso es <code>&quot;&gt;H&quot;</code> que significa lo siguiente:</p>
+<ul>
+<li><code>&gt;</code> indica que queremos codificación <em>big endian</em></li>
+<li><code>H</code> indica que el dato es <code>unsigned short</code>, es decir, que queremos codificarlo en 2 bytes</li>
+</ul>
+<p>Prueba en el intérprete <code>struct.pack(&quot;&gt;H&quot;, 15)</code> y observa lo que sale. Verás una cadena de 2 bytes y ya que ambos en este caso son no-imprimbles, podrás ver sus valores hexadecimales. ¿Están codificando el 15? ¿Qué crees que saldrá si en vez de <code>&gt;H</code> ponemos <code>&lt;H</code>? Compruébalo</p></li>
+<li><p>Para convertir una secuencia de 2 bytes al entero correspondiente allí codificado, el código sería:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>valor <span class="op">=</span> struct.unpack(<span class="st">&quot;&gt;H&quot;</span>, <span class="bu">bytes</span>)</span></code></pre></div>
+<p>El primer parámetro le dice “en clave” cómo debe interpretar los bytes de la cadena que le pasamos como segundo parámetro. Obviamente debemos poner la misma “clave” que usamos al codificarla (<code>&gt;H</code> que indica un <code>unsigned short</code> codificado en <em>big endian</em>). El valor retornado es una tupla con el entero decodificado.</p>
+<p>¿Qué valor saldrá de <code>struct.unpack(&quot;&gt;H&quot;, b&quot;\x00\x10&quot;)</code>? Compruébalo en el intérprete.</p></li>
+</ul>
+<div class="Alumno">
+<p><strong>Ejercicio 7 (opcional)</strong></p>
+<p>Modifica el cliente y servidor del ejercicio 6 (renombrándolos como <code>tcp_servidor7_opcional.py</code> y <code>tcp_cliente7_opcional.py</code>) para que la longitud inicial del mensaje sea transmitida en un número binario de 2 bytes, codificado en <em>big endian</em>. Observa que el servidor ya no necesita bucles o <code>readline()</code> para recibir esta longitud, ya que no tiene que detectar ningún terminador. Simplemente leerá los dos primeros bytes que el cliente le envía y los decodificará con <code>unpack()</code> para obtener esa longitud y así leer el resto del mensaje.</p>
+</div>
+<h1 data-number="3" id="despliegue-con-docker" data-number="3"><span class="header-section-number">3</span> Despliegue con Docker</h1>
+<p>En la sesión anterior sobre UDP vimos que las aplicaciones desplegadas con contenedores en la misma máquina pueden verse unas a otras porque están dentro de una misma subred, pero en cambio no son visibles desde el “mundo exterior”.</p>
+<p>Por ejemplo, lo siguiente serviría para lanzar uno de los servidores del servicio “oche” que has creado en la sesión de hoy. Aprovechamos para presentar la opción <code>--rm</code> que no habíamos usado aún, pero que sin duda considerarás útil. Esta opción hace que, una vez el contenedor haya finalizado o haya sido detenido con <code>docker stop</code>, sea eliminado como si hubiéramos hecho <code>docker rm</code>. Esto nos evita tener contenedores que aún aparezcan al hacer <code>docker ps -a</code> y que nos impedirían volver a lanzar otro contenedor con el mismo nombre.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a>$ <span class="ex">docker</span> run -d --rm --network pruebas --name servidor_oche -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/app \</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  python:3.7 python /app/tcp_servidor5_oche_readline.py</span></code></pre></div>
+<p>Después podemos lanzar un cliente en la misma subred que contacte con el servidor anterior por su nombre (<code>servidor_oche</code>) sin necesidad de conocer su IP:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a>$ <span class="ex">docker</span> run --rm --network pruebas -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/app \</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  python:3.7 python /app/tcp_cliente5_oche_readline.py servidor_oche 9999</span></code></pre></div>
+<p>Esto está muy bien para el despliegue de <em>microservicios</em> en el que una aplicación se descompone en múltiples servicios pequeños, cada uno escuchando en un cierto puerto, y que se comunican entre sí. Hacer que cada microservicio sea un contendor y que puedan contactar por su nombre evita problemas de colisiones de puertos o de configuración de las IPs.</p>
+<p>No obstante en algún momento querremos que, al menos uno de esos contenedores, tenga acceso desde el exterior, pero con el despliegue anterior no es posible porque todos los contenedores están en una red privada.</p>
+<p>La solución es utilizar la opción <code>-p puerto_host:puerto_contenedor</code> que establece un <em>mapeo</em> entre un puerto del anfitrión que podemos elegir (con cuidado de que no esté ya en uso en el anfitrión), y el puerto en el que un servicio esté escuchando dentro del contenedor.</p>
+<p>En nuestro ejemplo, la segunda parte sería <code>9999</code>. En cuanto al puerto del anfitrión podemos usar también <code>9999</code> si está libre, pero para mayor claridad usemos otro, como <code>9090</code>.</p>
+<div class="Alumno">
+<ol type="1">
+<li><p>Detén el contenedor <code>servidor_oche</code> que lanzaste antes y asegúrate de que ya no aparece en <code>docker ps -a</code>. Si aún te aparece es que lo lanzaste sin la opción <code>--rm</code> y debes entonces borrarlo a mano con <code>docker rm</code>.</p></li>
+<li><p>Lanza un nuevo contenedor usando la opción <code>-p</code> como se muestra a continuación:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a>$ <span class="ex">docker</span> run -d --rm -p 9090:9999 --network pruebas \</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  --name servidor_oche -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>:/app \</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  python:3.7 python /app/tcp_servidor5_oche_readline.py</span></code></pre></div></li>
+<li><p>Comprueba con <code>docker ps</code> que el servidor está corriendo y observa como ahora te muestra en la columna <code>PORTS</code> el mapeo <code>0.0.0.0:9090-&gt;9999/tcp</code> (para redireccionar un puerto udp habría que poner <code>/udp</code> al final de la redirección, por defecto asume tcp)</p></li>
+</ol>
+</div>
+<p>Ahora el servicio “oche” está accesible igual que antes desde otro contenedor en la misma subred, pero también desde el anfitrión, conectando un cliente con <code>localhost 9090</code>, por ejemplo:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1"></a>$ <span class="ex">python3</span> tcp_cliente5_oche_readline.py localhost 9090</span></code></pre></div>
+<p>Y más aún, cualquiera que pueda conectarse con nuestro servidor Ubuntu, podrá conectarse con el servicio que está dentro del contenedor, sin más que conectar con el puerto 9090 de Ubuntu<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="Alumno">
+<p><strong>Experimento</strong></p>
+<p>Haz que tu lance desde su PC el cliente <code>tcp_cliente5_oche_readline.py</code> de modo que conecte con el servidor que tienes en el contenedor.</p>
+<p><strong>Experimento adicional</strong></p>
+<p>¿Podrá tu compañero lanzar el cliente desde un contenedor? Tendría que especoificar la IP de tu Ubuntu y el puerto 9090. ¿Crees que funcionará? Probadlo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>Si tienes la máquina virtual en modo <em>adaptador puente</em>, basta conectarse a la IP de la máquina, puerto 9090. Si la tienes en modo NAT; tendrás que redirigir un puerto de windows hacia el 9090 de la máquina virtual, mediante la configuración de red de VirtualBox.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Aunque esto, si lo haceis correctamente, debería funcionar, es un pequeño engorro pues de nuevo nos movemos en el nivel de IPs y no de nombres. El contenedor donde se ejecute el cliente de tu compañero está en una sub-red diferente de la del contenedor que ejecuta el servicio, por lo que no tiene acceso al DNS de esta otra red para poder acceder al servicio por su nombre. Es más, ni siquiera puede acceder al servicio por su IP, sino que debe usar la IP del anfitrión, y fue necesario exponer el puerto del servidor en otro puerto del anfitrión.</p>
+<p>Docker incorpora herramientas como <em>docker swarm</em>, que permiten el despliegue de contendores en múltiples máquinas, a la vez que crea una red <em>overlay</em> que permite a los contenedores verse entre sí como si estuvieran en la misma sub-red. No obstante se sale de los objetivos del curso explicar esto.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+</article>
+</div>
+</div>
+</body>
+</html>

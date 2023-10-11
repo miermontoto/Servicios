@@ -7,16 +7,19 @@ import sys
 
 HOST, PORT = ips_argv.cliente(sys.argv)
 
+num = 5
+
 # Creacion de socket
 sock = socket.socket()
 
 try:
 	sock.connect((HOST, PORT))  # Conexión al servidor
 
-	for _ in range(5):
+	for _ in range(num):
 		string = f"{lorem.sentence()}\r\n".encode("utf8")
 		sock.send(string)
 
+	for _ in range(num):
 		# recibir respuesta del servidor
 		print(repr(recibir_mensaje.readline(sock)))
 except socket.error as e:

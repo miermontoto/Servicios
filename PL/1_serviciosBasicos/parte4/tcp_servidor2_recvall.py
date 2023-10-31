@@ -1,6 +1,7 @@
 import ips_argv
 import socket
 import sys
+import time
 
 
 def recvall(sock, bytes) -> str:

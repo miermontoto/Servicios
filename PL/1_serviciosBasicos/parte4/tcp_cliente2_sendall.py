@@ -10,7 +10,7 @@ sock = socket.socket()
 try:
 	sock.connect((HOST, PORT))  # Conexión al servidor
 
-	string = b"ABCD"
+	string = b"ABCDE"
 	for _ in range(5):
 		sock.sendall(string)
 

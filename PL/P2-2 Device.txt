@@ -1,0 +1,27 @@
+
+PASOS PARA HACER EL EJERCICIO FINAL (DEVICE):
+	En todo este proceso, el contenido de amigos/instance/config.py es:
+		import os
+		SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URI", "sqlite://")
+
+	1. PARAR TODOS LOS CONTENEDORES
+	2. MODIFICAR TODOS LOS ARCHIVOS NECESARIOS PARA INCLUIR LA IMPLEMENTACIÓN DE DEVICE: 
+		api/views.py,  html/views.py, templates/edit_amigo.html, templates/tabla_amigos.html y models.py
+	3. LANZAR LA BBDD: ./lanza-basedatos.sh  (Desde la carpeta raíz de esta práctica)
+	4. OBTENER SU IP CON: docker inspect basedatos
+	5. EJECUTAR: export DATABASE_URI=mysql+pymysql://amigosuser:amigospass@172.18.0.2/amigosdb   (con la IP del paso 4)
+	6. SITUARSE EN LA CARPETA AMIGOS/ Y EJECUTAR: 
+		FLASK_APP=lanzar.py flask db migrate
+		FLASK_APP=lanzar.py flask db upgrade
+
+	7. REALIZAR EL EXPERIMENTO 1 DE LA SESIÓN 2.2 Y COMPROBAR QUE APARECE LA COLUMNA 'device'
+
+	8. PROBAR EN MODO DESARROLLO LA APP: 
+		FLASK_APP=lanzar.py flask run -h 0.0.0.0
+		Ver en navegador: http://<ip>:5000/html/amigos
+		Probar la API también
+
+	9. SI TODO FUNCIONA COMO DEBE, CREAR EL DOCKER FINAL DE AMIGOS:
+		docker build -t amigos:2.0 .      (editar el script lanza-flask para que ahora use la imagen 2.0)
+
+	10. LANZAR LOS CONTENEDORES FLASK Y NGINX Y PROBAR EL FUNCIONAMIENTO COMPLETO DESDE WEB Y API

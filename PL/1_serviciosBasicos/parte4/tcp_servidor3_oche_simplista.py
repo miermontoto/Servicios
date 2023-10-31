@@ -42,7 +42,6 @@ while True:
         try:
             mensaje = sd.recv(80)  # Nunca enviará más de 80 bytes, aunque tal vez sí menos
             mensaje = str(mensaje, "utf8")  # Convertir los bytes a caracteres
-            time.sleep(1)
 
             if mensaje == "":
                 print("Conexión cerrada por el cliente")

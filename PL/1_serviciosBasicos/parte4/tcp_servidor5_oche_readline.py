@@ -6,21 +6,6 @@ import sys
 import time
 
 
-def recvall(sock, bytes) -> str:
-    """
-    Recibe una cantidad de bytes determinada por el parámetro `bytes` del
-    socket `sock` y devuelve una cadena de texto con los datos recibidos.
-    """
-
-    data = b""
-    while len(data) < bytes:
-        paquete = sock.recv(bytes - len(data))
-        if not paquete:
-            return ""
-        data += paquete
-    return data.decode("utf8")
-
-
 puerto = ips_argv.servidor(sys.argv)
 
 # Creación del socket de escucha

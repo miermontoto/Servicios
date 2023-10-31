@@ -2,7 +2,7 @@ import socket
 
 
 def uno(sock) -> str:
-    """"
+    """
     Función que recibe bytes del socket hasta
     detectar el fin de línea de uno en uno.
     """

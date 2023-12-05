@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smil title="conejo.smil">
+	<body>
+		<switch>
+			<video src="conejo_300.mp4">
+				<param name="videoBitrate" value="308000" valuetype="data"></param>
+			</video>
+			<video src="conejo_450.mp4">
+				<param name="videoBitrate" value="483000" valuetype="data"></param>
+			</video>
+			<video src="conejo_750.mp4">
+				<param name="videoBitrate" value="783000" valuetype="data"></param>
+			</video>
+			<video src="conejo_1100.mp4">
+				<param name="videoBitrate" value="1132000" valuetype="data"></param>
+			</video>
+		</switch>
+	</body>
+</smil>

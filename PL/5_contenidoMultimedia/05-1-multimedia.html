@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html style="scroll-behavior: auto !important;"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Sesión 5 Contenido multimedia en la Web y servicios de Streaming</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style type="text/css">figure {
+padding: 1em;
+margin: 2em auto;
+box-shadow: 10px 10px 7px -5px rgba(0,0,0,0.51);
+}
+figcaption {
+font-size: small;
+font-weight: bold;
+text-align: center;
+margin: 1em;
+color: #888;
+}
+.markdown-body .highlight pre, .markdown-body pre {
+padding: 0pt !important;
+border-radius: 3px;
+}
+div.sourceCode {
+margin: 0pt;
+padding: 0pt;
+border-radius: 3px;
+margin-bottom: 1em;
+}
+pre.sourceCode::before {
+font-size: 1rem;
+color: #fff;
+display: block;
+position: relative;
+top: 0pt;
+left: 0pt;
+width: 100%;
+background: #999;
+padding: 0;
+text-indent: 1em;
+background: #ccc;
+padding: 0;
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+margin-bottom: 1ex;
+}
+pre.console, pre.shell {
+padding: .5em 1em !important;
+}
+.markdown-body pre code {
+text-indent: 1em;
+}
+pre.sourceCode.html::before{
+content: "HTML";
+}
+pre.sourceCode.css::before{
+content: "CSS";
+}
+pre.sourceCode.xml::before{
+content: "XML";
+}
+pre.sourceCode.json::before{
+content: "JSON";
+}
+pre.sourceCode.nginx::before{
+content: "Nginx config";
+}
+pre.sourceCode.javascript::before{
+content: "Javascript";
+background-color: steelblue;
+}
+pre.sourceCode.text::before{
+content: "";
+}
+pre.sourceCode.yaml::before{
+content: "Yaml";
+}
+pre.sourceCode.sql::before{
+content: "SQL";
+}
+pre.sourceCode.rust::before{
+content: "Pseudocódigo";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.c\+\+::before{
+content: "XDR";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.python::before{
+content: "Python";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.java::before{
+content: "Java";
+background-color: #f3e2bb;
+color: #c09022;
+}
+pre.sourceCode.C::before{
+content: "C";
+}
+pre.sourceCode.dockerfile::before{
+content: "Dockerfile";
+}
+pre.sourceCode.Makefile::before{
+content: "Makefile";
+background-color: #d0d0e0;
+color: #888;
+}
+pre.sourceCode.bash::before{
+content: "Shell";
+background-color: #888;
+}
+code.sourceCode > span {
+display: inline-block;
+line-height: 1.4;
+min-height: 1.4em;
+}
+.markdown-body {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+color: #24292e;
+font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 16px;
+line-height: 1.5;
+word-wrap: break-word;
+box-sizing: border-box;
+min-width: 200px;
+max-width: 110ex;
+margin: 0 auto;
+padding: 45px;
+text-align: justify;
+}
+.markdown-body a {
+color: #0366d6;
+background-color: transparent;
+text-decoration: none;
+-webkit-text-decoration-skip: objects
+}
+.markdown-body a:active,
+.markdown-body a:hover {
+outline-width: 0
+}
+.markdown-body a:hover {
+text-decoration: underline
+}
+.markdown-body a:not([href]) {
+color: inherit;
+text-decoration: none
+}
+.markdown-body strong {
+font-weight: 600
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+margin-top: 24px;
+margin-bottom: 16px;
+font-weight: 600;
+line-height: 1.25
+}
+.markdown-body h1 {
+font-size: 2em;
+margin: .67em 0;
+padding-bottom: .3em;
+border-bottom: 1px solid #eaecef
+}
+.markdown-body h2 {
+padding-bottom: .3em;
+font-size: 1.5em;
+border-bottom: 1px solid #eaecef
+}
+.markdown-body h3 {
+font-size: 1.25em
+}
+.markdown-body h4 {
+font-size: 1em
+}
+.markdown-body h5 {
+font-size: .875em
+}
+.markdown-body h6 {
+font-size: .85em;
+color: #6a737d
+}
+.markdown-body img {
+border-style: none
+}
+.markdown-body svg:not(:root) {
+overflow: hidden
+}
+.markdown-body hr {
+box-sizing: content-box;
+height: .25em;
+margin: 24px 0;
+padding: 0;
+overflow: hidden;
+background-color: #e1e4e8;
+border: 0
+}
+.markdown-body hr::before {
+display: table;
+content: ""
+}
+.markdown-body hr::after {
+display: table;
+clear: both;
+content: ""
+}
+.markdown-body input {
+margin: 0;
+overflow: visible;
+font: inherit;
+font-family: inherit;
+font-size: inherit;
+line-height: inherit
+}
+.markdown-body [type=checkbox] {
+box-sizing: border-box;
+padding: 0
+}
+.markdown-body * {
+box-sizing: border-box
+}
+.markdown-body blockquote {
+margin: 0
+}
+.markdown-body ol,
+.markdown-body ul {
+padding-left: 2em
+}
+.markdown-body ol ol {
+list-style-type: lower-roman
+}
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+margin-top: 0;
+margin-bottom: 0
+}
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+list-style-type: lower-alpha
+}
+.markdown-body li>p {
+margin-top: 16px
+}
+.markdown-body li+li {
+margin-top: .25em
+}
+.markdown-body dd {
+margin-left: 0
+}
+.markdown-body dl {
+padding: 0
+}
+.markdown-body dl dt {
+padding: 0;
+margin-top: 16px;
+font-size: 1em;
+font-style: italic;
+font-weight: 600
+}
+.markdown-body dl dd {
+padding: 0 16px;
+margin-bottom: 16px
+}
+.markdown-body code {
+font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace
+}
+.markdown-body pre {
+font: 12px SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+word-wrap: normal
+}
+.markdown-body blockquote,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+margin-top: 0;
+margin-bottom: 16px
+}
+.markdown-body blockquote {
+padding: 0 1em;
+color: #6a737d;
+background-color: #eaecef;
+border-left: .25em solid #bac6d3
+}
+.markdown-body blockquote>:first-child {
+margin-top: 0
+}
+.markdown-body blockquote>:last-child {
+margin-bottom: 0
+}
+.markdown-body table {
+display: block;
+width: 100%;
+overflow: auto;
+border-spacing: 0;
+border-collapse: collapse
+}
+.markdown-body table th {
+font-weight: 600;
+background-color: #fff1af;
+color: #c66e41;
+}
+.markdown-body table td,
+.markdown-body table th {
+padding: 6px 13px;
+border: 1px solid #dfe2e5
+}
+.markdown-body table tr {
+background-color: #fff;
+border-top: 1px solid #c6cbd1
+}
+.markdown-body table tr:nth-child(2n) {
+background-color: #f6f8fa
+}
+.markdown-body img {
+max-width: 100%;
+box-sizing: content-box;
+background-color: #fff
+}
+.markdown-body code {
+padding: .2em 0;
+margin: 0;
+font-size: 85%;
+background-color: rgba(27, 31, 35, .10);
+word-break: normal;
+word-wrap: normal;
+border-radius: 3px
+}
+.markdown-body code::after,
+.markdown-body code::before {
+letter-spacing: -.2em;
+content: "\00a0"
+}
+.markdown-body pre>code {
+padding: 0;
+margin: 0;
+font-size: 100%;
+word-break: normal;
+white-space: pre;
+background: 0 0;
+border: 0
+}
+.markdown-body .highlight {
+margin-bottom: 16px
+}
+.markdown-body .highlight pre {
+margin-bottom: 0;
+word-break: normal
+}
+.markdown-body .highlight pre,
+.markdown-body pre {
+padding: 16px;
+overflow: auto;
+font-size: 85%;
+line-height: 1.45;
+background-color: #f6f8fa;
+border-radius: 3px
+}
+.markdown-body pre code {
+display: inline;
+max-width: auto;
+padding: 0;
+margin: 0;
+overflow: visible;
+line-height: inherit;
+word-wrap: normal;
+background-color: transparent;
+border: 0
+}
+.markdown-body pre code::after,
+.markdown-body pre code::before {
+content: normal
+}
+.markdown-body .full-commit .btn-outline:not(:disabled):hover {
+color: #005cc5;
+border-color: #005cc5
+}
+.markdown-body kbd {
+box-shadow: inset 0 -1px 0 #959da5;
+display: inline-block;
+padding: 3px 5px;
+font: 11px/10px SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
+color: #444d56;
+vertical-align: middle;
+background-color: #fcfcfc;
+border: 1px solid #c6cbd1;
+border-bottom-color: #959da5;
+border-radius: 3px;
+box-shadow: inset 0 -1px 0 #959da5
+}
+.markdown-body :checked+.radio-label {
+position: relative;
+z-index: 1;
+border-color: #0366d6
+}
+.markdown-body .task-list-item {
+list-style-type: none
+}
+.markdown-body .task-list-item+.task-list-item {
+margin-top: 3px
+}
+.markdown-body .task-list-item input {
+margin: 0 .2em .25em -1.6em;
+vertical-align: middle
+}
+.markdown-body::before {
+display: table;
+content: ""
+}
+.markdown-body::after {
+display: table;
+clear: both;
+content: ""
+}
+.markdown-body>:first-child {
+margin-top: 0 !important
+}
+.markdown-body>:last-child {
+margin-bottom: 0 !important
+}
+.Alert,
+.Error,
+.Note,
+.Success,
+.Warning {
+padding: 11px;
+margin-bottom: 24px;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px
+}
+.Alert p,
+.Error p,
+.Note p,
+.Success p,
+.Warning p {
+margin-top: 0
+}
+.Alert p:last-child,
+.Error p:last-child,
+.Note p:last-child,
+.Success p:last-child,
+.Warning p:last-child {
+margin-bottom: 0
+}
+.Alert {
+color: #246;
+background-color: #e2eef9;
+border-color: #bac6d3
+}
+.Warning {
+color: #4c4a42;
+background-color: #fff9ea;
+border-color: #dfd8c2
+}
+.Error {
+color: #911;
+background-color: #fcdede;
+border-color: #d2b2b2
+}
+.Success {
+color: #22662c;
+background-color: #e2f9e5;
+border-color: #bad3be
+}
+.Note {
+color: #2f363d;
+background-color: #f6f8fa;
+border-color: #d5d8da
+}
+.Alert h1,
+.Alert h2,
+.Alert h3,
+.Alert h4,
+.Alert h5,
+.Alert h6 {
+color: #246;
+margin-bottom: 0
+}
+.Warning h1,
+.Warning h2,
+.Warning h3,
+.Warning h4,
+.Warning h5,
+.Warning h6 {
+color: #4c4a42;
+margin-bottom: 0
+}
+.Error h1,
+.Error h2,
+.Error h3,
+.Error h4,
+.Error h5,
+.Error h6 {
+color: #911;
+margin-bottom: 0
+}
+.Success h1,
+.Success h2,
+.Success h3,
+.Success h4,
+.Success h5,
+.Success h6 {
+color: #22662c;
+margin-bottom: 0
+}
+.Note h1,
+.Note h2,
+.Note h3,
+.Note h4,
+.Note h5,
+.Note h6 {
+color: #2f363d;
+margin-bottom: 0
+}
+.Alert h1:first-child,
+.Alert h2:first-child,
+.Alert h3:first-child,
+.Alert h4:first-child,
+.Alert h5:first-child,
+.Alert h6:first-child,
+.Error h1:first-child,
+.Error h2:first-child,
+.Error h3:first-child,
+.Error h4:first-child,
+.Error h5:first-child,
+.Error h6:first-child,
+.Note h1:first-child,
+.Note h2:first-child,
+.Note h3:first-child,
+.Note h4:first-child,
+.Note h5:first-child,
+.Note h6:first-child,
+.Success h1:first-child,
+.Success h2:first-child,
+.Success h3:first-child,
+.Success h4:first-child,
+.Success h5:first-child,
+.Success h6:first-child,
+.Warning h1:first-child,
+.Warning h2:first-child,
+.Warning h3:first-child,
+.Warning h4:first-child,
+.Warning h5:first-child,
+.Warning h6:first-child {
+margin-top: 0
+}
+h1.title,
+p.subtitle,
+p.date {
+text-align: center
+}
+h1.title.followed-by-subtitle {
+margin-bottom: 0
+}
+p.subtitle {
+font-size: 1.5em;
+font-weight: 600;
+line-height: 1.25;
+margin-top: 0;
+margin-bottom: 16px;
+padding-bottom: .3em
+}
+div.line-block {
+white-space: pre-line
+}
+.markdown-body img {
+margin: auto;
+display: block;
+}
+.Profe,
+.Alumno,
+.Cuestion {
+padding: 1ex 1em 1ex 4.5em;
+margin: 1em 2em 1em 0em;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px;
+position: relative;
+}
+.Profe p,
+.Alumno p,
+.Cuestion p {
+margin-top: 0
+}
+.Profe p:last-child,
+.Alumno p:last-child,
+.Cuestion p:last-child {
+margin-bottom: 0
+}
+.Profe {
+color: #246;
+background-color: #e2eef9;
+border-color: #bac6d3
+}
+.Alumno {
+color: #4d2600;
+background-color: #ffcc99;
+border-color: #ff8000
+}
+.Cuestion {
+color: #4d2600;
+background-color: #ffeedc;
+border-color: #ffd9b3
+}
+.Profe::before {
+content: "👁";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+.Alumno::before {
+content: "⚙️";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+.Cuestion::before {
+content: "💭";
+font-size: 42px;
+position: absolute;
+top: -5px;
+left: 5px;
+}
+#TOC {
+width: 20%;
+position: fixed;
+z-index: 1;
+top: 0px;
+left: 0px;
+padding: 0px 10px;
+height: 100%;
+background-color: #f6f8fa;
+font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+font-size: 12px;
+line-height: 0.8;
+overflow-y: auto;
+overflow-x: hidden;
+}
+#TOC a {
+text-decoration: none;
+color: #3676ab;
+}
+.toc-title {
+color: #999;
+}
+#main {
+margin-left: 20%;
+}
+#TOC>ul {
+margin-left: -2.5em;
+}
+#TOC>ul>li {
+font-size: 18px;
+line-height: 27px;
+list-style-type: none;
+}
+#TOC>ul>li>ul>li {
+font-size: 16px;
+line-height: 24px;
+}
+#TOC>ul>li>ul>li>ul>li {
+font-size: 14px;
+line-height: 21px;
+}
+.markdown-body header {
+text-align: center;
+margin-bottom: 52pt;
+}
+@media print {
+#TOC {
+page-break-after: always;
+}
+.markdown-body {
+text-align: justify;
+}
+}
+@media print, screen and (max-width: 767px) {
+.markdown-body {
+padding: 2px;
+text-align: left;
+}
+#TOC {
+position: inherit;
+width: 100%;
+height: auto;
+page-break: inherit;
+}
+#main {
+margin-left: 0pt;
+}
+.markdown-body ol,
+.markdown-body ul {
+padding-left: 1.5em
+}
+.Profe,
+.Alumno,
+.Cuestion {
+padding: 1ex 1ex 1ex 1em;
+margin: 2em 0ex 2ex 2ex;
+border-style: solid;
+border-width: 1px;
+border-radius: 4px;
+position: relative;
+}
+.Profe::before {
+content: "👁";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+.Alumno::before {
+content: "⚙️";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+.Cuestion::before {
+content: "💭";
+font-size: 32px;
+position: absolute;
+top: -25px;
+left: -20px;
+}
+}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+
+<style></style></head>
+<body style="scroll-behavior: auto !important;">
+<div id="wrapper">
+<nav id="TOC">
+<h1 class="toc-title">Índice</h1>
+<ul>
+<li><a href="#introducción"><span class="toc-section-number">1</span> Introducción</a></li>
+<li><a href="#video-en-la-web"><span class="toc-section-number">2</span> Video en la Web</a>
+<ul>
+<li><a href="#contenedores-de-vídeo"><span class="toc-section-number">2.1</span> Contenedores de vídeo</a></li>
+<li><a href="#codecs-de-video"><span class="toc-section-number">2.2</span> Codecs de video</a></li>
+<li><a href="#codecs-de-audio"><span class="toc-section-number">2.3</span> Codecs de audio</a></li>
+<li><a href="#video-con-html5"><span class="toc-section-number">2.4</span> Video con HTML5</a></li>
+</ul></li>
+<li><a href="#streaming-de-contenido-multimedia"><span class="toc-section-number">3</span> Streaming de contenido multimedia</a>
+<ul>
+<li><a href="#protocolos"><span class="toc-section-number">3.1</span> Protocolos</a></li>
+</ul></li>
+<li><a href="#servidor-de-streaming"><span class="toc-section-number">4</span> Servidor de streaming</a>
+<ul>
+<li><a href="#instalación-de-wowza"><span class="toc-section-number">4.1</span> Instalación de Wowza</a></li>
+<li><a href="#aplicaciones-en-wowza"><span class="toc-section-number">4.2</span> Aplicaciones en Wowza</a></li>
+<li><a href="#servicios-de-streaming"><span class="toc-section-number">4.3</span> Servicios de streaming</a></li>
+</ul></li>
+</ul>
+</nav>
+<div id="main">
+<article class="markdown-body">
+<header>
+<h1 class="title followed-by-subtitle">Sesión 5 Contenido multimedia en la Web y servicios de Streaming</h1>
+<p class="subtitle">Ingeniería de Servicios</p>
+<p class="date">2023-2024</p>
+</header>
+<div id="main-text">
+<h1 data-number="1" id="introducción"><span class="header-section-number">1</span> Introducción</h1>
+<p>En esta práctica se va a hacer una introducción a la distribución de 
+contenidos multimedia a través de Internet. Se analizarán las 
+posibilidades que ofrece el HTML5 y a continuación se instalará y 
+utilizará un servidor de streaming para distribuir vídeo bajo demanda y 
+en directo, utilizando protocolos compatibles con los navegadores 
+modernos, como MPEG-DASH.</p>
+<h1 data-number="2" id="video-en-la-web"><span class="header-section-number">2</span> Video en la Web</h1>
+<p>Originalmente no había una forma estándar de introducir un vídeo 
+accesible en una página web. La solución era la utilización de un 
+plugin, es decir, un programa externo al navegador que se encargase de 
+la descarga y de la visualización del contenido multimedia. Entre este 
+tipo de herramientas las más conocidas son QuickTime, RealPlayer, 
+Silverlight, y sobre todo Flash. El uso de este tipo de herramientas era
+ en principio transparente al usuario final. Sin embargo, a lo largo de 
+los años han sido una fuente habitual de fallos de seguridad y de 
+inestabilidad en la navegación a través de Internet. Otro problema es la
+ compatibilidad, ya que no siempre estas herramientas están disponibles 
+en todas las plataformas. En la actualidad ya ningún navegador soporta 
+los plugin de Flash, lo que ha cambiado el panorama de cómo recibir y 
+reproducir contenido multimedia desde un navegador.</p>
+<p>Para posibilitar que los navegadores puedan reproducir vídeo sin 
+necesidad de recurrir a plugins de terceros, en HTML5 se definen nuevas 
+etiquetas HTML denominadas <code>&lt;audio&gt;</code> y <code>&lt;video&gt;</code>
+ que sirven respectivamente para la inclusión de contenido sonoro o de 
+un vídeo en una página web. La funcionalidad de descargar y reproducir 
+el recurso está incrustada en el propio navegador, por lo que no es 
+necesario el uso de otro tipo de herramientas externas.</p>
+<p>Para poder analizar el uso de vídeos en HTML5 en una página web es 
+necesario hacer un repaso a conceptos generales sobre contenedores y 
+codecs.</p>
+<h2 data-number="2.1" id="contenedores-de-vídeo"><span class="header-section-number">2.1</span> Contenedores de vídeo</h2>
+<p>Un contenedor de video es un fichero que contiene información 
+multimedia. En principio el contenedor es independiente de cómo se 
+almacena el recurso multimedia en sí, o de si está comprimido en un 
+determinado formato. Un contenedor de video puede albergar múltiples 
+pistas de vídeo y de audio. El contenedor simplemente define una forma 
+de acceder a esa información, pero en general no impone restricciones 
+sobre el formato de las pistas.</p>
+<p>Hay una gran multitud de contenedores multimedia, pero los más relevantes desde el punto de vista de la web son los siguientes:</p>
+<ul>
+<li><p>MPEG 4, con extensión <code>.mp4</code> o <code>.m4v</code>. Está basado en el contenedor de Apple QuickTime (<code>.mov</code>), pero es un estándar, no como la versión de Apple.</p></li>
+<li><p>OGG, con extensión <code>.ogg</code> es un estándar sin problemas
+ de patentes. Generalmente se usa junto con el codec Ogg video (llamado 
+Theora), y Ogg audio (llamado Vorbis).</p></li>
+<li><p>Flash Video, con extensión <code>.flv</code>. Es el contenedor 
+usado por el plugin de Flash en el navegador. Hasta no hace mucho era el
+ único contenedor soportado por este plugin. En la actualidad el plugin 
+de flash también soporta mp4. Este ya se considera <strong>obsoleto</strong>
+ puesto que la única forma de reproducir un contenido que utilice este 
+contenedor sería utilizando un reproductor Flash, el cual ya ha dejado 
+de mantenerse.</p></li>
+<li><p>WebM, con extensión <code>.webm</code>. Es un contenedor 
+estandarizado libre de patentes similar al contenedor Matroska. Se suele
+ utilizar en combinación con el codec de video VP8 y el codec de audio 
+Vorbis.</p></li>
+<li><p>Audio Video Interleave, con extensión <code>.avi</code>. Es un 
+contenedor desarrollado por Microsoft. Es antiguo y no soporta muchas de
+ las características de los contenedores modernos. Además, resulta muy 
+difícil su uso junto con codecs muy populares en la actualidad como 
+H.264.</p></li>
+</ul>
+<h2 data-number="2.2" id="codecs-de-video"><span class="header-section-number">2.2</span> Codecs de video</h2>
+<p>El vídeo digital sin comprimir es probablemente el tipo de 
+información, de la utilizada habitualmente, que más requisitos de 
+almacenamiento presenta. Por este motivo, es fundamental comprimir el 
+vídeo para que su tamaño una vez almacenado no sea demasiado elevado. 
+Para comprimir vídeo existen multitud de codecs (o algoritmos de 
+codificación) que emplean diversas técnicas. La mayoría de los 
+algoritmos de compresión se basan en MPEG y se aprovechan de que la 
+variación que se produce en un vídeo entre imágenes consecutivas es 
+mínima. Para reducir el tamaño de la información explotan esta 
+redundancia entre cuadros, también denominados <em>frames</em>. A 
+diferencia de las imágenes estáticas que sólo presentan redundancia 
+espacial (regiones de imagen homogéneas), el vídeo también presenta 
+redundancia temporal (cuadros de vídeo con mínimos cambios debidos al 
+movimiento).</p>
+<p>Los principales codecs o algoritmos de compresión que se utilizan hoy en día son los siguientes:</p>
+<ul>
+<li><p>MPEG-1 parte 2: Fue diseñado para comprimir vídeo VHS sin 
+demasiada pérdida de calidad. El codec MPEG-1 parte 2 es uno de los más 
+compatibles y prácticamente cualquier tipo de dispositivo es capaz de 
+reproducirlo. Es el precursor de los codecs actuales.</p></li>
+<li><p>MPEG-2 parte 2: es el codec utilizado en los DVD. El MPEG-2, al 
+igual que el MPEG-1, es un codec inferior a los más actuales, aunque 
+todavía goza de gran popularidad para multitud de aplicaciones.</p></li>
+<li><p>H.264, o MPEG-4 parte 10 AVC (<em>Advanced Video Coding</em>): 
+este formato es un codec actual que ofrece las características más 
+modernas en técnicas de compresión. Es el formato que se utiliza en el 
+vídeo de alta definición y en la actualidad es uno de los más 
+utilizados. Muchos dispositivos tienen un procesador específico para 
+procesar este tipo de formato, tanto para codificar como para 
+decodificar, lo que libera a la CPU de esta tarea y hace que el vídeo se
+ pueda reproducir de forma más eficiente y con menor consumo de energía.
+ El H.264 tiene restricciones de patentes.</p></li>
+<li><p>Theora: es un codec libre de patentes derivado del VP3. Se puede 
+utilizar en casi cualquier contenedor, aunque es generalmente usado 
+junto con el contenedor Ogg.</p></li>
+<li><p>VP8: es un codec libre de patentes de características similares 
+al H.264. Fue diseñado por la compañía On2, creadora también del VP3, y 
+luego adquirido por Google.</p></li>
+</ul>
+<h2 data-number="2.3" id="codecs-de-audio"><span class="header-section-number">2.3</span> Codecs de audio</h2>
+<p>Los codecs de audio sirven para codificar y comprimir el sonido. Los más habituales son:</p>
+<ul>
+<li><p>MPEG-1 Audio Layer 3, generalmente conocido como MP3. Es un formato de amplia difusión pero con restricciones de patentes.</p></li>
+<li><p>Advanced Audio Coding, generalmente conocido como AAC. Es un 
+codec posterior al MP3 diseñado para producir mejor calidad de audio 
+para el mismo ratio de bits. No tiene limitación del ratio de bits (<em>bitrate</em>), a diferencia del MP3 cuya limitación es 320 kbps. AAC también tiene restricciones de patentes.</p></li>
+<li><p>Vorbis, también conocido como Ogg Vorbis. Es un formato libre de 
+patentes. Este codec es generalmente usado con los contenedores Ogg o 
+WebM.</p></li>
+</ul>
+<h2 data-number="2.4" id="video-con-html5"><span class="header-section-number">2.4</span> Video con HTML5</h2>
+<p>Como se ha podido comprobar existen multitud de opciones para el 
+almacenamiento del video. El problema es que no hay un estándar que diga
+ cuáles de estos formatos de audio y vídeo han de ser soportados por un 
+navegador. Esto hace que ciertos formatos se puedan reproducir en unos 
+navegadores, pero no en otros. Observa en la siguiente página el <a href="https://videojs.com/html5-video-support/">estado actual</a> de compatibilidad. La combinación MP4/H.264 es una de las más soportadas y es la que se tiende a utilizar.</p>
+<p>Incluir en una página web un vídeo es sencillo. A continuación se muestra un ejemplo mínimo:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">&lt;video</span><span class="ot"> src=</span><span class="st">"ejemplo.mp4"</span><span class="ot"> controls</span><span class="kw">&gt;&lt;/video&gt;</span></span></code></pre></div>
+<p>Cuando un navegador encuentra este elemento en el HTML que está 
+mostrando, hará una petición del fichero contenedor del vídeo a la URL 
+especificada en el campo <code>src</code> y si el formato del contenedor
+ y el codec usado en ese archivo son compatibles con los que el 
+navegador soporta, mostrará el vídeo (muy probablemente sin esperar a 
+haber descargado el archivo completo, pues en muchos casos la 
+reproducción puede comenzar al haber recibido unos cuantos frames 
+iniciales). No obstante esto no es <em>streaming</em>, como veremos más 
+adelante. Es simplemente una descarga de un archivo junto con una 
+reproducción por parte del navegador del archivo que está siendo 
+descargado.</p>
+<p>Vamos a crear una página con un video incrustado utilizando esa técnica.</p>
+<div class="Alumno">
+<p><strong>Ejercicio 1</strong></p>
+<p>En la carpeta dedicada a la sesión de hoy, crea un subdirectorio llamado <code>html</code> y después otro <code>html/video5/</code>.</p>
+<p>Descarga y descomprime dentro de <code>html/video5/</code> el fichero <a href="http://www.atc.uniovi.es/grado/4is/VideosHTML5.zip" class="uri">http://www.atc.uniovi.es/grado/4is/VideosHTML5.zip</a>. Contiene el mismo video con distintos formatos. Se trata del video <a href="http://www.bigbuckbunny.org/">Big Buck Bunny</a>, utilizado como el “Hola mundo” en temas de video. <strong>No pongas estos archivos bajo control de versiones</strong> (de hecho, añade esta carpeta a <code>.gitignore</code>) pues ocupan mucho y no es necesario tenerlos en el repositorio ya que siempre pueden bajarse de nuevo.</p>
+<p>Crea una página web en esa carpeta (es decir, un fichero <code>.html</code>) e incrusta uno de los videos. Este fichero sí irá bajo control de versiones.</p>
+<p>Lanza la imagen docker <code>nginx</code> como ya hemos hecho en otras sesiones, montando la carpeta <code>html</code>
+ en la ruta apropiada del contenedor. No necesitamos en esta ocasión 
+montar otro volumen para la configuración de nginx, puesto que la 
+configuración por defecto es adecuada.</p>
+<p>Abre la página con el navegador Firefox (o Chrome) y verifica que puedes visualizar el video.</p>
+<p>Mientras lo estás reproduciendo abre las herramientas de 
+desarrollador web y observa los mensajes HTTP. Avanza el video y verás 
+nuevos mensajes (a menos que el vídeo ya haya sido descargado por 
+completo y esté en la caché del navegador, en cuyo caso no necesita 
+solicitarlo al servidor).</p>
+<p>Fíjate en la cabecera HTTP que se utiliza para acceder a una parte no descargada del fichero.</p>
+</div>
+<p>Se sabe que el video se está visualizando de forma nativa en el 
+navegador al pulsar con el botón derecho. El menú debe ser del navegador
+ y no de un plugin. En Firefox por ejemplo se nos permite ver 
+información adicional del video.</p>
+<div class="Profe">
+<p>Modifica ahora la página web y utiliza como fuente otro video.</p>
+<p>Prueba a visualizarlo. Dependiendo del navegador puede que alguno de 
+los formatos no estén soportados. Toma nota de cuáles puedes ver con 
+diferentes navegadores.</p>
+</div>
+<p>La propia etiqueta de video soporta la inclusión de múltiples fuentes
+ de forma que el navegador pueda seleccionar aquella que conozca o que 
+considere más apropiada. El formato de inclusión sería el siguiente:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">&lt;video</span><span class="ot"> width=</span><span class="st">"320"</span><span class="ot"> height=</span><span class="st">"240"</span><span class="ot"> controls</span><span class="kw">&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">"pru.ogv"</span><span class="ot">  type=</span><span class="st">"video/ogg; codecs=theora,vorbis"</span><span class="kw">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>  <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">"pru.mp4"</span><span class="ot">  type=</span><span class="st">"video/mp4; codecs=avc1.42E01E,mp4a.40.2"</span><span class="kw">&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>  <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">"pru.webm"</span><span class="ot"> type=</span><span class="st">"video/webm; codecs=vp8,vorbis"</span><span class="kw">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">&lt;/video&gt;</span></span></code></pre></div>
+<p>En el ejemplo anterior <code>mp4a.40.2</code> significa AAC con perfil <em>low-complexity</em> y <code>avc1.42E01E</code> significa H.264 con perfil <em>Baseline</em>.</p>
+<div class="Profe">
+<p>Modifica la página web anterior para incluir todas las fuentes disponibles. Puedes usar el programa <code>ffprobe</code> para obtener información del video (requiere instalar el paquete <code>ffmpeg</code>)</p>
+<p>Modifica también el ancho y el alto para que coincida con el del video.</p>
+</div>
+<p>Se puede incluir una opción adicional denominada <em>fallback</em> que el navegador usa en caso de que no entienda el tag <code>&lt;video&gt;</code> de HTML5. A continuación se muestra un ejemplo.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">&lt;video</span><span class="ot"> width=</span><span class="st">"320"</span><span class="ot"> height=</span><span class="st">"240"</span><span class="ot"> controls</span><span class="kw">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">&lt;source</span> <span class="er">...</span><span class="kw">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="kw">&lt;source</span> <span class="er">...</span><span class="kw">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="kw">&lt;source</span> <span class="er">...</span><span class="kw">&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="co">&lt;!-- Fallback flash: --&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  <span class="kw">&lt;object</span><span class="ot"> type=</span><span class="st">"application/x-shockwave-flash"</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="ot">          data=</span><span class="st">"http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf"</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="ot">          width=</span><span class="st">"640"</span><span class="ot"> height=</span><span class="st">"360"</span><span class="kw">&gt;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    <span class="kw">&lt;param</span><span class="ot"> name=</span><span class="st">"flashvars"</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="ot">            value=</span><span class="st">'config={"clip":"http://host/ruta/big_buck_bunny.mp4"}'</span><span class="kw">/&gt;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>          <span class="co">&lt;!-- Fallback final: --&gt;</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>          <span class="kw">&lt;p&gt;</span>No se puede reproducir el video<span class="kw">&lt;/p&gt;</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="kw">&lt;/object&gt;</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="kw">&lt;/video&gt;</span></span></code></pre></div>
+<p>En este caso, si el navegador no tiene soporte para ninguno de los videos especificadose en <code>&lt;source&gt;</code>,
+ el video se intentaría reproducir con el plugin flash. Por desgracia 
+los navegadores modernos no soportan ya este plugin, por lo que esta 
+solución no es viable hoy día. Finalmente, en caso de que tampoco se 
+pueda usar el plugin se mostraría el mensaje de error de que no se puede
+ reproducir el vídeo. Una alternativa mejor al mensaje de error sería 
+incluir una imagen con un fotograma del vídeo que sea un enlace al 
+archivo de vídeo para que al menos el usuario pueda descargarlo y tratar
+ de reproducirlo con alguna otra herramienta fuera del navegador web.</p>
+<h3 data-number="2.4.1" id="reproductores-javascript"><span class="header-section-number">2.4.1</span> Reproductores JavaScript</h3>
+<p>A pesar de que HTML5 tiene soporte para reproducción directa de 
+vídeo, aún hay muchos detalles que el desarrollador debe completar: 
+ofrecer diferentes versiones del vídeo para que el navegador pueda tomar
+ la que tiene un codec soportado, adaptar su código para que funcione en
+ los diferentes navegadores, cambiar el aspecto de los controles del 
+reproductor para que se integre mejor en el aspecto general del sitio 
+que está construyendo, etc.</p>
+<p>En la práctica, el tag <code>&lt;video&gt;</code> “a secas” no suele 
+usarse, sino que es necesario programar con JavaScript toda una 
+infrastructura para la reproducción del vídeo. Aunque el vídeo en sí 
+sigue siendo reproducido por el navegador de forma nativa (cuando el 
+codec es soportado), javascript se ocupa de los detalles de la interfaz 
+de usuario y de controlar la reproducción del vídeo (pausa, avance, 
+etc.) usando la API que el navegador le ofrece para ello. Además, desde 
+el momento que incorporamos javascript a la solución, se abre la 
+posibilidad de implementar características de <em>vídeo adaptativo dinámico</em>,
+ pues el código js puede solicitar diferentes “trocitos” de vídeo de la 
+calidad apropiada al ancho de bando, para ir pasándoselos a la API del 
+navegador para que los reproduzca. Esto es la base de MPEG DASH o de 
+HLS.</p>
+<p>Algunos reproductores basados en javascript son <a href="http://www.jwplayer.com/">jwplayer</a>,
+ que a pesar de ser de pago es muy utilizado por ser el más completo y 
+flexible (tiene una versión gratuita que se puede utilizar libremente, 
+pero no descargar para instalación local); <a href="https://videojs.com/">videojs</a> que es de código abierto o <a href="https://plyr.io/">plyr</a> también de código abierto.</p>
+<div class="Alumno">
+<p><strong>Ejercicio</strong></p>
+<p>Crea un nuevo fichero en <code>html/video5</code> llamado <code>videojs.html</code></p>
+<p>Adapta el <a href="https://videojs.com/getting-started/">código HTML de ejemplo</a>
+ que aparece en la página de video.js para que reproduzca el vídeo “Big 
+Buck Bunny” que has bajado antes. Ese código contiene enlaces a través 
+del tag <code>&lt;link&gt;</code> a direcciones públicas de las que el navegador obtendrá el javascript necesario, por tanto <em>no necesitas instalar nada</em> en tu ordenador, y las únicas modificaciones son para señalar al vídeo que quieras reproducir.</p>
+<p>Verifica su funcionamiento.</p>
+</div>
+<h1 data-number="3" id="streaming-de-contenido-multimedia"><span class="header-section-number">3</span> Streaming de contenido multimedia</h1>
+<p>Cuando se incluye un video en HTML5 se especifica la ruta del 
+fichero. El navegador selecciona el formato adecuado y realiza 
+peticiones HTTP para recibir el fichero de video. Durante esta 
+transferencia, el servidor utiliza todo el ancho de banda posible sin 
+tener en cuenta la calidad del video. El cliente crea un buffer con la 
+información recibida y empieza la reproducción del video. Si el ancho de
+ banda es suficiente el cliente va creando un buffer que utilizará 
+cuando sea necesario. Si el usuario deja de reproducir el video, la 
+parte descargada y no visualizada representa un desperdicio de ancho de 
+banda. Por otro lado, si el ancho de banda es insuficiente, la 
+reproducción del video debe detenerse hasta que se haya descargado la 
+suficiente cantidad de información. No hay forma de reducir la calidad 
+del video para evitar estos cortes en la reproducción.</p>
+<p>Para evitar estos problemas aparece el concepto de <em>streaming</em>.
+ Originalmente el streaming consistía en el envío y la reproducción 
+simultanea de contenido multimedia. Con el tiempo se han añadido otras 
+características, como por ejemplo la adaptación de la calidad del 
+contenido multimedia al ancho de banda disponible.</p>
+<p>En general, las ventajas del streaming respecto a la descarga progresiva son las siguientes:</p>
+<ul>
+<li><p>El streaming es más seguro para el propietario del <em>copyright</em>,
+ ya que sólo transmite lo que se reproduce sin exponer el video 
+completo. Esto hace más difícil hacer copias no autorizadas del 
+contenido multimedia.</p></li>
+<li><p>El streaming ahorra ancho de banda al adecuar el envío de 
+información a la cantidad necesaria para la reproducción en un momento 
+dado.</p></li>
+<li><p>La capacidad para avanzar o retroceder el contenido multimedia se mejora.</p></li>
+<li><p>El streaming permite implementar negocios donde se cobra por tiempo reproducido.</p></li>
+</ul>
+<h2 data-number="3.1" id="protocolos"><span class="header-section-number">3.1</span> Protocolos</h2>
+<p>Para realizar el streaming multimedia existen diversos protocolos. Los más habituales son los siguientes:</p>
+<ul>
+<li><p><em>Real Time Messaging Protocol</em> (RTMP). Se trata de un protocolo específico para plataformas Flash.</p></li>
+<li><p><em>Real-time Transport Protocol</em> (RTP). Es un protocolo sobre UDP para la transmisión de contenido multimedia. Funciona junto con el protocolo RTCP.</p></li>
+<li><p><em>Real Time Streaming Protocol</em> (RTSP). Es una extensión de RTP con la inclusión de la gestión de las sesiones.</p></li>
+</ul>
+<p>Los tres anteriores requieren de un servidor de <em>streaming</em> 
+específico, capaz de encapsular el vídeo siguiendo esos protocolos. Es 
+decir, un servidor HTTP no es válido, a diferencia de los ejemplos 
+vistos hasta ahora en los que el servidor era <code>nginx</code>. 
+Además, un navegador web no soporta ninguno de esos protocolos, lo que 
+quiere decir que para reproducir el vídeo que se está recibiendo hace 
+falta algún otro tipo de reproductor (por ejemplo <a href="https://www.videolan.org/vlc/">VLC</a>). En el pasado se podía hacer que un navegador mostrase este tipo de protocolos por el mecanismo de los <em>plugin</em>
+ (es decir, el navegador ejecutaba un código externo, el del plugin, que
+ era quien realmente conocía el protocolo usado y soportaba los codecs 
+necesarios). Hoy día, ya que los navegadores no permiten la instalación 
+de plugins, estos protocolos han dejado de ser utilizables desde un 
+navegador, lo que ha motivado la aparición de protocolos nuevos.</p>
+<p>Los siguientes protocolos delegan parte del trabajo en el cliente 
+(que generalmente irá programado en JavaScript), de modo que un servidor
+ HTTP estándar pueda ser usado para el envío de los datos. Digamos que 
+en estos casos el servidor es “tonto” y la inteligencia necesaria para 
+detectar si el ancho de banda es insuficiente y solicitar entonces una 
+calidad diferente recae en el cliente.</p>
+<ul>
+<li><p><em>Adobe HTTP Dynamic Streaming</em> (Adobe HDS). Se trata de un protocolo desarrollado por Adobe que basa en el protocolo HTTP.</p></li>
+<li><p><em>Apple HTTP Live Streaming</em> (Apple HLS). Es similar al 
+anterior pero desarrollado por Apple. Es el único protocolo de streaming
+ soportado por los dispositivos IOS.</p></li>
+<li><p><em>Dynamic Adaptive Streaming over HTTP</em> (DASH), también 
+conocido como MPEG-DASH. Se trata del primer estándar de protocolo de 
+streaming sobre HTTP. Comparte características similares a otros 
+protocolos sobre HTTP. Algunos de los reproductores basados en 
+JavaScript que vimos al final de la sección anterior admiten este 
+formato.</p></li>
+</ul>
+<p>Los protocolos basados en HTTP no necesitan un servidor específico. 
+Sin embargo, se necesitan complejos ficheros de configuración para que 
+el cliente pueda realizar el streaming, ya que básicamente cada fichero 
+de vídeo que se desee servir ha de existir múltiples veces, con 
+diferentes tasas de bits que requieran diferente ancho de banda, y 
+troceados en fragmentos de segundos o minutos de duración. El cliente 
+típicamente recibirá, para cada posible <em>bitrate</em> una lista de las URLs de los fragmentos, que irá solicitando en orden, a modo de <em>playlist</em>. El cliente puede cambiar a otra secuencia de trozos con distinto <em>bitrate</em> para adaptarse al ancho de banda disponible.</p>
+<p>Aunque estos protocolos pueden ser usados con un servidor web 
+estándar (ej: nginx), el uso de un servidor específico facilita la tarea
+ del streaming, puesto que puede <em>simular</em> la existencia de todos esos trocitos y servirle <em>transcodificado</em> al <em>bitrate</em> adecuado, el que el cliente le pida, sin necesidad de tenerlos realmente troceados y en diferentes resoluciones.</p>
+<h1 data-number="4" id="servidor-de-streaming"><span class="header-section-number">4</span> Servidor de streaming</h1>
+<p>A continuación vamos a instalar un servidor de streaming que nos 
+permita conocer los servicios que ofrecen. En estas prácticas vamos a 
+trabajar con el servidor Wowza Media Server sobre Linux, que es muy 
+flexible y fácil de instalar, y además los desarrolladores proporcionan 
+una versión <em>dockerizada</em>, fácil de desplegar en Linux sin necesidad de instalación.</p>
+<h2 data-number="4.1" id="instalación-de-wowza"><span class="header-section-number">4.1</span> Instalación de Wowza</h2>
+<p>Wowza es un servidor de pago, pero permite descargar una versión de 
+evaluación, que puede usarse por tiempo limitado. Wowza está 
+desarrollado en Java, pero si instalamos la versión docker, la imagen ya
+ vendrá con java preinstalado y todas las dependencias necesarias.</p>
+<p>La imagen docker se descarga por el método habitual:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a>$ <span class="ex">docker</span> pull wowzamedia/wowza-streaming-engine-linux:4.8.17</span></code></pre></div>
+<p>Una vez descargado, el contenedor se puede arrancar con un simple <code>docker run</code>
+ (habrás de especificar el número de versión en la imagen), pero 
+obviamente si queremos poder conectar con él desde fuera habrá que 
+mapear los puertos que expone (que son varios, pues contiene un servidor
+ HTTP para interactuar con el propio Wowza, más los servidores RTP, 
+RTSP, etc. que escuchan en puertos diferentes). Como mínimo, para una 
+primera prueba, deberemos mapear el puerto 8088 que es el que usa para 
+HTTP.</p>
+<p>Si queremos que sirva nuestros propios vídeos en lugar de los que 
+trae de demo, sería necesario montar la carpeta donde los tenemos en el 
+punto apropiado del contenedor, usando la opción <code>-v</code>, pero para una prueba inicial ni siquiera necesitamos hacer eso de momento.</p>
+<p>Lo que sí es necesario es especificarle el <em>entrypoint</em> de la 
+imagen, que es el nombre del ejecutable que debe lanzar al arrancar el 
+contenedor. Otros contenedores que habíamos usado hasta ahora no 
+requerían esto, pues ya la imagen tenía pre-especificado ese <em>entrypoint</em>,
+ pero en el caso del contenedor de Wowza sus desarrolladores no lo han 
+incluido preconfigurado en la imagen y por tanto hay que darlo como 
+parámetro al instanciarla.</p>
+<p>La sintaxis mínima para arrancar una prueba sería por tanto la siguiente:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a>$ <span class="ex">docker</span> run -d --rm --name wowza -p 8088:8088 \</span>
+<span id="cb5-2"><a href="#cb5-2"></a>    --entrypoint /sbin/entrypoint.sh \</span>
+<span id="cb5-3"><a href="#cb5-3"></a>     wowzamedia/wowza-streaming-engine-linux:4.8.17</span></code></pre></div>
+<div class="Profe">
+<p><strong>Experimento</strong></p>
+<p>Lanza el contenedor con el comando anterior. Comprueba con <code>docker ps</code> que está en ejecución. Puedes ver su log con <code>docker logs wowza</code></p>
+<p>Conecta un navegador a <code>http://ip.de.tu.ubuntu:8088</code></p>
+<p>Debe responderte Wowza. Tras ver (o saltarte) la intro llegarás a un punto en que te pedirá nombre y clave. Introduce <code>wowza</code> para ambos y verás la interfaz administrativa de este servidor.</p>
+</div>
+<p>No podemos hacer mucho más desde esa interfaz, porque no hemos 
+mapeado el resto de puertos, ni hemos montado el volúmen con nuestros 
+vídeos. Eso lo haremos en la sección siguiente, pero de momento veamos 
+un poco la filosofía de funcionamiento de este servidor.</p>
+<h2 data-number="4.2" id="aplicaciones-en-wowza"><span class="header-section-number">4.2</span> Aplicaciones en Wowza</h2>
+<p>Las tareas de streaming en Wowza se controlan a través de las denominadas <em>aplicaciones</em>.
+ Una aplicación en Wowza es básicamente un par de carpetas que contienen
+ ficheros de configuración. Básicamente Wowza soporta aplicaciones de 
+dos tipos: vídeo bajo demanda (VOD o <em>video on demand</em>) que son 
+para emitir flujos de vídeo a partir de contenidos preexistentes en 
+forma de ficheros, es decir, un servicio “tipo netflix” y emisiones en 
+vivo (<em>live</em>) que son para emitir flujos de vídeo a partir de contenidos que se están generando sobre la marcha, tales como una <em>webcam</em> o una emisión de televsión.</p>
+<p>Al arrancar el contenedor viene con dos aplicaciones de ejemplo ya creadas, una de cada tipo, llamadas <code>vod</code> y <code>live</code>.
+ En la interfaz web que hemos arrancado antes podemos verlas bajo el 
+menú “Applications”. Pero también podemos ver las carpetas que las 
+definen si entramos en el contenedor. Ejecuta el comando siguiente:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a>$ <span class="ex">docker</span> exec -it wowza bash</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="ex">root@11058693137c</span>:~#</span></code></pre></div>
+<p>En ese <em>shell</em> puedes usar <code>cd</code> para ir a la carpeta <code>/usr/local/WowzaStreamingEngine</code> y verás dentro de ella las carpetas <code>applications</code> y <code>conf</code>. Ambas contienen otras dos carpetas llamadas <code>live</code> y <code>vod</code> que son las que almacenan los ficheros que describen esas aplicaciones. En el caso de <code>conf/live</code> o <code>conf/vod</code> podrás ver el <code>Application.xml</code> que define esas aplicaciones. Las carpetas <code>applications/live</code> y <code>applications/vod</code> en cambio están vacías, pero deben existir. Además, la carpeta <code>contents/</code>
+ contendrá los ficheros usados en el vídeo bajo demanda. Ya viene con un
+ par de ficheros de ejemplo. Puedes salir de este shell dentro del 
+contenedor escribiendo <code>exit</code>.</p>
+<p>Las aplicaciones pueden crearse manipulando el sistema de archivos 
+(es decir, creando nuevas carpetas y copiando en ellas nuevos ficheros 
+de configuración), o a través de la interfaz web, que en el fondo hará 
+lo mismo.</p>
+<p>De cualquiera de las formas, ya que lo que estamos modificando es el 
+sistema de archivos del contenedor docker, todos esos cambios 
+desaparecerán al apagar el contenedor. Si queremos que sean 
+persistentes, tendremos que montar carpetas locales del anfitrión en los
+ lugares apropiados del contenedor.</p>
+<p>Comencemos por sacar una copia de los archivos de ejemplo que trae el
+ contenedor y mantenerla en nuestra carpeta de trabajo (incluso podemos 
+ponerlas bajo control de versiones):</p>
+<div class="Alumno">
+<ol type="1">
+<li><p>Junto a la carpeta <code>html</code> que teníamos de antes, crea otra llamada <code>wowza</code></p></li>
+<li><p>Entra en la carpeta <code>wowza</code> y ejecuta los comandos siguientes:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a>$ <span class="ex">docker</span> cp wowza:/usr/local/WowzaStreamingEngine/applications .</span>
+<span id="cb7-2"><a href="#cb7-2"></a>$ <span class="ex">docker</span> cp wowza:/usr/local/WowzaStreamingEngine/conf .</span>
+<span id="cb7-3"><a href="#cb7-3"></a>$ <span class="fu">mkdir</span> content</span>
+<span id="cb7-4"><a href="#cb7-4"></a>$ <span class="fu">touch</span> applications/vod/.vacio applications/live/.vacio content/.vacio</span>
+<span id="cb7-5"><a href="#cb7-5"></a>$ <span class="fu">git</span> add .</span></code></pre></div>
+<p>Eso crea tres carpetas llamadas <code>applications</code>, <code>conf</code> y <code>content</code>. Las dos primeras se copian del contenedor, la tercera la creamos vacía. El comando <code>touch</code> es para crear un algunos ficheros en las carpetas vacías ya que de lo contrario <code>git</code> no las pondría bajo control de versiones con el comando <code>git add .</code> final.</p></li>
+</ol>
+</div>
+<p>Ahora podemos apagar el contenedor para volver a lanzarlo montando 
+esas dos carpetas asi como mapeando el resto de puertos para poder 
+continuar con el resto de la práctica. Asegúrate de estar en la carpeta <code>wowza</code> de la que cuelgan <code>applications</code> y <code>conf</code> y ejecuta los siguientes comandos. El segundo de ellos puedes guardarlo en un script para no tener que teclearlo siempre<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a>$ <span class="co"># Verifica que estás en la carpeta correcta</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>$ <span class="fu">ls</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="ex">applications</span> conf content</span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>$ <span class="ex">docker</span> stop wowza</span>
+<span id="cb8-6"><a href="#cb8-6"></a>$ <span class="ex">docker</span> run -it --rm -d  --name wowza\</span>
+<span id="cb8-7"><a href="#cb8-7"></a>    -p 1935:1935 -p 8086:8086 -p 8087:8087 -p 8088:8088 \</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    -p 5004-5008:5004-5008/udp \</span>
+<span id="cb8-9"><a href="#cb8-9"></a>    -e WSE_MGR_USER=wowza \</span>
+<span id="cb8-10"><a href="#cb8-10"></a>    -e WSE_MGR_PASS=clavesecreta \</span>
+<span id="cb8-11"><a href="#cb8-11"></a>    -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/applications:/usr/local/WowzaStreamingEngine/applications \</span>
+<span id="cb8-12"><a href="#cb8-12"></a>    -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/conf:/usr/local/WowzaStreamingEngine/conf \</span>
+<span id="cb8-13"><a href="#cb8-13"></a>    -v <span class="va">$(</span><span class="bu">pwd</span><span class="va">)</span>/content:/usr/local/WowzaStreamingEngine/content \</span>
+<span id="cb8-14"><a href="#cb8-14"></a>    --entrypoint /sbin/entrypoint.sh \</span>
+<span id="cb8-15"><a href="#cb8-15"></a>    wowzamedia/wowza-streaming-engine-linux:4.8.17</span></code></pre></div>
+<p>Puedes copiar el largo comando <code>docker</code> que es necesario para arrancar wowza en un script, por ejemplo <code>lanzar-wowza</code> y dejar ese script en la carpeta <code>wowza</code> para asegurarte de lanzarlo siempre desde la carpeta correcta.</p>
+<div class="Profe">
+<p>Conecta otra vez el navegador a esta nueva instancia del servidor 
+(puerto 8088), y espera a que responda (puede tardar un rato). Será 
+necesario que te identifiques de nuevo como administrador (observa el 
+nombre y clave del mismo entre las opciones que hemos pasado a docker). 
+Comprueba que puedes hacerlo sin problemas.</p>
+<p>Intenta también una conexión desde el navegador al puerto 1935 de la 
+máquina Ubuntu. Deberás observar una página con un código de error 404 
+(no encontrada). Eso indica que al menos se puede conectar con el 
+servidor en ese puerto, aunque no tiene nada aún que suministrarnos.</p>
+</div>
+<h2 data-number="4.3" id="servicios-de-streaming"><span class="header-section-number">4.3</span> Servicios de streaming</h2>
+<p>En las siguientes secciones vamos a utilizar Wowza para ofrecer algunos de los servicios de <em>streaming</em> más comunes: video bajo demanda y video en vivo.</p>
+<h3 data-number="4.3.1" id="ejercicio-1-video-bajo-demanda"><span class="header-section-number">4.3.1</span> Ejercicio 1: Video bajo demanda</h3>
+<p>Para servir video bajo demanda vamos a definir una aplicación denominada <code>videodemanda</code> que vamos a utilizar para servir un fichero mediante diferentes protocolos de streaming.</p>
+<div class="Alumno">
+<p>Entra en la carpeta <code>applications</code> y crea un subdirectorio que se llame <code>videodemanda</code>.</p>
+<p>Ahora entra en la carpeta llamada <code>conf</code>. Crea otra carpeta denominada <code>videodemanda</code> (se debe llamar igual). En esta carpeta se debe almacenar el fichero de configuración que se debe llamar <code>Application.xml</code>.</p>
+<p>Para evitar crear un fichero de configuración desde cero vamos a 
+copiar un ejemplo que ya viene hecho. Se encuentra en la carpeta de 
+Wowza, dentro de <code>conf/vod/Application.xml</code>. Copia este fichero al directorio de configuración de la nueva aplicación.</p>
+<p>Edita el fichero y observa su contenido. Fíjate en concreto que la etiqueta <code>StreamType</code> que sirve para indicar el tipo de stream. Wowza soporta distintas opciones, pero sólo vamos a trabajar con dos: <code>default</code> para servir fichero en disco, y <code>live</code> para servir video en directo.</p>
+<p>No hace falta que modifiques nada en el fichero.</p>
+<p>El contenido multimedia servido por Wowza se almacena en la carpeta <code>content</code>. Copia el fichero <code>big_buck_bunny.mp4</code> de antes a esta carpeta, llamándolo <code>sample.mp4</code> (si te da errores de permisos verifica que el propietario de la carpeta <code>content</code> es tu usuario, y no <code>root</code>, si es necesario usa <code>chown tu_usuario:tu_usuario content</code> para cambiarlo, desde la carpeta <code>wowza</code>).</p>
+<p>Detén el contenedor <code>wowza</code> y lánzalo de nuevo, con el 
+mismo comando que la última vez (es necesario para que durante el 
+arranque el servidor Wowza descubra la nueva aplicación que has creado, 
+no sería necesario si hubiéramos creado la aplicación a través de la 
+interfaz Web de Wowza, como haremos más adelante).</p>
+</div>
+<p>La creación de la aplicación ha terminado y ahora es necesario probar
+ con algún cliente si el video es correctamente recibido. El problema es
+ que diferentes clientes soportan diferentes protocolos, por lo que 
+Wowza puede publicar diferentes URLs para los diferentes protocolos que 
+es capaz de servir, y cada cliente deberá conectarse con la URL adecuada
+ para su protocolo.</p>
+<div class="Alumno">
+<p>Conecta con <code>http://ip.de.tu.ubuntu:8088</code> y ve a 
+“Applications”, donde deberás ver una llamada `videodemanda" que es la 
+que has creado. Arriba a la derecha hay un botón “▶ Test Playback…” que 
+debes pulsar, para abrir el diálogo que te muestra las diferentes URLs a
+ probar.</p>
+<p>Por defecto, la IP que te pone arriba a la izquierda esa ventana es 
+la IP del servidor Wowza, el cual “no sabe” que está dentro de un 
+contenedor, por lo que te muestra en realidad la IP del contenedor (<code>172.17.0.2</code> por defecto). Debes cambiar esa IP por la que tenga tu máquina Ubuntu, pues al lanzar el contenedor hemos publicado (con <code>-p</code>) el puerto <code>1935</code> utilizado para el straming, de modo que esté accesible a través de la máquina anfitrión.</p>
+<p>Cambia esa IP y deja el resto de campos como estaban (en <em>Application</em> deja “videodemanda” y en <em>Media file name</em>
+ deja “mp4:sample.mp4”, que es el tipo de contenedor y el nombre de 
+fichero con el vídeo a servir, el cual ha de coincidir con el que hemos 
+dejado en la carpeta <code>content</code>. Toma nota de las URLs que Wowza te muestra para los protocolos HLS, MPEG-DASH, RTMP y RTSP</p>
+</div>
+<p>Probaremos dos clientes diferentes: VLC, que es un reproductor de 
+vídeo genérico que soporta una gran variedad de codecs y protocolos, y 
+un navegador web, que está mucho más limitado en cuanto los protocolos y
+ codecs que es capaz de manejar. Si dispones de un móvil Android o Apple
+ conectado a la misma red que el servidor Wowza, podrás también 
+probarlos como clientes.</p>
+<h4 data-number="4.3.1.1" id="prueba-desde-el-cliente-vlc"><span class="header-section-number">4.3.1.1</span> Prueba desde el cliente VLC</h4>
+<div class="Alumno">
+<p>Este cliente soporta todos los protocolos antes vistos. Para verificarlo abre el programa VLC y ve al menú <code>Medio &gt; Abrir Ubicación de Red</code>, o pulsa <code>Ctrl+N</code>.
+ En el diálogo que aparece introduce una de las URLs de las que hemos 
+tomado nota en el apartado anterior, por ejemplo la que corresponde a 
+HLS, y después pulsa el botón “Reproducir”. Verifica que el vídeo se 
+está sirviendo correctamente.</p>
+<p>Repite lo anterior para los restantes tres protocolos y verifica que VLC puede reproducirlos todos sin problemas.</p>
+</div>
+<h4 data-number="4.3.1.2" id="prueba-desde-un-navegador-web"><span class="header-section-number">4.3.1.2</span> Prueba desde un navegador web</h4>
+<div class="Alumno">
+<p>Si observas las URLs antes utlizadas, verás que las dos últimas (RTMP y RTSP) comienzan por <code>rtmp://</code> y <code>rtsp://</code>
+ respectivamente, que no son protocolos soportados por el navegador. 
+Esto indica que si intentamos pegar esas URls directamente en la barra 
+de dirección del vamos a obtener un error. Compruébalo.</p>
+<p>En cambio las dos primeras comienzan por <code>http://</code> por lo 
+que el navegador debería aceptarlas. Pero si te fijas en el resto de la 
+URL no parece que el fichero que esté solicitando sea el vídeo a 
+reproducir. En el caso del protocolo HLS el fichero solicitado tiene 
+extensión <code>.m3u8</code> y en el caso de MPEG-DASH tiene extensión <code>.mpd</code>.
+ No son formatos contenedores de vídeo, sino ficheros de texto 
+utilizados como parte de estos protocolos. ¿Qué ocurrirá si usamos 
+directamente esas URLs en el navegador? Inténtalo. Verás que el 
+navegador, al no conocer qué hacer con ese tipo de ficheros, se limita a
+ descargarlos como si fuera un archivo de datos.</p>
+<p>Prueba a abrir con un editor los ficheros que se ha descargado y 
+verás que HLS proporciona un archivo de texto plano, mientras que 
+MPEG-DASH proporciona un XML.</p>
+</div>
+<p>Parece por tanto que ninguna de las 4 URLs proporcionadas por Wowza 
+sirven para reproducir directamente el vídeo desde un navegador web. 
+Esta es la razón por la que en el pasado se utilizaban <em>plugins</em> para su reproducción. Los protocolos RTMP y RTSP eran soportados por el plugin Flash, quien se ocupaba de descargar el <em>stream</em>
+ e ir reproduciéndolo, de forma independiente al navegador. En el fondo 
+era como hacerlo en VLC, sólo que el reproductor se veía incrustado en 
+la página.</p>
+<p>Los navegadores modernos no permiten el uso de plugins, por lo que ya
+ no pueden reproducir los protocolos RTMP ni RTSP. Pero los otros dos 
+protocolos sí pueden reproducirlos con ayuda de Javascript, puesto que 
+en los ficheros que de texto (o XML) que el servidor nos ha suministrado
+ hay información que Javascript puede usar para solicitar más recursos 
+al servidor, en concreto los recursos serán fragmentos de vídeo de corta
+ duración que Javascript podrá reproducir invocando a los métodos que el
+ navegador proporciona para la reproducción de vídeo. De algún modo, los
+ ficheros de texto descargados son como “playlists” que javascript puede
+ ir reproduciendo, sólo que los vídeos de la “playlist” son en realidad 
+trocitos del vídeo que queremos ver.</p>
+<p>Probemos entonces a utilizar un reproductor javascript para la 
+reproducción. La forma más simple es probar el que el consorcio 
+industrial que ha creado MPEG-DASH proporciona en su web.</p>
+<div class="Alumno">
+<ul>
+<li>Ve a la página <a href="https://reference.dashif.org/dash.js/" class="uri">https://reference.dashif.org/dash.js/</a>
+ en la que el consorcio MPEG-DASH proporciona un cliente de referencia 
+(en el que pueden basarse otros reproductores javascript que quieran ser
+ compatibles con este protocolo)</li>
+<li>Pincha en el enlace <a href="http://reference.dashif.org/dash.js/latest/samples/dash-if-reference-player/index.html">Reference GUI</a></li>
+<li>Asegúrate de que el navegador está accediendo a esta página con el 
+protocolo HTTP y no con HTTPS pues de lo contrario no podría reproducir 
+nuestro vídeo (ya que Wowza lo sirve bajo HTTP). Si ves que el navegador
+ accede por HTTPS, edita la URL en la barra de navegación para que use 
+HTTP (<a href="http://reference.dashif.org/dash.js/latest/samples/dash-if-reference-player/index.html" class="uri">http://reference.dashif.org/dash.js/latest/samples/dash-if-reference-player/index.html</a>)</li>
+<li>En la caja de texto que aparece al lado de “Stream” pega la URL que 
+has sacado de Wowza para el protocolo MPEG-DASH y luego pulsa el botón 
+“Load”</li>
+</ul>
+<p>La reproducción del vídeo debería comenzar. Observa que el vídeo está
+ siendo solicitado desde tu navegador a tu servidor Wowza. El vídeo no 
+pasa por los servidores de <code>dashif.org</code> que tan solo se ha 
+limitado a proporcionar el código JS que el navegador está ejecutando. 
+Ese ese código el que, en base al XML que ha recibido en el fichero <code>manifest.mpd</code> va haciendo peticiones de vídeo al servidor Wowza.</p>
+<p><strong>Nota</strong>: Hemos detectado que algunos navegadores se 
+niegan a reproducir el vídeo, debido a que la URL para reproducirlo (la 
+que has pegado para MPEG-DASH que apunta a nuestro servidor Wowza) no es
+ segura por comenzar por http. El síntoma es que se muestra un error 
+“Dash.js:25” diciendo que el recurso no está disponible, y el vídeo no 
+se muestra. El problema no es que el recurso no esté disponible, sino 
+que el navegador ha bloqueado el acceso al mismo. Si abres la consola 
+JavaScript para desarrolladores en el navegador podrás ver errores de 
+CORS del estilo <em>“Mixed Content: […] the content must be served over HTTPS”</em>,
+ que hacen que el navegador se niegue a acceder a ese recurso. Si te 
+sucede esto, simplemente adjunta en la memoria una captura de pantalla 
+que muestre el problema y pasa al ejercicio siguiente.</p>
+</div>
+<h4 data-number="4.3.1.3" id="prueba-desde-un-dispositivo-móvil-opcional"><span class="header-section-number">4.3.1.3</span> Prueba desde un dispositivo móvil (opcional)</h4>
+<p>Si dispones de un teléfono conectado a la misma red que la máquina 
+Ubuntu, puedes probar a abrir un navegador en el teléfono (por ejemplo 
+Chrome, o Safari si tienes un iPhone) y probar a copiar alguna de las 
+cuatro URLs antes vistas. Comprobarás que en dispositivos Apple funciona
+ directamente en el navegador la URL correspondiente a HLS, sin 
+necesidad de usar un reproductor javascript. Esto es porque el operativo
+ iOS ya tiene incorporado este protocolo. En Android ocurre lo propio 
+con el protocolo HLS.</p>
+<h4 data-number="4.3.1.4" id="escribe-tu-propia-página-con-reproductor-javascript-integrado"><span class="header-section-number">4.3.1.4</span> Escribe tu propia página con reproductor JavaScript integrado</h4>
+<p>Probemos ahora a reproducir el vídeo mediante un código incrustado en una página web, servida por nginx.</p>
+<p>El reproductor <code>videojs</code> incluye desde mayo de 2018 la 
+posibilidad de reproducir HLS o MPEG-DASH incluso si el navegador en que
+ se ejecuta no soporta este formato. Vamos a mostrar un ejemplo de ello.</p>
+<div class="Alumno">
+<p>En la caperta <code>html</code> que creaste al inicio de la práctica crea otra llamda <code>videojsHLS</code> y dentro de ella el fichero <code>index.html</code> a partir del siguiente ejemplo que debes adaptar:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">&lt;head&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="kw">&lt;title&gt;</span>Apple HLS con Video.js<span class="kw">&lt;/title&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="kw">&lt;link</span><span class="ot"> href=</span><span class="st">"https://vjs.zencdn.net/7.1.0/video-js.css"</span><span class="ot"> rel=</span><span class="st">"stylesheet"</span><span class="kw">&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">&lt;/head&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="kw">&lt;body&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="kw">&lt;h1&gt;</span>HLS con Video.js<span class="kw">&lt;/h1&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="kw">&lt;video</span><span class="ot"> id=</span><span class="st">"my-video"</span><span class="ot"> class=</span><span class="st">"video-js"</span><span class="ot"> controls</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="ot">        preload=</span><span class="st">"auto"</span><span class="ot"> width=</span><span class="st">"640"</span><span class="ot"> height=</span><span class="st">"264"</span><span class="kw">&gt;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>    <span class="kw">&lt;source</span><span class="ot"> src=</span><span class="st">"URL-a-averiguar"</span><span class="ot"> type=</span><span class="st">"application/x-mpegURL"</span><span class="kw">&gt;</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="kw">&lt;p</span><span class="ot"> class=</span><span class="st">"vjs-no-js"</span><span class="kw">&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>        Para ver este video debes activar JavaScript y tener un navegador</span>
+<span id="cb9-13"><a href="#cb9-13"></a>        moderno que <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">"https://videojs.com/html5-video-support/"</span><span class="kw">&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>        soporte HTML5 video<span class="kw">&lt;/a&gt;</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>  <span class="kw">&lt;/video&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a>  <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">"https://vjs.zencdn.net/7.1.0/video.js"</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>  <span class="kw">&lt;script&gt;</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>    <span class="co">// Esto instancia el reproductor del video usando el elemento cuyo</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>    <span class="co">// id le pasemos como parámetro</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>    <span class="kw">var</span> player <span class="op">=</span> <span class="at">videojs</span>(<span class="st">'my-video'</span>)</span>
+<span id="cb9-23"><a href="#cb9-23"></a>  <span class="kw">&lt;/script&gt;</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="kw">&lt;/body&gt;</span></span></code></pre></div>
+<p>Averigua cuál es la URL que debes poner en el recurso donde Wowza servirá el <em>stream</em> para la aplicación <code>videodemanda</code>
+ usando el protocolo HLS. Aunque el protocolo fue creado para la 
+plataforma iOS y un navegador no-Apple en principio no podría reproducir
+ ese protocolo, gracias a video.js sí se podrá, pues en el fondo utiliza
+ el protocolo HTTP y las capacidades de video de HTML5.</p>
+<p>Recuerda poner como IP del servidor la de tu máquina Ubuntu en lugar de la del contenedor docker.</p>
+</div>
+<h3 data-number="4.3.2" id="ejercicio-2-video-en-vivo"><span class="header-section-number">4.3.2</span> Ejercicio 2: Video en vivo</h3>
+<p>El video bajo demanda que hemos visto es una opción para servir de 
+forma eficiente una biblioteca de videos en ficheros estáticos, pero no 
+es adecuado cuando el vídeo no está pre-almacenado en un fichero, sino 
+siendo generado en tiempo real.</p>
+<p>El flujo de información en una retransmisión de video en directo sería la siguiente:</p>
+<ul>
+<li>En primer lugar se realiza la adquisición de imágenes de una cámara.</li>
+<li>Posteriormente se codifica la información y se envía al servidor de streaming.</li>
+<li>El servidor de streaming distribuye el flujo multimedia usando algunos de los protocolos disponibles.</li>
+<li>Generalmente, el flujo de video se reproduce sobre el navegador, de forma nativa o con un reproductor javascript.</li>
+</ul>
+<p>Como los ordenadores disponibles para hacer las prácticas no tienen 
+cámara instalada vamos a simular la adquisición de una cámara con un 
+programa que lea un fichero de video y emita el contenido multimedia 
+como si se estuviese emitiendo video en directo. Para esta tarea vamos a
+ utilizar el programa VLC, que ya usamos (con otro propósito) en la 
+sección anterior.</p>
+<div class="Alumno">
+<p>Descarga en Windows algún vídeo de longitud suficiente (media hora). Puedes usar por ejemplo este: <code>http://www.atc.uniovi.es/grado/4is/tv.mp4</code>.</p>
+<p>Abre VLC y elige el menú “Medio-&gt;Emitir” (si trabajas con OSX, 
+deberás usar “Abrir archivo -&gt; Abrir archivo avanzado” y adaptar lo 
+que sigue).</p>
+<p>En la pestaña “Archivo” elige el video que has descargado. Pulsa el botón “Emitir”.</p>
+<p>Pulsa “siguiente” y en la pantalla de configuración de destino 
+selecciona la opción “RTP / MPEG Transport Stream” y pulsa el botón 
+“añadir”.</p>
+<p>Selecciona como dirección la IP del servidor linux y como puerto 5004. Pulsa “siguiente”.</p>
+<p>Seleciona transcodificar a “Video H.264 + MP3 (MP4)”. Pulsa “siguiente” y luego “stream” o “emitir”.</p>
+</div>
+<p>Aunque no veamos el vídeo en la ventana de VLC, en principio éste lo 
+estará reproduciendo, transcodificándolo y “emitiéndolo” igual que si 
+fuera una cámara, enviando paquetes UDP al puerto 5004 de nuestro 
+servidor Ubuntu. En ese puerto no hay nadie escuchando aún, por lo que 
+los paquetes se van descartando, pero el puerto está mapeado al 
+contenedor docker donde se ejecuta Wowza, por lo que bastará crear una 
+aplicación Wowza que tome contenido “vivo” de ese puerto y lo pueda 
+retransmitir por <em>streaming</em> a los diferentes clientes con los protocolos que se requieran.</p>
+<div class="Alumno">
+<p>A través de la interfaz web de Wowza crea una nueva aplicación de video en vivo, llamada por ejemplo “envivo”.</p>
+<p>Dentro de la opción “Stream Files” añade un nuevo fichero llamado <code>cam.stream</code>, cuya URI sea <code>udp://0.0.0.0:5004</code>, (la IP <code>0.0.0.0</code> hará que escuche en la interfaz de red del contenedor docker donde se está ejecutando Wowza).</p>
+<p>Pincha de nuevo en “Stream files” y en la lista de <em>streams</em>, 
+pulsa el icono que representa “Connect to this stream”. Dentro de la 
+pantalla “Incoming Streams” deberías ver que tienes un flujo de video 
+conectado.</p>
+<p>Verifica que eres capaz de reproducir el video con el reproductor web
+ que ya usamos para el ejercicio de video bajo demanda. Para obtener la 
+URL apropiada usa “Test Playback…” Fíjate que el nombre del stream debe 
+ser <code>cam.stream</code> y la IP debe ser la del servidor Ubuntu. Al igual que en el ejercicio anterior, se requiere Flash para ciertos protocolos.</p>
+</div>
+<h3 data-number="4.3.3" id="ejercicio-3-streaming-con-bitrate-adaptativo-abr"><span class="header-section-number">4.3.3</span> Ejercicio 3: Streaming con bitrate adaptativo (ABR)</h3>
+<p>El streaming con bitrate adaptativo (ABR) es una técnica utilizada en
+ streaming de contenido multimedia para adaptar la calidad del contenido
+ al ancho de banda disponible en el cliente. Generalmente, se dispone de
+ diversas fuentes codificadas con distintas calidades. Entonces, el 
+cliente selecciona el flujo adecuado según los recursos disponibles.</p>
+<p>Los protocolos clásicos de <em>streaming</em> como RTMP o RTSP 
+asignan al servidor la tarea de elegir el bitrate adecuado a cada 
+cliente (para lo cual reciben periódicamente estadísticas de cada 
+cliente que les informa del número de paquetes perdidos). Como ya vimos 
+para reproducir estos protocolos se requiere un plugin o un reproductor 
+externo al navegador.</p>
+<p>En los protocolos basados en HTTP, como MPEG-DASH o HLS, es el cliente el que decide cuál puede ser el <em>bitrate</em>
+ más apropiado para el ancho de banda disponible y quien toma la 
+decisión de pedirle al servidor otra calidad menor si el ancho de banda 
+es insuficiente.</p>
+<p>En cualquier caso el servidor necesita, o bien tener varias copias de
+ cada vídeo en diferentes calidades, o bien transcodificarlo al vuelo 
+para la calidad apropiada. De cualquiera de las formas es necesario 
+escribir un archivo de configuración en el servidor que liste las 
+calidades y los archivos correspondientes a cada una.</p>
+<div class="Alumno">
+<p>Descomprime el fichero <a href="http://www.atc.uniovi.es/grado/4is/VideosABR.zip" class="uri">http://www.atc.uniovi.es/grado/4is/VideosABR.zip</a> dentro de la carpeta <code>wowza/content</code>.</p>
+<p>Crea una nueva aplicación de video bajo demanda mediante la interfaz web (llámala <code>abr</code>)</p>
+<p>Las calidades disponibles se describen en un fichero denominado 
+“smil”. Desde la interfaz web de la aplicación añade un nuevo fichero 
+SMIL a la aplicación denominado <code>conejo.smil</code>.</p>
+<p>Dentro del fichero smil debes añadir tantos flujos (“+ Add SMIL stream”) como videos tengas disponibles. Utiliza el programa <code>ffprobe</code> para obtener la información que necesitas, con la opción <code>-show_entries stream=bit_rate</code> te mostrará el bitrate del vídeo y el del audio (en ese orden). Repítelo para cada uno de los ficheros.</p>
+<p>Verifica que puedes reproducir el contenido ABR con el cliente de 
+referencia DASH que hemos usado anteriormente. Ahora el nombre del medio
+ es <code>smil:conejo.smil</code>. Verás que el reproductor comienza 
+correctamente, pero puede que genera errores de “recurso no encontrado” 
+al poco tiempo, así como si intentas cambiar la calidad del video con el
+ selector de calidades. Probablemente se trata de alguna 
+incompatibilidad entre este reproductor concreto y los contenidos 
+servidos por Wowza, por lo que intentaremos seguidamente utilizar otro 
+reproductor.</p>
+</div>
+<p>Probaremos seguidamente a reproducir ese contenido usando <code>video.js</code>
+ como reproductor. Este reproductor puede consumir un flujo HLS y 
+reproducirlo en cualquier navegador, por lo que esta solución es muy 
+general, haciendo posible verlo también desde un dispositivo Apple o 
+Android.</p>
+<p>En la carpeta <code>html/videojsHLS</code> tenías un <code>index.html</code>
+ que permitía reproducir contenido HLS en cualquier navegador. Usaremos 
+ese código como punto de partida para reproducir también en múltiples 
+calidades.</p>
+<div class="Alumno">
+<p>En la misma carpeta, copia <code>index.html</code> como <code>indexABR.html</code>.</p>
+<p>Modifícalo para que el título mostrado sea “HLS con ABR con Video.js”</p>
+<p>Modifica el atributo <code>src</code> del vídeo para que sea el del 
+recurso SMIL (puedes usar el reproductor que te da Wowza en “Test 
+Playback…” y seleccionar la URL para el protocolo HLS).</p>
+<p>Usa un navegador web para acceder a <code>http://ip.de.ubuntu/videojsHLS/indexABR.html</code> y comprueba que se ve el vídeo.</p>
+</div>
+<p>Aunque no lo parezca a primera vista, el vídeo que estamos recibiendo
+ en esta ocasión se adapta al ancho de banda disponible. El cliente 
+(videojs) elige la calidad más apropiada de entre las que hemos listado 
+en el archivo SMIL, según cuál sea la resolución a la que lo estás 
+visualizando (si el vídeo lo ves en una pantalla pequeña no tiene 
+sentido pedir la máxima resolución), y del ancho de banda disponible (si
+ hay pérdidas de paquetes, se seleccionará una resolución menor.</p>
+<p>Puedes usar las opciones de desarrollador del navegador web para 
+examinar el tráfico de red y comprobar qué versión del archivo es la que
+ está pidiendo el cliente. Entre las peticiones de red verás varias que 
+comienzan por <code>media_</code> y tienen extensión <code>.ts</code>. Como parte del nombre de ese recurso aparece <code>_b</code>
+ seguido de varios números, que son el bitrate seleccionado. Todos esos 
+recursos que el cliente está pidiendo, en el caso de estar usando un 
+servidor Wowza, no necesitan existir realmente en el servidor, sino que 
+éste los va generando a partir de los ficheros de vídeo listados en el 
+SMIL. Si no quisiéramos usar Wowza sino un servidor HTTP estándar como 
+nginx, todos esos recursos deberían ser generados (probablemente con una
+ herramienta automática) a partir de los ficheros de vídeo, y 
+almacenados en el disco del servidor.</p>
+<div class="Cuestion">
+<p>¿Qué bitrate ha elegido el cliente? Si cambias el reproductor a 
+pantalla completa durante un rato ¿cambiará el recurso de vídeo elegido?
+ Compruébalo.</p>
+<p>¿De qué fichero <code>.mp4</code> de los del servidor proviene el 
+vídeo que recibe tu cliente? Para deducirlo, observa en las herramientas
+ de desarrollador del navegador en el apartado Red que estarás 
+descargando fragmentos de vídeo con el nombre “<code>media_w...b&lt;cantidad de bits por segundo&gt;...ts</code>”.
+ Esa cantidad de bits debe coincidir con la suma de bits/s de 
+vídeo+audio de una de las cuatro calidades, es decir, si recibes “<code>media_...b776077...</code>” sabrás que el cliente está reproduciendo <code>conejo_750.mp4</code> al coincidir con la suma de <span class="math inline">644274 + 131803</span>, que son los bits/s de vídeo+audio de dicho vídeo.</p>
+</div>
+<p>Aunque el cliente se adapta automáticamente para solicitar el recurso
+ de vídeo más apropiado, el usuario no puede cambiar esa decisión, ya 
+que la interfaz de usuario del reproductor <code>video.js</code> no ofrece entre sus controles la posibilidad de elegir la calidad. No obstante <code>video.js</code>
+ es un reproductor extensible mediante librerías javascript adicionales,
+ por lo que no es muy difícil añadirle esa funcionalidad si sabemos qué 
+módulos adicionales instalar.</p>
+<p>Basta añadir lo siguiente, <em>después del enlace que carga <code>video.js</code></em>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb10-1"><a href="#cb10-1"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">"https://cdn.jsdelivr.net/npm/</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">                videojs-contrib-quality-levels@2.0.7/dist/</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="st">                videojs-contrib-quality-levels.min.js"</span><span class="kw">&gt;&lt;/script&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">"https://cdn.jsdelivr.net/npm/</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="st">                videojs-hls-quality-selector@0.0.8/dist/</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="st">                videojs-hls-quality-selector.min.js"</span><span class="kw">&gt;&lt;/script&gt;</span></span></code></pre></div>
+<p>(<strong>Nota</strong>. El código anterior se ha separado en varias 
+líneas para facilitar su visionado e impresión, pero a la hora de 
+copiarlo debes hacer que los enlaces entre comillas sean una sola 
+línea).</p>
+<p>También debes cambiar el código que inicializa el <em>player</em> para que sea:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode html"><code class="sourceCode html"><span id="cb11-1"><a href="#cb11-1"></a>    <span class="kw">&lt;script&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>        <span class="kw">var</span> player <span class="op">=</span> <span class="at">videojs</span>(<span class="st">'my-video'</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a>        <span class="va">player</span>.<span class="at">hlsQualitySelector</span>()<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">&lt;/script&gt;</span></span></code></pre></div>
+<div class="Alumno">
+<p>Haz las modificaciones anteriores y comprueba que el reproductor 
+ofrece ahora un nuevo control que permite elegir la calidad del vídeo. 
+Prueba a cambiar esa calidad mientras observas las peticiones de red 
+para comprobar cómo solicita recursos diferentes según la calidad 
+elegida.</p>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>La descripción de esos parámetros y alguno más puede verse en la página de Wowza donde explica el <a href="https://www.wowza.com/docs/how-to-set-up-wowza-streaming-engine-using-docker">despliegue con docker</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+</div>
+</article>
+</div>
+</div>
+
+
+</body></html>

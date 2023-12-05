@@ -39,3 +39,5 @@ while True:
 			print("ERROR. El datagrama de confirmación no llega")
 		except Exception as e:    # Otras posibles excepciones dejamos que las maneje el usuario
 			print("ERROR. Excepción: ", e)
+
+		sock.sendto(string.encode('utf-8'), (HOST, PORT))

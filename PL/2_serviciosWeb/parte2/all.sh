@@ -1,4 +1,6 @@
 if [ "$1" = "flask" ]; then
+	docker kill amigos
+	docker build -t amigos:1.0 amigos/
 	docker run --name amigos --rm -d --network pruebas amigos:1.0
    exit 0
 fi

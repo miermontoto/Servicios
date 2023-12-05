@@ -43,12 +43,7 @@ while True:
     while True:
         try:
             longitud = recibir_mensaje.uno(sd)
-
-            if longitud == "":
-                print("Conexión cerrada por el cliente")
-                sd.close()
-                break
-
+            print("Recibiendo %d bytes" % int(longitud))
             mensaje = sd.recv(int(longitud)).decode("utf8")
 
             if mensaje == "":
@@ -58,9 +53,9 @@ while True:
 
             linea = mensaje[::-1]
 
-            # Finalmente, enviarle la respuesta con un fin de línea añadido
-            # Observa la transformación en bytes para enviarlo
-            sd.sendall(bytes(linea + "\r\n", "utf8"))
+            newlen = "%d\n" % len(bytes(linea, "utf8"))
+            print("Enviando %d bytes" % int(newlen))
+            sd.sendall(bytes(newlen + linea + "\r\n", "utf8"))
         except ConnectionResetError:
             print("Cliente desconectado")
             sd.close()

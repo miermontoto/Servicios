@@ -1,1 +1,0 @@
-# This file has been upgraded for use by the Wowza Streaming Engine REST API. Please avoid hand-editing.

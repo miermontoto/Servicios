@@ -1,5 +1,5 @@
 from flask import request, abort, jsonify
-from .. import db
+from .. import db, fcm
 from . import api
 from ..models import Amigo
 
@@ -81,8 +81,9 @@ def edit_amigo(id):
 
     # Finalmente, si hemos cambiado algo en el objeto amigo, hacemos
     # el commit a la base de datos para que se guarden las modificaciones
-    if name or lati or longi:
+    if name or lati or longi or device:
         db.session.commit()
+        fcm.notificar_amigos("amigo modificado")
 
     # Y retornamos el JSON con los nuevos datos
     amigodict = {"id": amigo.id, "name": amigo.name,
@@ -100,6 +101,7 @@ def delete_amigo(id):
     amigo = Amigo.query.get_or_404(id)
     db.session.delete(amigo)
     db.session.commit()
+    fcm.notificar_amigos("amigo eliminado")
 
     return ('', 204)  # Devolver 'No Content'
 
@@ -140,6 +142,7 @@ def new_amigo():
     amigo = Amigo(name=name, lati=lati, longi=longi, device=device)
     db.session.add(amigo)
     db.session.commit()
+    fcm.notificar_amigos("amigo creado")
 
     # Y retornamos el JSON con los datos del nuevo amigo
     amigodict = {"id": amigo.id, "name": amigo.name,

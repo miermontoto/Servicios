@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, request, abort
 from . import html
 from ..models import Amigo
-from .. import db
+from .. import db, fcm
 
 
 @html.route("/amigos")
@@ -26,6 +26,7 @@ def delete_amigo(id):
     # Una vez obtenido, lo borramos
     db.session.delete(amigo)
     db.session.commit()
+    fcm.notificar_amigos()
 
     # Y redireccionamos a la vista /amigos
     return redirect(url_for('html.tabla_amigos'))
@@ -37,6 +38,7 @@ def edit_amigo(id):
     Presenta un formulario para obtener datos a modificar de un amigo
     """
     amigo = Amigo.query.get_or_404(id)
+    fcm.notificar_amigos("amigo modificado")
     # Rellenar el template con los datos de este amigo y presentar
     # el formulario al usuario
     return render_template("edit_amigo.html", amigo=amigo)
@@ -49,6 +51,7 @@ def new_amigo():
     """
     # No tenemos datos de ningún amigo previo
     # Pero podemos usar el mismo template
+    fcm.notificar_amigos("amigo creado")
     return render_template("edit_amigo.html", amigo=None)
 
 
@@ -90,4 +93,5 @@ def save_amigo():
         # Una vez modificado, lo guardamos a la base de datos
         db.session.commit()
     # Redireccionamos hacia la tabla-lista de amigos
+    fcm.notificar_amigos("amigo actualizado")
     return redirect(url_for("html.tabla_amigos"))
